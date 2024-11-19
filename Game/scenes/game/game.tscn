@@ -1,3 +1,7 @@
-[gd_scene format=3 uid="uid://cgrpcl502e64v"]
+[gd_scene load_steps=2 format=3 uid="uid://cgrpcl502e64v"]
+
+[ext_resource type="PackedScene" uid="uid://dad1n737iwdgi" path="res://systems/map/map.tscn" id="1_3fvot"]
 
 [node name="Game" type="Node2D"]
+
+[node name="Map" parent="." instance=ExtResource("1_3fvot")]
