@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://dso37a2xgc5db"]
+
+[ext_resource type="Script" path="res://entities/plants/Flower/flower.gd" id="1_yfyb6"]
+
+[node name="Flower" type="Node2D" node_paths=PackedStringArray("stages")]
+script = ExtResource("1_yfyb6")
+stages = [NodePath("Sprite2D")]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
