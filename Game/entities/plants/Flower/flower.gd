@@ -4,7 +4,7 @@ class_name Flower
 func Grow(sun: float, water: float)->void:
 	pass
 
-static func createPlant(Pos: Vector2i, StageIndex: int)->Plant:
+static func CreatePlant(Pos: Vector2i, StageIndex: int)->Plant:
 	var out = Plant.new();
 	out._Pos = Pos;
 	out._StageIndex = StageIndex;

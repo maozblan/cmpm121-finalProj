@@ -22,6 +22,6 @@ func SetStage(StageIndex: int)->bool:
 	return true;
 
 #create a new plant: call this function on the subclass you want, not Plant
-static func createPlant(Pos: Vector2i, StageIndex: int)->Plant:
+static func CreatePlant(Pos: Vector2i, StageIndex: int)->Plant:
 	assert(false, "call createPlant on a subclass of plant, not the base class");
 	return null;
