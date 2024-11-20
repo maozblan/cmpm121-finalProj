@@ -1,14 +1,6 @@
-[gd_scene load_steps=3 format=3 uid="uid://dso37a2xgc5db"]
+[gd_scene load_steps=2 format=3 uid="uid://dso37a2xgc5db"]
 
 [ext_resource type="Script" path="res://entities/plants/Flower/flower.gd" id="1_yfyb6"]
-[ext_resource type="Texture2D" uid="uid://tn1hx33l6aqj" path="res://entities/plants/Flower/flower.jpg" id="2_1r7fr"]
 
-[node name="Flower" type="Node2D" node_paths=PackedStringArray("scene", "stages")]
+[node name="Flower" type="Node2D"]
 script = ExtResource("1_yfyb6")
-scene = NodePath(".")
-stages = [NodePath("Sprite2D")]
-
-[node name="Sprite2D" type="Sprite2D" parent="."]
-position = Vector2(2.49998, -3.50017)
-scale = Vector2(8.44727, 11.1858)
-texture = ExtResource("2_1r7fr")
