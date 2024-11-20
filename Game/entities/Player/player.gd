@@ -1,6 +1,6 @@
 extends Sprite2D
 
-@onready var tile_map = $"../TileMap"
+@export var tile_map: Node2D;
 @onready var sprite_2d = $Sprite2D
 
 var is_moving = false;
@@ -15,7 +15,8 @@ func _physics_process(delta: float):
 	
 	sprite_2d.global_position = sprite_2d.global_position.move_toward(global_position, 1)
 
-
+func _ready():
+	move(Vector2.ZERO);
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float):
 	if is_moving:
@@ -30,10 +31,10 @@ func _process(delta: float):
 	elif Input.is_action_pressed("down"):
 		move(Vector2.DOWN)
 
-
 func move(direction: Vector2):
 	#get current tile Vector2i
 	var current_tile: Vector2i = tile_map.local_to_map(global_position)
+
 	#Get target tile Vector2i
 	var target_tile: Vector2i = Vector2i(
 		current_tile.x + direction.x,
@@ -41,7 +42,7 @@ func move(direction: Vector2):
 	)
 
 	#Get custom data layer from target tile
-	var tile_data: TileData = tile_map.get_cell_tile_data(0, target_tile)
+	#var tile_data: TileData = tile_map.get_cell_tile_data(0, target_tile)
 	
 	#if tile_data.get_custom_data("walkable") == false:
 		#return
@@ -51,3 +52,7 @@ func move(direction: Vector2):
 	global_position = tile_map.map_to_local(target_tile)
 	
 	sprite_2d.global_position = tile_map.map_to_local(current_tile)
+
+
+func plant_seed():
+	tile_map.place_plant(tile_map.local_to_map(global_position), Plant.new());

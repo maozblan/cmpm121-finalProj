@@ -1,13 +1,9 @@
-[gd_scene load_steps=4 format=3 uid="uid://cgrpcl502e64v"]
+[gd_scene load_steps=3 format=3 uid="uid://cgrpcl502e64v"]
 
 [ext_resource type="PackedScene" uid="uid://dad1n737iwdgi" path="res://systems/map/map.tscn" id="1_3fvot"]
 [ext_resource type="Script" path="res://scenes/game/game.gd" id="1_07er0"]
-[ext_resource type="PackedScene" uid="uid://dvehiil782ujl" path="res://entities/Player/player.tscn" id="3_upgi0"]
 
 [node name="Game" type="Node2D"]
 script = ExtResource("1_07er0")
 
 [node name="Map" parent="." instance=ExtResource("1_3fvot")]
-
-[node name="Player" parent="." node_paths=PackedStringArray("tile_map") instance=ExtResource("3_upgi0")]
-tile_map = NodePath("../Map")

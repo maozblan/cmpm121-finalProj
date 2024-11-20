@@ -1,0 +1,20 @@
+[gd_scene load_steps=4 format=3 uid="uid://dvehiil782ujl"]
+
+[ext_resource type="Texture2D" uid="uid://tdli1suukhyy" path="res://entities/Player/Lily/dirt-tiles.png" id="1_traur"]
+[ext_resource type="Script" path="res://entities/Player/player.gd" id="2_1m2io"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hww2k"]
+atlas = ExtResource("1_traur")
+region = Rect2(288, 48, 16, 16)
+
+[node name="Player" type="Sprite2D"]
+texture = SubResource("AtlasTexture_hww2k")
+script = ExtResource("2_1m2io")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_traur")
+region_enabled = true
+region_rect = Rect2(256, 80, 16, 16)
+
+[node name="Camera2D" type="Camera2D" parent="Sprite2D"]
+zoom = Vector2(3.015, 3.015)
