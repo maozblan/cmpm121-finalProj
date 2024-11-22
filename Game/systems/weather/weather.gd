@@ -1,7 +1,8 @@
-class_name weather extends Node2D
+class_name Weather extends Node2D
 
 var noise := FastNoiseLite.new();
 var step := 0;
+var resources;
 var w: int;
 var h: int;
 
@@ -13,8 +14,9 @@ func _init(width: int, height: int) -> void:
 	self.w = width;
 	self.h = height;
 	self.noise.fractal_gain = 0.25;
+	self.resources = set_step(self.step);
 
-func _calcResource(val: int) -> Dictionary:
+func _calc_resource(val: int) -> Dictionary:
 	const MAX := 255.0;
 	var sun := 0;
 	var rain := 0;
@@ -30,22 +32,26 @@ func _calcResource(val: int) -> Dictionary:
 		rain = MAX_RAIN;
 	return {"sun": sun, "rain": rain}
 
-func _calcAllResources(data: Array):
-	var resources := [[]];
+func _calc_all_resources(data: Array):
+	var r := [[]];
 	for cell in data:
-		if (len(resources[len(resources)-1]) == self.w):
-			resources.push_back([]);
-		resources[len(resources)-1].push_back(self._calcResource(cell));
-	print(resources);
-	return resources;
+		if (len(r[len(r)-1]) == self.w):
+			r.push_back([]);
+		r[len(r)-1].push_back(self._calc_resource(cell));
+	self.resources = r;
+	return r;
 
 func next():
-	return setStep(self.step + 1);
+	return set_step(self.step + 1);
 
 func last():
-	return setStep(self.step - 1);
+	return set_step(self.step - 1);
 
-func setStep(s: int):
+func set_step(s: int):
 	self.step = s;
 	self.noise.offset = Vector3(s * NOISE_SHIFT, s * NOISE_SHIFT, 0);
-	return self._calcAllResources(noise.get_image(self.w, self.h).get_data())
+	return self._calc_all_resources(noise.get_image(self.w, self.h).get_data())
+
+func get_cell_resource(coord: Vector2i):
+	assert(coord.x < self.w && coord.y < self.h)
+	return self.resources[coord.x][coord.y];

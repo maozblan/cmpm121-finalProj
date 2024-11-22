@@ -14,16 +14,17 @@ func _ready() -> void:
 	texture.noise = noise
 	print('sample noise ', noise.get_image(3, 3, false, false, false).get_data())
 	$TextureRect.texture = texture;
-	w = weather.new(3, 3);
+	w = Weather.new(3, 3);
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	if (Input.is_action_just_pressed("ui_down")):
-		updateNoise();
+		update_noise();
 	if (Input.is_action_just_pressed("ui_accept")):
 		print(w.next());
+		print(w.get_cell_resource(Vector2(1, 2)));
 
-func updateNoise() -> void:
+func update_noise() -> void:
 	print('updating noise ', noise.get_image(3, 3, false, false, false).get_data())
 	var a = -20
 	v = v + Vector3(a, a, 0)
