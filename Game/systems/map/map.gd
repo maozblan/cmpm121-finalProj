@@ -42,15 +42,27 @@ func map_to_local(cord:Vector2i):
 	return ground_layer.map_to_local(cord);
 
 # may need to adjust parameters to choose right plant
-func place_plant(cord:Vector2i):
+func place_plant(cord:Vector2i) -> void:
 	var plant = Wheat.new(cord, self);
 	
 	if ground_layer.get_cell_source_id(cord) == -1:
-		return null;
+		return;
 	if cord_to_key(cord) in plants.keys():
 		print("already planted " + cord_to_key(cord));
+		return;
 	plant_layer.set_cell(cord, 0, plant.current_tile, 0);
 	plants[cord_to_key(cord)] = plant;
+
+func reap_plant(cord:Vector2i):
+	if plant_layer.get_cell_source_id(cord) == -1:
+		print("no plant to reap");
+		return null;
+	plant_layer.set_cell(cord, -1);
+	
+	var plant = plants[cord_to_key(cord)];
+	plants.erase(cord_to_key(cord));
+	
+	
 
 func cord_to_key(cord) -> String:
 	return str(cord.x) + ", " + str(cord.y);
