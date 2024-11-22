@@ -19,6 +19,9 @@ func get_cell_sunlight(cord:Vector2i):
 func get_cell_water(cord:Vector2i):
 	return water_levels[cord_to_key(cord)];
 
+func set_cell_water(cord:Vector2i, water_level):
+	water_levels[cord_to_key(cord)] = water_level;
+
 func get_cell_plant(cord:Vector2i):
 	if cord_to_key(cord) in plants.keys():
 		return plants[cord_to_key(cord)];
