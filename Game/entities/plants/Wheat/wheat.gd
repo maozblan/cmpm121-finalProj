@@ -29,8 +29,11 @@ func grow()->void:
 		GrowthValue -= 2;
 	else:
 		GrowthValue -= 4;
-	GrowthValue = max(min(GrowthValue, 12), 0)
+	GrowthValue = max(min(GrowthValue, 12), -4)
 	_SetStage(max(min(floor(GrowthValue / 4), 2), 0));
+	
+	if GrowthValue == -4:
+		_map.reap_plant(pos);
 
 func _init(pos: Vector2i, map_instance: Map):
 	_stages = [Vector2i(10, 12), Vector2i(10, 13), Vector2i(10, 14)];
