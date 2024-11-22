@@ -19,7 +19,7 @@ func grow()->void:
 
 func _init(pos: Vector2i, map_instance: Map):
 	_stages = [Vector2i(0, 1), Vector2i(1, 1), Vector2i(2, 1)];
-	pos = pos;
+	self.pos = pos;
 	_stage_index = 0;
 	_map = map_instance;
 	_SetStage(0);
