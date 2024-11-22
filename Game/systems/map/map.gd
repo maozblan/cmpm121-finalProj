@@ -14,9 +14,11 @@ func _process(delta):
 	pass
 
 func get_cell_sunlight(cord:Vector2i):
+	return 0;
 	pass;
 
 func get_cell_water(cord:Vector2i):
+	water_levels[cord_to_key(cord)] = 0; # DEBUG - REMOVE LATER
 	return water_levels[cord_to_key(cord)];
 
 func set_cell_water(cord:Vector2i, water_level):
@@ -43,7 +45,7 @@ func place_plant(cord:Vector2i):
 		return null;
 	if cord_to_key(cord) in plants.keys():
 		print("already planted " + cord_to_key(cord));
-	plant_layer.set_cell(cord, 0, plant.currentTile, 0);
+	plant_layer.set_cell(cord, 0, plant.current_tile, 0);
 	plants[cord_to_key(cord)] = plant;
 
 func cord_to_key(cord) -> String:
@@ -52,4 +54,7 @@ func cord_to_key(cord) -> String:
 func grow_plants():
 	for key in plants.keys():
 		print("plant at: " + key + " is growing");
-		plants[key].grow(); # still also need sun/rain system
+		var plant = plants[key];
+		print(plant.pos);
+		plant.grow(); # still also need sun/rain system
+		plant_layer.set_cell(plant.pos, 0, plant.current_tile, 0);

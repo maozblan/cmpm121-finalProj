@@ -1,20 +1,20 @@
 class_name Plant
 
-var _StageIndex: int;
-var _Pos: Vector2i;
-var _Map: Map;
+var _stage_index: int;
+var pos: Vector2i;
+var _map: Map;
 
-var currentTile: Vector2i;
-var _Stages: Array[Vector2i];
+var current_tile: Vector2i;
+var _stages: Array[Vector2i];
 
 func grow()->void:
 	pass
 
 #set a plants growth stage
-func _SetStage(StageIndex: int)->bool:
-	if StageIndex in range(0, _Stages.size()):
-		_StageIndex = StageIndex;
-		currentTile = _Stages[StageIndex];
+func _SetStage(stage_index: int)->bool:
+	if stage_index in range(0, _stages.size()):
+		_stage_index = stage_index;
+		current_tile = _stages[stage_index];
 		return true;
 	return false;
 	
