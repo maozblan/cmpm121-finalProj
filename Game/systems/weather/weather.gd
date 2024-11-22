@@ -15,7 +15,9 @@ func _init(width: int, height: int) -> void:
 	self.h = height;
 	self.noise.fractal_gain = 0.25;
 	self.resources = set_step(self.step);
+	self.resources = set_step(self.step);
 
+func _calc_resource(val: int) -> Dictionary:
 func _calc_resource(val: int) -> Dictionary:
 	const MAX := 255.0;
 	var sun := 0;
@@ -33,23 +35,29 @@ func _calc_resource(val: int) -> Dictionary:
 	return {"sun": sun, "rain": rain}
 
 func _calc_all_resources(data: Array):
+func _calc_all_resources(data: Array):
 	var r := [[]];
 	for cell in data:
 		if (len(r[len(r)-1]) == self.w):
 			r.push_back([]);
+		r[len(r)-1].push_back(self._calc_resource(cell));
 		r[len(r)-1].push_back(self._calc_resource(cell));
 	self.resources = r;
 	return r;
 
 func next():
 	return set_step(self.step + 1);
+	return set_step(self.step + 1);
 
 func last():
 	return set_step(self.step - 1);
+	return set_step(self.step - 1);
 
+func set_step(s: int):
 func set_step(s: int):
 	self.step = s;
 	self.noise.offset = Vector3(s * NOISE_SHIFT, s * NOISE_SHIFT, 0);
+	return self._calc_all_resources(noise.get_image(self.w, self.h).get_data())
 	return self._calc_all_resources(noise.get_image(self.w, self.h).get_data())
 
 func get_cell_resource(coord: Vector2i):
