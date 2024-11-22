@@ -18,5 +18,11 @@ func _SetStage(stage_index: int)->bool:
 		return true;
 	return false;
 	
+func get_points()->int:
+	if _stage_index == 1 || _stage_index == 2:
+		return _stage_index;
+	return 0;
+		
+	
 func _init():
 	assert(false, "don't create a Plant object, create an object of one of it's subclasses such as flower");
