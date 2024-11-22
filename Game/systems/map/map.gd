@@ -15,14 +15,16 @@ func _process(delta):
 	pass
 
 func get_cell_sunlight(cord:Vector2i) -> int:
-	return 5;
+	return weather.get_cell_resource(cord).sun;
 	pass;
 
 func get_cell_water(cord:Vector2i) -> int:
-	water_levels[cord_to_key(cord)] = 5; # DEBUG - REMOVE LATER
+	if !water_levels.has(cord_to_key(cord)): # TEMP
+		water_levels[cord_to_key(cord)] = weather.get_cell_resource(cord).rain;
 	return water_levels[cord_to_key(cord)];
 
 func set_cell_water(cord:Vector2i, water_level):
+	water_levels[cord_to_key(cord)] = weather.get_cell_resource(cord).rain;
 	water_levels[cord_to_key(cord)] = water_level;
 
 func get_cell_plant(cord:Vector2i):
