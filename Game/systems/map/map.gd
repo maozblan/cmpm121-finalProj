@@ -57,12 +57,12 @@ func reap_plant(cord:Vector2i):
 	if plant_layer.get_cell_source_id(cord) == -1:
 		print("no plant to reap");
 		return null;
-	plant_layer.set_cell(cord, -1);
 	
+	plant_layer.set_cell(cord, -1);
 	var plant = plants[cord_to_key(cord)];
 	plants.erase(cord_to_key(cord));
-	
-	
+	#plant.free();
+
 
 func cord_to_key(cord) -> String:
 	return str(cord.x) + ", " + str(cord.y);
@@ -86,5 +86,6 @@ func grow_plants():
 		var plant = plants[key];
 		print(plant.pos);
 		plant.grow(); # still also need sun/rain system
-		plant_layer.set_cell(plant.pos, 0, plant.current_tile, 0);
+		if key in plants:
+			plant_layer.set_cell(plant.pos, 0, plant.current_tile, 0);
 	weather.next();
