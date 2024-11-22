@@ -1,4 +1,4 @@
-extends Node2D
+class_name Map extends Node2D
 @onready var ground_layer = $GroundTileLayer
 @onready var plant_layer = $PlantTileLayer
 var water_levels:Dictionary = {};
