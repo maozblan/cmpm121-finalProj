@@ -49,7 +49,7 @@ func map_to_local(cord:Vector2i):
 
 # may need to adjust parameters to choose right plant
 func place_plant(cord:Vector2i) -> void:
-	var plant = Wheat.new(cord, self);
+	var plant = Flower.new(cord, self);
 	
 	if ground_layer.get_cell_source_id(cord) == -1:
 		return;
