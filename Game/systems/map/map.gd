@@ -5,6 +5,12 @@ class_name Map extends Node2D
 var weather:Weather = Weather.new(size, size);
 var water_levels: Array[Array] = []
 var plants:Dictionary = {};
+var total_score:
+	get:
+		var count = 0;
+		for key in plants.keys():
+			count += plants[key].get_points()
+		return count;
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -74,7 +80,6 @@ func next_turn():
 	weather.next();
 
 func update_water():
-	print(water_levels)
 	var resources = weather.resources;
 	for i in range(size):
 		for j in range(size):
@@ -82,9 +87,7 @@ func update_water():
 
 func grow_plants():
 	for key in plants.keys():
-		print("plant at: " + key + " is growing");
 		var plant = plants[key];
-		print(plant.pos);
 		plant.grow(); # still also need sun/rain system
 		if key in plants:
 			plant_layer.set_cell(plant.pos, 0, plant.current_tile, 0);

@@ -26,3 +26,4 @@ func _input(event):
 func nextTurn():
 	print("next turn");
 	map.next_turn();
+	print("points: " + str(map.total_score));
