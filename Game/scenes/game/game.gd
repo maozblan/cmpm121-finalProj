@@ -23,4 +23,4 @@ func _input(event):
 # process next turn
 func nextTurn():
 	print("next turn");
-	map.grow_plants();
+	map.next_turn();

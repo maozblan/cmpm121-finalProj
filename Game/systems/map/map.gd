@@ -1,14 +1,17 @@
 class_name Map extends Node2D
 @onready var ground_layer = $GroundTileLayer
 @onready var plant_layer = $PlantTileLayer
-var weather:Weather = Weather.new(10, 10);
-var water_levels:Dictionary = {};
+@export var size = 10;
+var weather:Weather = Weather.new(size, size);
+var water_levels: Array[Array] = []
 var plants:Dictionary = {};
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	pass # Replace with function body.
-
+	for i in range(size):
+		water_levels.append([])
+		for j in range(size):
+			water_levels[i].append(0)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
@@ -19,13 +22,10 @@ func get_cell_sunlight(cord:Vector2i) -> int:
 	pass;
 
 func get_cell_water(cord:Vector2i) -> int:
-	if !water_levels.has(cord_to_key(cord)): # TEMP
-		water_levels[cord_to_key(cord)] = weather.get_cell_resource(cord).rain;
-	return water_levels[cord_to_key(cord)];
+	return water_levels[cord.x][cord.y];
 
 func set_cell_water(cord:Vector2i, water_level):
-	water_levels[cord_to_key(cord)] = weather.get_cell_resource(cord).rain;
-	water_levels[cord_to_key(cord)] = water_level;
+	water_levels[cord.x][cord.y] = water_level;
 
 func get_cell_plant(cord:Vector2i):
 	if cord_to_key(cord) in plants.keys():
@@ -54,6 +54,19 @@ func place_plant(cord:Vector2i):
 
 func cord_to_key(cord) -> String:
 	return str(cord.x) + ", " + str(cord.y);
+
+
+func next_turn(): 
+	grow_plants();
+	update_water();
+	weather.next();
+
+func update_water():
+	print(water_levels)
+	var resources = weather.resources;
+	for i in range(size):
+		for j in range(size):
+			water_levels[i][j] += resources[i][j].rain;
 
 func grow_plants():
 	for key in plants.keys():
