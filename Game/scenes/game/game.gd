@@ -27,3 +27,9 @@ func nextTurn():
 	print("next turn");
 	map.next_turn();
 	print("points: " + str(map.total_score));
+	
+	if map.total_score > 25:
+		win_game();
+
+func win_game():
+	print("You've won!");
