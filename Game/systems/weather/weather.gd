@@ -18,7 +18,6 @@ func _init(width: int, height: int) -> void:
 	self.resources = set_step(self.step);
 
 func _calc_resource(val: int) -> Dictionary:
-func _calc_resource(val: int) -> Dictionary:
 	const MAX := 255.0;
 	var sun := 0;
 	var rain := 0;
@@ -34,7 +33,6 @@ func _calc_resource(val: int) -> Dictionary:
 		rain = MAX_RAIN;
 	return {"sun": sun, "rain": rain}
 
-func _calc_all_resources(data: Array):
 func _calc_all_resources(data: Array):
 	var r := [[]];
 	for cell in data:
@@ -53,7 +51,6 @@ func last():
 	return set_step(self.step - 1);
 	return set_step(self.step - 1);
 
-func set_step(s: int):
 func set_step(s: int):
 	self.step = s;
 	self.noise.offset = Vector3(s * NOISE_SHIFT, s * NOISE_SHIFT, 0);

@@ -1,6 +1,7 @@
 class_name Map extends Node2D
 @onready var ground_layer = $GroundTileLayer
 @onready var plant_layer = $PlantTileLayer
+var weather:Weather = Weather.new(10, 10);
 var water_levels:Dictionary = {};
 var plants:Dictionary = {};
 
@@ -13,11 +14,11 @@ func _ready():
 func _process(delta):
 	pass
 
-func get_cell_sunlight(cord:Vector2i):
+func get_cell_sunlight(cord:Vector2i) -> int:
 	return 5;
 	pass;
 
-func get_cell_water(cord:Vector2i):
+func get_cell_water(cord:Vector2i) -> int:
 	water_levels[cord_to_key(cord)] = 5; # DEBUG - REMOVE LATER
 	return water_levels[cord_to_key(cord)];
 
