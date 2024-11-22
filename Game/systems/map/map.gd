@@ -13,8 +13,16 @@ func _ready():
 func _process(delta):
 	pass
 
-func get_cell(cord:Vector2i):
+func get_cell_sunlight(cord:Vector2i):
 	pass;
+
+func get_cell_water(cord:Vector2i):
+	return water_levels[cord_to_key(cord)];
+
+func get_cell_plant(cord:Vector2i):
+	if cord_to_key(cord) in plants.keys():
+		return plants[cord_to_key(cord)];
+	return null;
 
 func get_surrounding_cells(cord:Vector2i):
 	return ground_layer.get_surrounding_cells(cord);
