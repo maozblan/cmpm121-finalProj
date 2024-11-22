@@ -14,11 +14,11 @@ func _process(delta):
 	pass
 
 func get_cell_sunlight(cord:Vector2i):
-	return 0;
+	return 5;
 	pass;
 
 func get_cell_water(cord:Vector2i):
-	water_levels[cord_to_key(cord)] = 0; # DEBUG - REMOVE LATER
+	water_levels[cord_to_key(cord)] = 5; # DEBUG - REMOVE LATER
 	return water_levels[cord_to_key(cord)];
 
 func set_cell_water(cord:Vector2i, water_level):
@@ -41,6 +41,7 @@ func map_to_local(cord:Vector2i):
 # may need to adjust parameters to choose right plant
 func place_plant(cord:Vector2i):
 	var plant = Wheat.new(cord, self);
+	
 	if ground_layer.get_cell_source_id(cord) == -1:
 		return null;
 	if cord_to_key(cord) in plants.keys():

@@ -9,7 +9,7 @@ func grow()->void:
 	elif tmp_sun < 1 or tmp_water < 1:
 		_SetStage(0);
 
-func _init(Pos: Vector2i, map_instance: Map):
+func _init(pos: Vector2i, map_instance: Map):
 	_stages = [Vector2i(8, 0), Vector2i(0, 1), Vector2i(1, 1)];
 	pos = pos;
 	_stage_index = 0;
