@@ -14,8 +14,10 @@ func _process(delta):
 
 func _input(event):
 	# debug
-	if event is InputEventMouseButton:
+	if event.is_action_pressed("Action1"):
 		player.plant_seed();
+	if event.is_action_pressed("Action2"):
+		player.reap_plant();
 	if event.is_action_pressed("NextTurn"):
 		nextTurn();
 
