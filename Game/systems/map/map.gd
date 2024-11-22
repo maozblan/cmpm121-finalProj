@@ -62,3 +62,4 @@ func grow_plants():
 		print(plant.pos);
 		plant.grow(); # still also need sun/rain system
 		plant_layer.set_cell(plant.pos, 0, plant.current_tile, 0);
+	weather.next();
