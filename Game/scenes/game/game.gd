@@ -16,6 +16,8 @@ func _input(event):
 	# debug
 	if event is InputEventMouseButton:
 		player.plant_seed();
+	if event.is_action_pressed("NextTurn"):
+		nextTurn();
 
 
 # process next turn

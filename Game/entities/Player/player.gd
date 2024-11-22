@@ -55,4 +55,4 @@ func move(direction: Vector2):
 
 
 func plant_seed():
-	tile_map.place_plant(tile_map.local_to_map(global_position), Plant.new());
+	tile_map.place_plant(tile_map.local_to_map(global_position));
