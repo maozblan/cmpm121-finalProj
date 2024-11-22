@@ -12,26 +12,23 @@ func grow()->void:
 			var tmp:Plant = _map.get_cell_plant(pos + Vector2i(i, j));
 			if tmp is Wheat:
 				nearby_wheat_count += 1;
-	
-	if nearby_wheat_count >= 4:
-		if tmp_sun >= 3 and tmp_water >= 3:
+	if tmp_sun >= 3 and tmp_water >= 3:
+		if nearby_wheat_count >= 4:
 			GrowthValue += 2;
-		elif tmp_sun >= 7 and tmp_water >= 7:
-			GrowthValue += 4;
-		elif tmp_sun <= 0 or tmp_water <= 0:
-			GrowthValue -= 1;
-	elif nearby_wheat_count >= 2:
-		if tmp_sun >= 3 and tmp_water >= 3:
-			GrowthValue += 1;
-		elif tmp_sun >= 7 and tmp_water >= 7:
-			GrowthValue += 2;
-		elif tmp_sun <= 0 or tmp_water <= 0:
-			GrowthValue -= 2;
+		elif nearby_wheat_count >= 2:
+			if tmp_sun >= 7 or tmp_water >= 7:
+				GrowthValue += 2;
+			else:
+				GrowthValue += 1;
+		else:
+			if tmp_sun >= 10 or tmp_water >= 10:
+				GrowthValue += 2;
+			elif tmp_sun >= 7 or tmp_water >= 7:
+				GrowthValue += 1;
+	elif tmp_sun >= 3 or tmp_water >= 3:
+		GrowthValue -= 2;
 	else:
-		if tmp_sun >= 3 && tmp_water >= 3:
-			GrowthValue += 1;
-		elif tmp_sun <= 0 or tmp_water <= 0:
-			GrowthValue -= 2;
+		GrowthValue -= 4;
 	GrowthValue = max(min(GrowthValue, 12), 0)
 	_SetStage(max(min(floor(GrowthValue / 4), 2), 0));
 
