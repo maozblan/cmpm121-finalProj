@@ -29,6 +29,12 @@ func grow()->void:
 		GrowthValue -= 2;
 	else:
 		GrowthValue -= 4;
+	#if GrowthValue == 12 or true:
+		#for i in range(-1, 2, 2):
+				#for j in range(-1, 2, 2):
+					#var tmp = _map.get_cell_plant(pos + Vector2i(i, j));
+					##if tmp == null && randf_range(0.0, 1.0) < 20:
+					#_map.place_plant(pos);
 	GrowthValue = max(min(GrowthValue, 12), -4)
 	_SetStage(max(min(floor(GrowthValue / 4), 2), 0));
 	
