@@ -2,6 +2,12 @@ class_name Map extends Node2D
 @onready var ground_layer = $GroundTileLayer
 @onready var plant_layer = $PlantTileLayer
 @export var size = 10;
+
+enum PlantTypes {
+	WHEAT,
+	FLOWER
+}
+
 var weather:Weather = Weather.new(size, size);
 var water_levels: Array[Array] = []
 var plants:Dictionary = {};
@@ -48,9 +54,16 @@ func map_to_local(cord:Vector2i):
 	return ground_layer.map_to_local(cord);
 
 # may need to adjust parameters to choose right plant
-func place_plant(cord:Vector2i) -> void:
-	var plant = Flower.new(cord, self);
-	
+func place_plant(cord:Vector2i, plant_type: PlantTypes) -> void:
+	var plant;
+	match plant_type:
+		PlantTypes.WHEAT:
+			plant = Wheat.new(cord, self);
+		PlantTypes.FLOWER:
+			plant = Flower.new(cord, self);
+		_:
+			plant = Flower.new(cord, self);
+			print("invalid plant type");
 	if ground_layer.get_cell_source_id(cord) == -1:
 		return;
 	if cord_to_key(cord) in plants.keys():

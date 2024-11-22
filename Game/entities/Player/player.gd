@@ -4,6 +4,7 @@ extends Sprite2D
 @onready var sprite_2d = $Sprite2D
 
 var is_moving = false;
+var plant_alternator = false;
 
 func _physics_process(delta: float):
 	if is_moving == false:
@@ -55,7 +56,12 @@ func move(direction: Vector2):
 
 
 func plant_seed():
-	tile_map.place_plant(tile_map.local_to_map(global_position));
+	plant_alternator = !plant_alternator;
+	if plant_alternator:
+		tile_map.place_plant(tile_map.local_to_map(global_position), tile_map.PlantTypes.WHEAT);
+	else:
+		tile_map.place_plant(tile_map.local_to_map(global_position), tile_map.PlantTypes.FLOWER);
+
 
 func reap_plant():
 	tile_map.reap_plant(tile_map.local_to_map(global_position));
