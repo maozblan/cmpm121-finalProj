@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://csb03vq6doi1d"
-path="res://.godot/imported/flower.jpg-586ce0b8493c55663a961c164e9591dd.ctex"
+uid="uid://tn1hx33l6aqj"
+path="res://.godot/imported/wheat.jpg-073f52b70b95cb23765882df51d764e4.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://entities/plants/Flower/flower.jpg"
-dest_files=["res://.godot/imported/flower.jpg-586ce0b8493c55663a961c164e9591dd.ctex"]
+source_file="res://entities/plants/Wheat/wheat.jpg"
+dest_files=["res://.godot/imported/wheat.jpg-073f52b70b95cb23765882df51d764e4.ctex"]
 
 [params]
 
