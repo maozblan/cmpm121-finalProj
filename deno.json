@@ -9,5 +9,5 @@
   "compilerOptions": {
     "lib": ["es2015", "dom"]
   },
-  "files": ["src/index.d.ts", "src/**/*"]
+  "files": ["src/**/*.ts", "src/**/*.d.ts"]
 }
