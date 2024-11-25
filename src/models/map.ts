@@ -31,8 +31,10 @@ class Cell {
 export class GameMap {
 	private cells: Array<Array<Cell>>;
 	private buffer: ArrayBuffer;
+	size:number;
 
 	constructor(size:number) {
+		this.size = size;
 		this.cells = new Array(size);
 		this.buffer = new ArrayBuffer(size * size * CELL_SIZE);
 		for (let i = 0; i < size; i++) {
