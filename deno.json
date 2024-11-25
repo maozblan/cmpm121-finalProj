@@ -1,0 +1,12 @@
+{
+  "tasks": {
+    "dev": "deno run -A --node-modules-dir npm:vite",
+    "build": "deno run -A --node-modules-dir npm:vite build",
+    "preview": "deno run -A --node-modules-dir npm:vite preview",
+    "serve": "deno run --allow-net --allow-read https://deno.land/std@0.157.0/http/file_server.ts dist/",
+    "hook": "deno run --allow-read --allow-run --allow-write https://deno.land/x/deno_hooks@0.1.2/mod.ts"
+  },
+  "compilerOptions": {
+    "lib": ["es2015", "dom"]
+  }
+}
