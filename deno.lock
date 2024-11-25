@@ -204,5 +204,12 @@
         "rollup"
       ]
     }
+  },
+  "redirects": {
+    "https://esm.sh/v135/@types/noisejs@~2.1/index.d.ts": "https://esm.sh/v135/@types/noisejs@2.1.0/index.d.ts"
+  },
+  "remote": {
+    "https://esm.sh/noisejs@2.1.0": "1872e1e4b1ee5b62197d74ea0dca46ee6c6523d709dad94630374fbff226a314",
+    "https://esm.sh/v135/noisejs@2.1.0/denonext/noisejs.mjs": "61ad0beeb2d5af9378d6b7533ac637cede71fd4c99cb08995a60d8155ec16c29"
   }
 }
