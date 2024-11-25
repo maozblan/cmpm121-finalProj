@@ -60,7 +60,7 @@ export class GameMap {
 		return this.cells[x][y];
 	}
 
-	placePlant(x:number, y:number, plantType:number, plantLevel:number) {
+	placePlant(x:number, y:number, plantType:number, plantLevel:number = 1) {
 		this.checkBounds(x, y);
 		if (this.getCell(x, y).hasPlant) {
 			console.log("Cell already has a plant");
