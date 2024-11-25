@@ -11,4 +11,5 @@ const title = document.createElement("h1");
 app.append(title);
 
 const image = document.createElement("img");
-image.src = img.sampleImage
+image.src = img.sampleImage;
+app.append(image);
