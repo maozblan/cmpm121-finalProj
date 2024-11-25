@@ -1,0 +1,22 @@
+.row-div {
+  display: flex;
+  flex-direction: row;
+}
+
+.col-div {
+  display: flex;
+  flex-direction: column;
+}
+
+
+#field {
+  display: grid;
+  grid-gap: 5px;
+  margin: 0 auto;
+}
+
+#field .cell {
+  background-color: cornflowerblue;
+  width: 30px;
+  height: 30px;
+}
