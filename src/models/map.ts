@@ -48,20 +48,33 @@ export class GameMap {
 			this.cells[i] = new Array(size);
 			for (let j = 0; j < size; j++) {
 				this.cells[i][j] = new Cell(new DataView(this.buffer, i * size * CELL_SIZE + j * CELL_SIZE, CELL_SIZE));
+				this.cells[i][j].waterLevel = this.randomInt(2, 7);
+				this.cells[i][j].sunLevel = this.randomInt(2, 7);
 			}
 		}
 	}
-	nextTurn() {
-		for (let i = 0; i < this.cells.length; i++) {
-			for (let j = 0; j < this.cells.length; j++) {
-				if (this.cells[i][j].hasPlant) {
-					this.growPlant(i, j);
-					this.cells[i][j].waterLevel -= 1;
-				}
-				// updateWaterLevels();
-				// updateSun();
+	exportBuffer() {
+		return this.buffer;
+	}
+	loadBuffer(buffer: ArrayBuffer) { 
+		this.buffer = buffer;
+		for (let i = 0; i < this.size; i++) {
+			this.cells[i] = new Array(this.size);
+			for (let j = 0; j < this.size; j++) {
+				this.cells[i][j] = new Cell(new DataView(this.buffer, i * this.size * CELL_SIZE + j * CELL_SIZE, CELL_SIZE));
 			}
 		}
+	}
+
+	nextTurn() {
+		this.loopCells((cell, x, y) => {
+			if (cell.hasPlant) {
+				this.growPlant(x, y);
+				cell.waterLevel -= 1;
+			}
+			// updateWaterLevels();
+			// updateSun();
+		});
 	}
 
 	getCell(x:number, y:number) {
@@ -95,11 +108,47 @@ export class GameMap {
 			console.log("Cell does not have a plant");
 			return;
 		}
+		if (this.getCell(x, y).waterLevel < 1) {
+			console.log("Not enough water to grow plant at cell (" + x + ", " + y + ")");
+			this.reapPlant(x, y);
+			return;
+		}
 		// let plant = new Plant(this.getCell(x, y).plantType, this.getCell(x, y).plantLevel);
 		// plant.grow(); // this should be able to directly update plant level in map
 	}
 
+	updateWaterLevels() {
+		this.loopCells((cell, _x, _y) => {
+			cell.waterLevel += this.randomInt(0,2);
+		});
+	}
+
+	updateSun() {
+		this.loopCells((cell, _x, _y) => {
+			cell.sunLevel = this.randomInt(0, 6);
+		});
+	}
+
+	// utility functions
+	loopCells(callback: (cell: Cell, x: number, y: number) => void) {
+		for (let i = 0; i < this.cells.length; i++) {
+			for (let j = 0; j < this.cells.length; j++) {
+				callback(this.cells[i][j], i, j);
+			}
+		}
+	}
+
+	checkCells() {
+		this.loopCells((cell, x, y) => {
+			console.log(`Cell at (${x}, ${y}) has water level ${cell.waterLevel}, sun level ${cell.sunLevel}, plant type ${cell.plantType}, plant level ${cell.plantLevel}`);
+		});
+	}
+
 	checkBounds(x:number, y:number) {
 		if (x < 0 || y < 0 || x >= this.cells.length || y >= this.cells.length) throw("Out of Bounds");
+	}
+
+	randomInt(min:number, max:number) {
+		return Math.floor(Math.random() * (max - min + 1)) + min;
 	}
 }
