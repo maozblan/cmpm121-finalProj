@@ -1,4 +1,5 @@
 import { GameMap } from "../models/map.ts";
+import { gameData } from "../game.ts";
 
 export function createMap(map: GameMap): void {
   const field = document.querySelector<HTMLDivElement>("#field")!;
@@ -28,4 +29,11 @@ export function displayMap(map: GameMap): void {
       field.append(cell);
     }
   }
+}
+
+document.addEventListener("update", displayData);
+
+function displayData(): void {
+  const controls = document.querySelector<HTMLDivElement>("#controls")!;
+  controls.querySelector("#turn-count")!.textContent = gameData.turn.toString();
 }

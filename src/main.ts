@@ -2,7 +2,8 @@ import "./style.css";
 import "./gameStyle.css";
 import { img } from "./views/imgs.ts";
 import { createMap } from "./views/views.ts";
-import { GameMap } from "./models/map.ts";
+import playerInteraction from "./controllers/controller.ts";
+import { gameMap } from "./game.ts";
 
 const APP_NAME = "cmpm121-final";
 const app = document.querySelector<HTMLDivElement>("#app")!;
@@ -11,13 +12,16 @@ document.title = APP_NAME;
 app.innerHTML = APP_NAME;
 app.classList.add("col-div");
 
-const title = document.createElement("h1");
-app.append(title);
-
 const controls = document.createElement("div");
 controls.classList.add("row-div");
 controls.id = "controls";
 app.append(controls);
+
+controls.innerHTML = `
+  <h2> TURN: <span id="turn-count">0</span> </h2>
+  <button id="undo">Undo</button>
+  <button id="redo">Redo</button>
+`;
 
 const container = document.createElement("div");
 container.classList.add("row-div");
@@ -31,8 +35,7 @@ const howToPlay = document.createElement("div");
 howToPlay.innerHTML = `
   <h2>How to Play</h2>
   <p>Use WASD to move your character</p>
-  <p>Left Click to sow plant</p
-  <p>Right Click to reap plant</p>
+  <p>F to reap/sow plants on current tile</p>
   <p>Space to end turn</p>
 `;
 howToPlay.style.marginLeft = "20px";
@@ -42,8 +45,6 @@ const image = document.createElement("img");
 image.src = img.sampleImage;
 // app.append(image);
 
-// TUNEABLE GAME SETTINGS
-const MAPSIZE = 10;
-
-const gameMap: GameMap = new GameMap(MAPSIZE);
+// linking to other systems
 createMap(gameMap);
+document.addEventListener("keydown", playerInteraction);
