@@ -24,9 +24,6 @@ interface GameState {
 }
 
 
-
-
-
 const tmpMap = new GameMap(MAPSIZE);
 const tmpLedger: updateLedgerIntry = {map: tmpMap, turn: 0};
 export let gameState: GameState = {
