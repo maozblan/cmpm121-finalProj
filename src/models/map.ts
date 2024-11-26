@@ -69,11 +69,11 @@ export class GameMap {
 	nextTurn() {
 		this.loopCells((cell, x, y) => {
 			if (cell.hasPlant) {
-				this.growPlant(x, y);
+				this.updatePlant(x, y);
 				cell.waterLevel -= 1;
 			}
-			// updateWaterLevels();
-			// updateSun();
+			this.updateWaterLevels();
+			this.updateSun();
 		});
 	}
 
@@ -102,7 +102,7 @@ export class GameMap {
 		this.getCell(x, y).plantLevel = 0;
 	}
 
-	growPlant(x:number, y:number) {
+	updatePlant(x:number, y:number) {
 		this.checkBounds(x, y);
 		if (!this.getCell(x, y).hasPlant) {
 			console.log("Cell does not have a plant");
