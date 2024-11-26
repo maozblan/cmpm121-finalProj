@@ -1,5 +1,6 @@
 import { GameMap } from "../models/map.ts";
-import { gameData } from "../game.ts";
+import { Player } from "../models/player.ts";
+import { gameMap, currentIndex, player } from "../game.ts";
 
 export function createMap(map: GameMap): void {
   const field = document.querySelector<HTMLDivElement>("#field")!;
@@ -11,7 +12,13 @@ export function createMap(map: GameMap): void {
   for (let i = 0; i < map.size; ++i) {
     for (let j = 0; j < map.size; ++j) {
       const cell = document.createElement("div");
-      cell.classList.add("cell");
+      //cell.classList.add("cell");
+      if(player.x === j && player.y === i){
+        cell.classList.add("playerCell");
+      }
+      else{
+        cell.classList.add("cell");
+      }
       // cell.addEventListener('click', foo);
       field.append(cell);
     }
@@ -20,12 +27,32 @@ export function createMap(map: GameMap): void {
   field.style.gridTemplateRows = `repeat(${map.size}, 1fr)`;
 }
 
-export function displayMap(map: GameMap): void {
+export function displayMap(map: GameMap, player: Player): void {
   const field = document.querySelector<HTMLDivElement>("#field")!;
+  while (field.firstChild) {
+    const child = field.firstChild as HTMLElement;
+    // child.removeEventListener('click', childClickHandler);
+    field.removeChild(child);
+  }
   for (let i = 0; i < map.size; i++) {
     for (let j = 0; j < map.size; j++) {
       const cell = document.createElement("div");
-      cell.classList.add("cell");
+      const gameCell = map.getCell(j, i);
+      if(player.x === j && player.y === i){
+        cell.classList.add("playerCell");
+      }
+      else if(!gameCell.hasPlant){
+        cell.classList.add("cell");
+      }
+      else{
+        if(gameCell.plantType === 1){
+          cell.classList.add("plantCell1");
+        }
+        else if(gameCell.plantType === 2){
+          cell.classList.add("plantCell2");
+        }
+        cell.innerHTML = gameCell.plantLevel.toString();
+      }
       field.append(cell);
     }
   }
@@ -35,5 +62,5 @@ document.addEventListener("update", displayData);
 
 function displayData(): void {
   const controls = document.querySelector<HTMLDivElement>("#controls")!;
-  controls.querySelector("#turn-count")!.textContent = gameData.turn.toString();
+  controls.querySelector("#turn-count")!.textContent = currentIndex.toString();
 }

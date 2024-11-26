@@ -1,3 +1,4 @@
+import { Plant } from "./plants.ts";
 const CELL_SIZE = 6;
 class Cell {
 	constructor(private dataView: DataView) {}
@@ -66,20 +67,74 @@ export class GameMap {
 		}
 	}
 
-	nextTurn() {
+	copy(): GameMap {
+		const newMap = new GameMap(this.size);
+		//set newMap to the same state as the current map
 		this.loopCells((cell, x, y) => {
-			if (cell.hasPlant) {
-				this.updatePlant(x, y);
-				cell.waterLevel -= 1;
-			}
-			this.updateWaterLevels();
-			this.updateSun();
+			newMap.getCell(x, y).waterLevel = cell.waterLevel;
+			newMap.getCell(x, y).sunLevel = cell.sunLevel;
+			newMap.getCell(x, y).plantType = cell.plantType;
+			newMap.getCell(x, y).plantLevel = cell.plantLevel;
 		});
+		return newMap;
+	}
+
+	nextTurn(): GameMap {
+		const newMap = this.copy();
+
+		//update the plants into the next turn in the new map
+		this.loopCells((cell, x, y) => {
+			//if current maps cell has a plant
+			if (cell.hasPlant) {
+				//update the plant: changes are made in the new map
+				this.updatePlant(x, y, newMap);
+				//reduce the new map's water by 1
+				try {
+					newMap.getCell(x, y).waterLevel -= 1;
+				}
+				catch{}
+			}
+		});
+
+		//update the next maps water/sun levels
+		try {
+			newMap.updateWaterLevels();
+		}
+		catch{}
+		try {
+			newMap.updateSun();
+		}
+		catch{}
+		return newMap;
 	}
 
 	getCell(x:number, y:number) {
 		this.checkBounds(x, y);
 		return this.cells[x][y];
+	}
+
+	placePlantOnCopy(x:number, y:number, plantType:number, plantLevel:number = 1): GameMap | null {
+		const newMap = this.copy();
+		this.checkBounds(x, y);
+		if (this.getCell(x, y).hasPlant) {
+			console.log("Cell already has a plant");
+			return null;
+		}
+		newMap.getCell(x, y).plantType = plantType;
+		newMap.getCell(x, y).plantLevel = plantLevel;
+		return newMap;
+	}
+
+	reapPlantOnCopy(x:number, y:number): GameMap | null {
+		const newMap = this.copy();
+		this.checkBounds(x, y);
+		if (!this.getCell(x, y).hasPlant) {
+			console.log("Cell does not have a plant");
+			return null;
+		}
+		newMap.getCell(x, y).plantType = 0;
+		newMap.getCell(x, y).plantLevel = 0;
+		return newMap;
 	}
 
 	placePlant(x:number, y:number, plantType:number, plantLevel:number = 1) {
@@ -102,7 +157,7 @@ export class GameMap {
 		this.getCell(x, y).plantLevel = 0;
 	}
 
-	updatePlant(x:number, y:number) {
+	updatePlant(x:number, y:number, newMap: GameMap) {
 		this.checkBounds(x, y);
 		if (!this.getCell(x, y).hasPlant) {
 			console.log("Cell does not have a plant");
@@ -113,8 +168,8 @@ export class GameMap {
 			this.reapPlant(x, y);
 			return;
 		}
-		// let plant = new Plant(this.getCell(x, y).plantType, this.getCell(x, y).plantLevel);
-		// plant.grow(); // this should be able to directly update plant level in map
+		const plant = new Plant(this.getCell(x, y).plantType, this.getCell(x, y).plantLevel, x, y);
+		plant.grow(this, newMap); // this should be able to directly update plant level in map
 	}
 
 	updateWaterLevels() {
@@ -150,5 +205,28 @@ export class GameMap {
 
 	randomInt(min:number, max:number) {
 		return Math.floor(Math.random() * (max - min + 1)) + min;
+	}
+
+	//current senario is trying to check if you trapped the faster growing green plants
+	playScenarioCompleted(){
+		let plant1Count = 0;
+		let plant2Count = 0;
+		let minPlant1Level = 0;
+		let minPlant2Level = 0;
+		this.loopCells((cell, x, y) => {
+			if(cell.plantType === 1){
+				plant1Count++;
+				if(cell.plantLevel < minPlant1Level){
+					minPlant1Level = cell.plantLevel;
+				}
+			}
+			if(cell.plantType === 2){
+				plant2Count++;
+				if(cell.plantLevel < minPlant2Level){
+					minPlant2Level = cell.plantLevel;
+				}
+			}
+		});
+		return (plant1Count >= 4 && plant2Count >= 4 && minPlant1Level > 4 && minPlant2Level > 4 && plant1Count < plant2Count);
 	}
 }

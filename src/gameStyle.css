@@ -21,3 +21,20 @@
   width: 30px;
   height: 30px;
 }
+
+#field .plantCell1 {
+  background-color: rgb(12, 144, 0);
+  width: 30px;
+  height: 30px;
+}
+#field .plantCell2 {
+  background-color: rgb(255, 247, 0);
+  width: 30px;
+  height: 30px;
+}
+
+#field .playerCell {
+  background-color: rgb(255, 0, 0);
+  width: 30px;
+  height: 30px;
+}
