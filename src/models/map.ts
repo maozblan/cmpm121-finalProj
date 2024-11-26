@@ -57,8 +57,11 @@ export class GameMap {
 		}
 	}
 
-	exportBuffer() {
+	getBuffer() {
 		return this.buffer;
+	}
+	exportBuffer() {
+		return this.buffer.slice(0);
 	}
 	loadBuffer(buffer: ArrayBuffer) { 
 		this.buffer = buffer;
@@ -74,13 +77,7 @@ export class GameMap {
 
 	copy(): GameMap {
 		const newMap = new GameMap(this.size);
-		//set newMap to the same state as the current map
-		this.loopCells((cell, x, y) => {
-			newMap.getCell(x, y).waterLevel = cell.waterLevel;
-			newMap.getCell(x, y).sunLevel = cell.sunLevel;
-			newMap.getCell(x, y).plantType = cell.plantType;
-			newMap.getCell(x, y).plantLevel = cell.plantLevel;
-		});
+		newMap.loadBuffer(this.exportBuffer());
 		return newMap;
 	}
 
