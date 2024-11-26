@@ -22,6 +22,9 @@ controls.innerHTML = `
   <button id="undo">Undo</button>
   <button id="redo">Redo</button>
 `;
+document.querySelectorAll<HTMLButtonElement>("button").forEach((button) => {
+  button.addEventListener("click", playerInteraction);
+});
 
 const container = document.createElement("div");
 container.classList.add("row-div");

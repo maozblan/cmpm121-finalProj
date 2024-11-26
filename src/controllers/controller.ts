@@ -14,10 +14,18 @@ const actions: { [key: string]: () => void } = {
   d: () => playerMove("right"),
   ' ': nextTurn,
   f: plant,
+  undo: undoCmd,
+  redo: redoCmd,
 };
 
-export default function playerInteraction(event: KeyboardEvent) {
-  actions[event.key]?.();
+export default function playerInteraction(event: KeyboardEvent | MouseEvent) {
+  let key: string = "";
+  if (event.type === "keydown") {
+    key = (event as KeyboardEvent).key;
+  } else if (event.type === "click") {
+    key = (event.target as HTMLElement).id;
+  }
+  actions[key]?.();
 }
 
 function playerMove(direction: string) {
@@ -41,4 +49,12 @@ function plant() {
     console.log("sow plant");
     gameMap.placePlant(mock.x, mock.y, 0, 1);
   }
+}
+
+function undoCmd() {
+  console.log("undo");
+}
+
+function redoCmd() {
+  console.log("redo");
 }
