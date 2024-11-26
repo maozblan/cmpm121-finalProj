@@ -3,7 +3,7 @@ import "./gameStyle.css";
 import { img } from "./views/imgs.ts";
 import { createMap } from "./views/views.ts";
 import playerInteraction from "./controllers/controller.ts";
-import { gameState, tryLoad } from "./game.ts";
+import { gameState, getCurrentMap } from "./game.ts";
 
 
 const APP_NAME = "cmpm121-final";
@@ -55,5 +55,5 @@ image.src = img.sampleImage;
 // app.append(image);
 
 // linking to other systems
-createMap(gameState.gameMap);
+createMap(getCurrentMap());
 document.addEventListener("keydown", playerInteraction);

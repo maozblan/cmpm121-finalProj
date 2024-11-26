@@ -46,7 +46,7 @@ export class Plant{
                     catch{}
                     try {
                         const tmpCell = map.getCell(this.x, this.y);
-                        if(tmpCell.waterLevel > 5 && tmpCell.sunLevel > 5){
+                        if(tmpCell.waterLevel > 2 && tmpCell.sunLevel > 2){
                             newMap.getCell(this.x, this.y).plantLevel = tmpCell.plantLevel + 1;
                         }
                     }
@@ -80,7 +80,7 @@ export class Plant{
                     catch{}
                     try {
                         const tmpCell = map.getCell(this.x, this.y);
-                        if(tmpCell.waterLevel > 5 && tmpCell.sunLevel > 5){
+                        if(tmpCell.waterLevel > 2 && tmpCell.sunLevel > 2){
                             newMap.getCell(this.x, this.y).plantLevel = tmpCell.plantLevel + 1;
                         }
                     }

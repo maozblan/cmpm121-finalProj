@@ -54,6 +54,7 @@ export class GameMap {
 			}
 		}
 	}
+
 	exportBuffer() {
 		return this.buffer;
 	}
@@ -211,8 +212,8 @@ export class GameMap {
 	playScenarioCompleted(){
 		let plant1Count = 0;
 		let plant2Count = 0;
-		let minPlant1Level = 0;
-		let minPlant2Level = 0;
+		let minPlant1Level = 99999;
+		let minPlant2Level = 99999;
 		this.loopCells((cell, x, y) => {
 			if(cell.plantType === 1){
 				plant1Count++;
@@ -227,6 +228,10 @@ export class GameMap {
 				}
 			}
 		});
+		console.log("plant 1 count: " + plant1Count);
+		console.log("plant 2 count: " + plant2Count);
+		console.log("minPlant1Level: " + minPlant1Level);
+		console.log("minPlant2Level: " + minPlant2Level);
 		return (plant1Count >= 4 && plant2Count >= 4 && minPlant1Level > 4 && minPlant2Level > 4 && plant1Count < plant2Count);
 	}
 }

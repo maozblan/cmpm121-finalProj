@@ -1,4 +1,4 @@
-import { updateMap, gameState, setTurn, player, undo, redo, tryLoad } from "../game.ts";
+import { updateMap, gameState, getCurrentMap, tryLoad, save, setTurn, player, undo, redo } from "../game.ts";
 import { displayMap } from "../views/views.ts";
 import { GameMap } from "../models/map.ts";
 
@@ -20,7 +20,11 @@ const actions: { [key: string]: () => void } = {
   f: plant,
   undo: undoCmd,
   redo: redoCmd,
-  loadautosave: () => tryLoad("autosave")
+   loadautosave: () => {tryLoad("autosave"); displayMap(getCurrentMap(), player);},
+   load1: () => {tryLoad("save1"); console.log("load1"); displayMap(getCurrentMap(), player);},
+   load2: () => {tryLoad("save2"); console.log("load2"); displayMap(getCurrentMap(), player);},
+   save1: () => {save("save1"); console.log("save1"); displayMap(getCurrentMap(), player);},
+   save2: () => {save("save2"); console.log("save2"); displayMap(getCurrentMap(), player);}
 };
 
 export default function playerInteraction(event: KeyboardEvent | MouseEvent) {
@@ -35,15 +39,16 @@ export default function playerInteraction(event: KeyboardEvent | MouseEvent) {
 
 function playerMove(direction: string) {
   console.log("player move", direction);
-  player.move(direction, gameState.gameMap);
-  displayMap(gameState.gameMap, player);
+  player.move(direction, getCurrentMap());
+  displayMap(getCurrentMap(), player);
 }
 
 function nextTurn() {
   console.log("next turn");
   setTurn(gameState.currentTurn + 1);
-  updateMap(gameState.gameMap.nextTurn());
-  displayMap(gameState.gameMap, player);
+  updateMap(getCurrentMap().nextTurn());
+  displayMap(getCurrentMap(), player);
+  console.log(getCurrentMap().playScenarioCompleted());
 }
 
 function setPlantType(type: number){
@@ -52,24 +57,24 @@ function setPlantType(type: number){
 
 // TODO currently no player location b/c no player
 function plant() {
-  if (gameState.gameMap.getCell(player.x, player.y).hasPlant) {
+  if (getCurrentMap().getCell(player.x, player.y).hasPlant) {
     console.log("reap plant");
-    updateMap(gameState.gameMap.reapPlantOnCopy(player.x, player.y));
+    updateMap(getCurrentMap().reapPlantOnCopy(player.x, player.y));
   } else {
     console.log("sow plant");
-    updateMap(gameState.gameMap.placePlantOnCopy(player.x, player.y, player.plantType, 1));
+    updateMap(getCurrentMap().placePlantOnCopy(player.x, player.y, player.plantType, 1));
   }
 }
 
 function undoCmd() {
   console.log("undo");
   undo();
-  displayMap(gameState.gameMap, player);
+  displayMap(getCurrentMap(), player);
 
 }
 
 function redoCmd() {
   console.log("redo");
   redo();
-  displayMap(gameState.gameMap, player);
+  displayMap(getCurrentMap(), player);
 }
