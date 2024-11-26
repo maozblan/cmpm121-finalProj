@@ -1,5 +1,5 @@
 import { Plant } from "./plants.ts";
-const CELL_SIZE = 6;
+const CELL_SIZE = 6; // in bytes
 class Cell {
 	constructor(private dataView: DataView) {}
 
@@ -48,7 +48,9 @@ export class GameMap {
 		for (let i = 0; i < size; i++) {
 			this.cells[i] = new Array(size);
 			for (let j = 0; j < size; j++) {
-				this.cells[i][j] = new Cell(new DataView(this.buffer, i * size * CELL_SIZE + j * CELL_SIZE, CELL_SIZE));
+				this.cells[i][j] = new Cell(new DataView(
+					this.buffer, i * size * CELL_SIZE + j * CELL_SIZE, CELL_SIZE
+				));
 				this.cells[i][j].waterLevel = this.randomInt(2, 7);
 				this.cells[i][j].sunLevel = this.randomInt(2, 7);
 			}
@@ -63,7 +65,9 @@ export class GameMap {
 		for (let i = 0; i < this.size; i++) {
 			this.cells[i] = new Array(this.size);
 			for (let j = 0; j < this.size; j++) {
-				this.cells[i][j] = new Cell(new DataView(this.buffer, i * this.size * CELL_SIZE + j * CELL_SIZE, CELL_SIZE));
+				this.cells[i][j] = new Cell(new DataView(
+					this.buffer, i * this.size * CELL_SIZE + j * CELL_SIZE, CELL_SIZE
+				));
 			}
 		}
 	}
@@ -111,6 +115,8 @@ export class GameMap {
 		}
 		return newMap;
 	}
+
+	// game functions ///////////////////////////////////////////////////////////
 
 	getCell(x:number, y:number) {
 		this.checkBounds(x, y);
@@ -161,6 +167,8 @@ export class GameMap {
 		this.getCell(x, y).plantLevel = 0;
 	}
 
+	// internal functions ///////////////////////////////////////////////////////
+
 	updatePlant(x:number, y:number, newMap: GameMap) {
 		this.checkBounds(x, y);
 		if (!this.getCell(x, y).hasPlant) {
@@ -168,12 +176,12 @@ export class GameMap {
 			return;
 		}
 		if (this.getCell(x, y).waterLevel < 1) {
-			console.log("Not enough water to grow plant at cell (" + x + ", " + y + ")");
+			console.log(`Not enough water to grow plant at cell (${x}, ${y})`);
 			this.reapPlant(x, y);
 			return;
 		}
 		const plant = new Plant(this.getCell(x, y).plantType, this.getCell(x, y).plantLevel, x, y);
-		plant.grow(this, newMap); // this should be able to directly update plant level in map
+		plant.grow(this, newMap);
 	}
 
 	updateWaterLevels() {
@@ -188,7 +196,8 @@ export class GameMap {
 		});
 	}
 
-	// utility functions
+	// utility functions ////////////////////////////////////////////////////////
+
 	loopCells(callback: (cell: Cell, x: number, y: number) => void) {
 		for (let i = 0; i < this.cells.length; i++) {
 			for (let j = 0; j < this.cells.length; j++) {
@@ -199,12 +208,18 @@ export class GameMap {
 
 	checkCells() {
 		this.loopCells((cell, x, y) => {
-			console.log(`Cell at (${x}, ${y}) has water level ${cell.waterLevel}, sun level ${cell.sunLevel}, plant type ${cell.plantType}, plant level ${cell.plantLevel}`);
+			console.log(`Cell at (${x}, ${y}) has 
+				water level ${cell.waterLevel}, 
+				sun level ${cell.sunLevel}, 
+				plant type ${cell.plantType}, 
+				plant level ${cell.plantLevel}`);
 		});
 	}
 
 	checkBounds(x:number, y:number) {
-		if (x < 0 || y < 0 || x >= this.cells.length || y >= this.cells.length) throw("Out of Bounds");
+		if (x < 0 || y < 0 || x >= this.cells.length || y >= this.cells.length) {
+			throw("Out of Bounds");
+		}
 	}
 
 	randomInt(min:number, max:number) {
