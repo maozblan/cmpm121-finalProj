@@ -1,6 +1,6 @@
 import { GameMap } from "../models/map.ts";
 import { Player } from "../models/player.ts";
-import { gameState, player } from "../game.ts";
+import { gameState, getCurrentMap, player } from "../game.ts";
 
 export function createMap(map: GameMap): void {
   const field = document.querySelector<HTMLDivElement>("#field")!;
@@ -13,10 +13,9 @@ export function createMap(map: GameMap): void {
     for (let j = 0; j < map.size; ++j) {
       const cell = document.createElement("div");
       //cell.classList.add("cell");
-      if(player.x === j && player.y === i){
+      if (player.x === j && player.y === i) {
         cell.classList.add("playerCell");
-      }
-      else{
+      } else {
         cell.classList.add("cell");
       }
       // cell.addEventListener('click', foo);
@@ -38,17 +37,14 @@ export function displayMap(map: GameMap, player: Player): void {
     for (let j = 0; j < map.size; j++) {
       const cell = document.createElement("div");
       const gameCell = map.getCell(j, i);
-      if(player.x === j && player.y === i){
+      if (player.x === j && player.y === i) {
         cell.classList.add("playerCell");
-      }
-      else if(!gameCell.hasPlant){
+      } else if (!gameCell.hasPlant) {
         cell.classList.add("cell");
-      }
-      else{
-        if(gameCell.plantType === 1){
+      } else {
+        if (gameCell.plantType === 1) {
           cell.classList.add("plantCell1");
-        }
-        else if(gameCell.plantType === 2){
+        } else if (gameCell.plantType === 2) {
           cell.classList.add("plantCell2");
         }
         cell.innerHTML = gameCell.plantLevel.toString();
@@ -58,9 +54,13 @@ export function displayMap(map: GameMap, player: Player): void {
   }
 }
 
-document.addEventListener("update", displayData);
-
 function displayData(): void {
   const controls = document.querySelector<HTMLDivElement>("#controls")!;
-  controls.querySelector("#turn-count")!.textContent = gameState.currentTurn.toString();
+  controls.querySelector("#turn-count")!.textContent =
+    gameState.currentTurn.toString();
 }
+
+document.addEventListener("update-visuals", () => {
+  displayData();
+  displayMap(getCurrentMap(), player);
+});

@@ -1,92 +1,72 @@
 import { GameMap } from "./map.ts";
-export class Plant{
-    plantType: number;
-    plantLevel: number;
-    x: number;
-    y: number;
-    constructor(plantType: number, plantLevel: number, x: number, y: number){
-        this.plantType = plantType;
-        this.plantLevel = plantLevel;
-        this.x = x;
-        this.y = y;
+
+interface PlantInfo {
+  waterEx: number; // water needed for expanding
+  sunEx: number; // sun needed for expanding
+  waterSelf: number;
+  sunSelf: number;
+}
+
+const plantInfo: PlantInfo[] = [
+  {
+    waterEx: 5,
+    sunEx: 4,
+    waterSelf: 2,
+    sunSelf: 2,
+  },
+  {
+    waterEx: 7,
+    sunEx: 5,
+    waterSelf: 2,
+    sunSelf: 2,
+  },
+];
+
+export class Plant {
+  plantType: number;
+  plantLevel: number;
+  x: number;
+  y: number;
+  constructor(plantType: number, plantLevel: number, x: number, y: number) {
+    this.plantType = plantType;
+    this.plantLevel = plantLevel;
+    this.x = x;
+    this.y = y;
+  }
+  _tryPlace(map: GameMap, x: number, y: number, type: number, level: number) {
+    try {
+      map.placePlant(x, y, type, level);
+    } catch {
+      console.error("Error planting plant");
     }
-    _tryPlace(map: GameMap, x: number, y: number, type: number, level: number){
-        try{
-            map.placePlant(x, y, type, level);
+  }
+  grow(map: GameMap, newMap: GameMap) {
+    for (const [x, y] of getSurroundingCells(this.x, this.y)) {
+      try {
+        const cell = map.getCell(x, y);
+        if (cell.waterLevel > plantInfo[this.plantType].waterEx && cell.sunLevel > plantInfo[this.plantType].sunEx) {
+          this._tryPlace(newMap, x, y, this.plantType, this.plantLevel);
         }
-        catch{}
+      } catch {
+        console.error("Error growing plant to neighbor");
+      }
     }
-    grow(map: GameMap, newMap: GameMap){
-        console.log("plant grow");
-        switch (this.plantType){
-            case 1:
-                for(let i = 0; i < 4; i++){
-                    let x = this.x;
-                    let y = this.y;
-                    switch(i){
-                        case 0:
-                            x--;
-                            break;
-                        case 1:
-                            x++;
-                            break;
-                        case 2:
-                            y--;
-                            break;
-                        case 3:
-                            y++;
-                            break;
-                    }
-                    try {
-                        let cell = map.getCell(x, y);
-                        if(cell.waterLevel > 5 && cell.sunLevel > 4){
-                            this._tryPlace(newMap, x, y, this.plantType, this.plantLevel);
-                        }
-                    }
-                    catch{}
-                    try {
-                        const tmpCell = map.getCell(this.x, this.y);
-                        if(tmpCell.waterLevel > 2 && tmpCell.sunLevel > 2){
-                            newMap.getCell(this.x, this.y).plantLevel = tmpCell.plantLevel + 1;
-                        }
-                    }
-                    catch{}
-                }
-                break;
-            case 2:
-                for(let i = 0; i < 4; i++){
-                    let x = this.x;
-                    let y = this.y;
-                    switch(i){
-                        case 0:
-                            x--;
-                            break;
-                        case 1:
-                            x++;
-                            break;
-                        case 2:
-                            y--;
-                            break;
-                        case 3:
-                            y++;
-                            break;
-                    }
-                    try {
-                        let cell = map.getCell(x, y);
-                        if(cell.waterLevel > 7 && cell.sunLevel > 5){
-                            this._tryPlace(newMap, x, y, this.plantType, this.plantLevel);
-                        }
-                    }
-                    catch{}
-                    try {
-                        const tmpCell = map.getCell(this.x, this.y);
-                        if(tmpCell.waterLevel > 2 && tmpCell.sunLevel > 2){
-                            newMap.getCell(this.x, this.y).plantLevel = tmpCell.plantLevel + 1;
-                        }
-                    }
-                    catch{}
-                }
-                break;
-        }
+    try {
+      const tmpCell = map.getCell(this.x, this.y);
+      if (tmpCell.waterLevel > plantInfo[this.plantType].waterSelf && tmpCell.sunLevel > plantInfo[this.plantType].sunSelf) {
+        newMap.getCell(this.x, this.y).plantLevel = tmpCell.plantLevel + 1;
+      }
+    } catch {
+      console.error("Error raising plant level");
     }
+  }
+}
+
+function getSurroundingCells(x: number, y: number) {
+  return [
+    [x - 1, y],
+    [x + 1, y],
+    [x, y - 1],
+    [x, y + 1],
+  ];
 }

@@ -92,20 +92,23 @@ export class GameMap {
 				//reduce the new map's water by 1
 				try {
 					newMap.getCell(x, y).waterLevel -= 1;
+				} catch {
+					console.error("Error decreasing water levels");
 				}
-				catch{}
 			}
 		});
 
 		//update the next maps water/sun levels
 		try {
 			newMap.updateWaterLevels();
+		} catch {
+			console.error("Error updating water levels");
 		}
-		catch{}
 		try {
 			newMap.updateSun();
+		} catch {
+			console.error("Error updating sun levels");
 		}
-		catch{}
 		return newMap;
 	}
 
@@ -214,7 +217,7 @@ export class GameMap {
 		let plant2Count = 0;
 		let minPlant1Level = 99999;
 		let minPlant2Level = 99999;
-		this.loopCells((cell, x, y) => {
+		this.loopCells((cell) => {
 			if(cell.plantType === 1){
 				plant1Count++;
 				if(cell.plantLevel < minPlant1Level){
