@@ -1,4 +1,4 @@
-import { updateMap, gameMap, player, undo, redo } from "../game.ts";
+import { updateMap, gameState, setTurn, player, undo, redo, tryLoad } from "../game.ts";
 import { displayMap } from "../views/views.ts";
 import { GameMap } from "../models/map.ts";
 
@@ -20,6 +20,7 @@ const actions: { [key: string]: () => void } = {
   f: plant,
   undo: undoCmd,
   redo: redoCmd,
+  loadautosave: () => tryLoad("autosave")
 };
 
 export default function playerInteraction(event: KeyboardEvent | MouseEvent) {
@@ -34,14 +35,15 @@ export default function playerInteraction(event: KeyboardEvent | MouseEvent) {
 
 function playerMove(direction: string) {
   console.log("player move", direction);
-  player.move(direction, gameMap);
-  displayMap(gameMap, player);
+  player.move(direction, gameState.gameMap);
+  displayMap(gameState.gameMap, player);
 }
 
 function nextTurn() {
   console.log("next turn");
-  updateMap(gameMap.nextTurn());
-  displayMap(gameMap, player);
+  setTurn(gameState.currentTurn + 1);
+  updateMap(gameState.gameMap.nextTurn());
+  displayMap(gameState.gameMap, player);
 }
 
 function setPlantType(type: number){
@@ -50,24 +52,24 @@ function setPlantType(type: number){
 
 // TODO currently no player location b/c no player
 function plant() {
-  if (gameMap.getCell(player.x, player.y).hasPlant) {
+  if (gameState.gameMap.getCell(player.x, player.y).hasPlant) {
     console.log("reap plant");
-    updateMap(gameMap.reapPlantOnCopy(player.x, player.y));
+    updateMap(gameState.gameMap.reapPlantOnCopy(player.x, player.y));
   } else {
     console.log("sow plant");
-    updateMap(gameMap.placePlantOnCopy(player.x, player.y, player.plantType, 1));
+    updateMap(gameState.gameMap.placePlantOnCopy(player.x, player.y, player.plantType, 1));
   }
 }
 
 function undoCmd() {
   console.log("undo");
   undo();
-  displayMap(gameMap, player);
+  displayMap(gameState.gameMap, player);
 
 }
 
 function redoCmd() {
   console.log("redo");
   redo();
-  displayMap(gameMap, player);
+  displayMap(gameState.gameMap, player);
 }

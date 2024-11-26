@@ -1,6 +1,6 @@
 import { GameMap } from "../models/map.ts";
 import { Player } from "../models/player.ts";
-import { gameMap, currentIndex, player } from "../game.ts";
+import { gameState, player } from "../game.ts";
 
 export function createMap(map: GameMap): void {
   const field = document.querySelector<HTMLDivElement>("#field")!;
@@ -62,5 +62,5 @@ document.addEventListener("update", displayData);
 
 function displayData(): void {
   const controls = document.querySelector<HTMLDivElement>("#controls")!;
-  controls.querySelector("#turn-count")!.textContent = currentIndex.toString();
+  controls.querySelector("#turn-count")!.textContent = gameState.currentTurn.toString();
 }

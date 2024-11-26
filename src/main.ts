@@ -3,7 +3,8 @@ import "./gameStyle.css";
 import { img } from "./views/imgs.ts";
 import { createMap } from "./views/views.ts";
 import playerInteraction from "./controllers/controller.ts";
-import { gameMap } from "./game.ts";
+import { gameState, tryLoad } from "./game.ts";
+
 
 const APP_NAME = "cmpm121-final";
 const app = document.querySelector<HTMLDivElement>("#app")!;
@@ -21,6 +22,11 @@ controls.innerHTML = `
   <h2> TURN: <span id="turn-count">0</span> </h2>
   <button id="undo">Undo</button>
   <button id="redo">Redo</button>
+  <button id="loadautosave">Load Autosave</button>
+  <button id="save1">save1</button>
+  <button id="load1">load1</button>
+  <button id="save2">save2</button>
+  <button id="load2">load2</button>
 `;
 document.querySelectorAll<HTMLButtonElement>("button").forEach((button) => {
   button.addEventListener("click", playerInteraction);
@@ -49,5 +55,5 @@ image.src = img.sampleImage;
 // app.append(image);
 
 // linking to other systems
-createMap(gameMap);
+createMap(gameState.gameMap);
 document.addEventListener("keydown", playerInteraction);
