@@ -1,4 +1,4 @@
-const CELL_SIZE = 4;
+const CELL_SIZE = 6;
 class Cell {
 	constructor(private dataView: DataView) {}
 
@@ -9,22 +9,29 @@ class Cell {
 		if (value > 65535 || value < 0) throw("Excessive Water Level")
 		this.dataView.setInt16(0, value);
 	}
+	get sunLevel() {
+		return this.dataView.getUint16(2);
+	}
+	set sunLevel(value: number) {
+		if (value > 65535 || value < 0) throw("Excessive Sun Level")
+		this.dataView.setInt16(2, value);
+	}
 	get plantType() {
-		return this.dataView.getUint8(2);
+		return this.dataView.getUint8(4);
 	}
 	set plantType(value: number) {
 		if (value > 255 || value < 0) throw("Excessive Plant Type")
-		this.dataView.setInt8(2, value);
+		this.dataView.setInt8(4, value);
 	}
 	get plantLevel() {
-		return this.dataView.getUint8(3);
+		return this.dataView.getUint8(5);
 	}
 	set plantLevel(value: number) {
 		if (value > 255 || value < 0) throw("Excessive Plant Level")
-		this.dataView.setUint8(3, value);
+		this.dataView.setUint8(5, value);
 	}
 	get hasPlant() {
-		return this.dataView.getUint16(2) != 0;
+		return this.dataView.getUint16(4) != 0;
 	}
 }
 
