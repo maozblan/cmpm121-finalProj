@@ -9,12 +9,13 @@ import {
   undo,
   redo,
 } from "../game.ts";
+import { MoveDirection } from "../models/player.ts";
 
 const actions: { [key: string]: () => void } = {
-  w: () => playerMove("up"),
-  a: () => playerMove("left"),
-  s: () => playerMove("down"),
-  d: () => playerMove("right"),
+  w: () => playerMove(MoveDirection.UP),
+  a: () => playerMove(MoveDirection.LEFT),
+  s: () => playerMove(MoveDirection.DOWN),
+  d: () => playerMove(MoveDirection.RIGHT),
   1: () => setPlantType(0),
   2: () => setPlantType(1),
   " ": nextTurn,
@@ -53,7 +54,7 @@ export default function playerInteraction(event: KeyboardEvent | MouseEvent) {
   document.dispatchEvent(new Event("update-visuals"));
 }
 
-function playerMove(direction: string) {
+function playerMove(direction: MoveDirection) {
   player.move(direction, getCurrentMap());
 }
 

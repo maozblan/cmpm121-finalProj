@@ -1,4 +1,11 @@
 import { GameMap } from "./map.ts";
+
+export enum MoveDirection{
+    UP,
+    DOWN,
+    LEFT,
+    RIGHT
+}
 export class Player{
     x: number;
     y: number;
@@ -8,30 +15,24 @@ export class Player{
         this.y = y;
         this.plantType = 1;
     }
-    move(direction: string, map: GameMap){
-        let newX = this.x;
-        let newY = this.y;
-
+    move(direction:MoveDirection, map: GameMap){
         switch(direction){
-            case "up":
-                newY -= 1;
+            case MoveDirection.UP:
+                if (checkValidMove(this.x, this.y - 1)) this.y -= 1;
                 break;
-            case "down":
-                newY += 1;
+            case MoveDirection.DOWN:
+                if (checkValidMove(this.x, this.y + 1)) this.y += 1;
                 break;
-            case "left":
-                newX -= 1;
+            case MoveDirection.LEFT:
+                if (checkValidMove(this.x - 1, this.y - 1)) this.x -= 1;
                 break;
-            case "right":
-                newX += 1;
+            case MoveDirection.RIGHT:
+                if (checkValidMove(this.x + 1, this.y)) this.x += 1;
                 break;
         }
 
-        try {
-            map.checkBounds(newX, newY);
-            this.x = newX;
-            this.y = newY;
+        function checkValidMove(x:number, y:number) {
+            return x >= 0 && x < map.size && y >= 0 && y < map.size;
         }
-        catch{}
     }
 }
