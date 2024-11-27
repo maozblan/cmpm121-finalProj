@@ -24,7 +24,7 @@ export class Player{
                 if (checkValidMove(this.x, this.y + 1)) this.y += 1;
                 break;
             case MoveDirection.LEFT:
-                if (checkValidMove(this.x - 1, this.y - 1)) this.x -= 1;
+                if (checkValidMove(this.x - 1, this.y)) this.x -= 1;
                 break;
             case MoveDirection.RIGHT:
                 if (checkValidMove(this.x + 1, this.y)) this.x += 1;

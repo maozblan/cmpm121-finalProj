@@ -45,7 +45,12 @@ howToPlay.innerHTML = `
   <h2>How to Play</h2>
   <p>Use WASD to move your character</p>
   <p>F to reap/sow plants on current tile</p>
-  <p>Space to end turn</p>
+  <p>SPACE to end turn</p>
+  <p>each cell will randomly receive 3-7 sun and rain each turn</p>
+  <p>your plants will grow accordingly</p>
+  <h2>Goal</h2>
+  <p>Balance plant 1 and plant 2 to grow both to appropriate levels</p>
+  <p>while still keeping plant 2 greater than plant 1</p>
 `;
 howToPlay.style.marginLeft = "20px";
 container.append(howToPlay);

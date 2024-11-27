@@ -1,20 +1,17 @@
 import { GameMap } from "./map.ts";
 
-interface PlantInfo {
-  waterEx: number; // water needed for expanding
-  sunEx: number; // sun needed for expanding
-  waterSelf: number;
-  sunSelf: number;
-}
-
 const plantInfo: PlantInfo[] = [
   {
+    name: "Plant1",
+    imgUrl: "",
     waterEx: 5,
     sunEx: 4,
     waterSelf: 2,
     sunSelf: 2,
   },
   {
+    name: "Plant2",
+    imgUrl: "",
     waterEx: 7,
     sunEx: 5,
     waterSelf: 2,

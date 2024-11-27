@@ -156,7 +156,10 @@ export function save(slot: "autosave" | "save1" | "save2") {
 }
 
 export function tryLoad(slot: "autosave" | "save1" | "save2") {
-  if (document_cookie === "") return
+  if (document_cookie === "") {
+    console.log("tryLoad(): document_cookie is empty");
+    return;
+  }
   const saveDataObject: SaveData = JSON.parse(document_cookie);
   if (saveDataObject[slot] !== "") {
     const tmp: GameState = GameStateParse(saveDataObject[slot]);
@@ -174,3 +177,13 @@ export function updateMap(newMap: GameMap | null) {
   gameState.currentIndex = gameState.mapUpdateLedger.length - 1;
   save("autosave");
 }
+
+// save between sessions //////////////////////////////////////////////////////
+document.addEventListener("DOMContentLoaded", function () {
+  document_cookie = JSON.parse(localStorage.getItem("savestate") || "");
+});
+
+globalThis.addEventListener("beforeunload", function () {
+  save("autosave");
+  localStorage.setItem("savestate", JSON.stringify(document_cookie));
+});

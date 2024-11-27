@@ -230,23 +230,19 @@ export class GameMap {
 		let minPlant1Level = 99999;
 		let minPlant2Level = 99999;
 		this.loopCells((cell) => {
-			if(cell.plantType === 1){
+			if(cell.plantType === 0 && cell.hasPlant){
 				plant1Count++;
 				if(cell.plantLevel < minPlant1Level){
 					minPlant1Level = cell.plantLevel;
 				}
 			}
-			if(cell.plantType === 2){
+			if(cell.plantType === 1 && cell.hasPlant){
 				plant2Count++;
 				if(cell.plantLevel < minPlant2Level){
 					minPlant2Level = cell.plantLevel;
 				}
 			}
 		});
-		console.log("plant 1 count: " + plant1Count);
-		console.log("plant 2 count: " + plant2Count);
-		console.log("minPlant1Level: " + minPlant1Level);
-		console.log("minPlant2Level: " + minPlant2Level);
-		return (plant1Count >= 4 && plant2Count >= 4 && minPlant1Level > 4 && minPlant2Level > 4 && plant1Count < plant2Count);
+		return (plant1Count >= 4 && plant2Count >= 4 && minPlant1Level >= 4 && minPlant2Level >= 4 && plant1Count < plant2Count);
 	}
 }
