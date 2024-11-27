@@ -1,0 +1,15 @@
+plants:
+  wheat:
+    - waterEx: 5
+    - sunEx: 4
+    - waterSelf: 2
+    - sunSelf: 2
+    - plantName: "Wheat"
+    - imgUrl:
+  umbrella:
+    - waterEx: 7
+    - sunEx: 5
+    - waterSelf: 2
+    - sunSelf: 2
+    - plantName: "Umbrella Plant"
+    - imgUrl:
