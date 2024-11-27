@@ -1,6 +1,8 @@
 {
   "version": "4",
   "specifiers": {
+    "npm:fs@^0.0.1-security": "0.0.1-security",
+    "npm:js-yaml@^4.1.0": "4.1.0",
     "npm:vite@*": "5.4.8"
   },
   "npm": {
@@ -124,6 +126,9 @@
     "@types/estree@1.0.6": {
       "integrity": "sha512-AYnb1nQyY49te+VRAVgmzfcgjYS91mY5P0TKUDCLEM+gNnA+3T6rWITXRLYCpahpqSQbN5cE+gHpnPyXjHWxcw=="
     },
+    "argparse@2.0.1": {
+      "integrity": "sha512-8+9WqebbFzpX9OR+Wa6O29asIogeRMzcGtAINdpMHHyAg10f05aSFVBbcEqGf/PXw1EjAZ+q2/bEBg3DvurK3Q=="
+    },
     "esbuild@0.21.5": {
       "integrity": "sha512-mg3OPMV4hXywwpoDxu3Qda5xCKQi+vCTZq8S9J/EpkhB2HzKXq4SNFZE3+NK93JYxc8VMSep+lOUSC/RVKaBqw==",
       "dependencies": [
@@ -152,8 +157,17 @@
         "@esbuild/win32-x64"
       ]
     },
+    "fs@0.0.1-security": {
+      "integrity": "sha512-3XY9e1pP0CVEUCdj5BmfIZxRBTSDycnbqhIOGec9QYtmVH2fbLpj86CFWkrNOkt/Fvty4KZG5lTglL9j/gJ87w=="
+    },
     "fsevents@2.3.3": {
       "integrity": "sha512-5xoDfX+fL7faATnagmWPpbFtwh/R77WmMMqqHGS65C3vvB0YHrgF+B1YmZ3441tMj5n63k0212XNoJwzlhffQw=="
+    },
+    "js-yaml@4.1.0": {
+      "integrity": "sha512-wpxZs9NoxZaJESJGIZTyDEaYpl0FKSA+FB9aJiyemKhMwkxQg63h4T1KJgUGHpTqPDNRcmmYLugrRjJlBtWvRA==",
+      "dependencies": [
+        "argparse"
+      ]
     },
     "nanoid@3.3.7": {
       "integrity": "sha512-eSRppjcPIatRIMC1U6UngP8XFcz8MQWGQdt1MTBQ7NaAmvXDfvNxbvWV3x2y6CdEUciCSsDHDQZbhYaB8QEo2g=="
@@ -211,5 +225,13 @@
   "remote": {
     "https://esm.sh/noisejs@2.1.0": "1872e1e4b1ee5b62197d74ea0dca46ee6c6523d709dad94630374fbff226a314",
     "https://esm.sh/v135/noisejs@2.1.0/denonext/noisejs.mjs": "61ad0beeb2d5af9378d6b7533ac637cede71fd4c99cb08995a60d8155ec16c29"
+  },
+  "workspace": {
+    "packageJson": {
+      "dependencies": [
+        "npm:fs@^0.0.1-security",
+        "npm:js-yaml@^4.1.0"
+      ]
+    }
   }
 }
