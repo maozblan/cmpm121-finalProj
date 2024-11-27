@@ -63,7 +63,9 @@ function playerMove(direction: MoveDirection) {
 function nextTurn() {
   setTurn(gameState.currentTurn + 1);
   updateMap(getCurrentMap().nextTurn());
-  console.log(getCurrentMap().playScenarioCompleted());
+  if (getCurrentMap().playScenarioCompleted()) {
+    alert("You win!");
+  }
 }
 
 function setPlantType(type: number) {
