@@ -52,8 +52,6 @@ export default function playerInteraction(event: KeyboardEvent | MouseEvent) {
     key = (event.target as HTMLElement).id;
     (event.target as HTMLButtonElement)!.blur();
   }
-  console.log("playerInteraction: " + key);
-  console.log(event.type)
   actions[key]?.();
   document.dispatchEvent(new Event("update-visuals"));
 }
