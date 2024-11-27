@@ -26,30 +26,34 @@ const actions: { [key: string]: () => void } = {
     tryLoad("autosave");
   },
   load1: () => {
+    console.log("input: load1");
     tryLoad("save1");
-    console.log("load1");
   },
   load2: () => {
+    console.log("input: load2");
     tryLoad("save2");
-    console.log("load2");
   },
   save1: () => {
+    console.log("input: save1");
     save("save1");
-    console.log("save1");
   },
   save2: () => {
+    console.log("input: save2");
     save("save2");
-    console.log("save2");
   },
 };
 
+// after loading this is called every turn
 export default function playerInteraction(event: KeyboardEvent | MouseEvent) {
   let key: string = "";
   if (event.type === "keydown") {
     key = (event as KeyboardEvent).key;
   } else if (event.type === "click") {
     key = (event.target as HTMLElement).id;
+    (event.target as HTMLButtonElement)!.blur();
   }
+  console.log("playerInteraction: " + key);
+  console.log(event.type)
   actions[key]?.();
   document.dispatchEvent(new Event("update-visuals"));
 }

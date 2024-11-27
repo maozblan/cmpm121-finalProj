@@ -156,7 +156,10 @@ export function save(slot: "autosave" | "save1" | "save2") {
 }
 
 export function tryLoad(slot: "autosave" | "save1" | "save2") {
-  if (document_cookie === "") return
+  if (document_cookie === "") {
+    console.log("tryLoad(): document_cookie is empty");
+    return;
+  }
   const saveDataObject: SaveData = JSON.parse(document_cookie);
   if (saveDataObject[slot] !== "") {
     const tmp: GameState = GameStateParse(saveDataObject[slot]);
