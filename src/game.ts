@@ -177,3 +177,13 @@ export function updateMap(newMap: GameMap | null) {
   gameState.currentIndex = gameState.mapUpdateLedger.length - 1;
   save("autosave");
 }
+
+// save between sessions //////////////////////////////////////////////////////
+document.addEventListener("DOMContentLoaded", function () {
+  document_cookie = JSON.parse(localStorage.getItem("savestate") || "");
+});
+
+globalThis.addEventListener("beforeunload", function () {
+  save("autosave");
+  localStorage.setItem("savestate", JSON.stringify(document_cookie));
+});
