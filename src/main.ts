@@ -46,6 +46,9 @@ howToPlay.innerHTML = `
   <p>Use WASD to move your character</p>
   <p>F to reap/sow plants on current tile</p>
   <p>Space to end turn</p>
+  <p>each cell will randomly receive 3-7 sun and rain each turn</p>
+  <p>your plants will grow accordingly</p>
+  <h2>Goal</h2>
 `;
 howToPlay.style.marginLeft = "20px";
 container.append(howToPlay);
