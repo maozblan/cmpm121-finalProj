@@ -1,4 +1,4 @@
 export default {
   base: Deno.env.get("REPO_NAME") || "/project",
-  assetsInclude: ['**/*.png'],
+  assetsInclude: ['**/*.png', '**/*.yaml']
 };

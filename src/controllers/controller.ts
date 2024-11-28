@@ -10,8 +10,10 @@ import {
   redo,
 } from "../game.ts";
 import { MoveDirection } from "../models/player.ts";
+import { loadPlantData } from "../models/loadData.ts";
 
 const actions: { [key: string]: () => void } = {
+  p: test,
   w: () => playerMove(MoveDirection.UP),
   a: () => playerMove(MoveDirection.LEFT),
   s: () => playerMove(MoveDirection.DOWN),
@@ -80,4 +82,11 @@ function plant() {
       getCurrentMap().placePlantOnCopy(player.x, player.y, player.plantType, 1)
     );
   }
+}
+
+function test() {
+  console.log("test");
+  loadPlantData().then((data) => {
+    console.log("result of loading", data);
+  });
 }

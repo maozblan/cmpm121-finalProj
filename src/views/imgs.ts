@@ -1,5 +1,3 @@
-import tux from "../../assets/tux.png";
-
 export const img = {
-  sampleImage: tux,
+  sampleImage: new URL('../../assets/tux.png', import.meta.url).href,
 }
