@@ -1,54 +1,56 @@
-// // // parse yaml into json objects
-// //import * as fs from 'node:fs';
-// //import testDataContents from "./testData.yaml";
-// const testDataUri = new URL('./testData.yaml', import.meta.url).href;
+// parse yaml into uri
+const testDataUri = new URL('./testData.yaml', import.meta.url).href;
 
-// // // import {parse} from 'jsr:@std/yaml';
-// import YAML from "yaml";
+// // import yaml
+import YAML from "yaml";
 
 
-// // Define TypeScript interfaces for clarity
-// interface Event {
-//   turn?: number;
-//   chance_of_rain?: number;
-// }
+// Define TypeScript interfaces for clarity
+interface Event {
+  turn?: number;
+  chance_of_rain?: number;
+}
 
-// interface RepeatingEvent {
-//   starting_turn: number;
-//   every: number;
-//   chance_of_rain: number;
-// }
+interface RepeatingEvent {
+  starting_turn: number;
+  every: number;
+  chance_of_rain: number;
+}
 
-// interface DataStructure {
-//   events: {
-//     one_time_events: Event[];
-//     repeating_events: RepeatingEvent[];
-//   };
-//   win_conditions: {
-//     point_requirement: number;
-//   };
-// }
+interface DataStructure {
+  events: {
+    one_time_events: Event[];
+    repeating_events: RepeatingEvent[];
+  };
+  win_conditions: {
+    point_requirement: number;
+  };
+}
 
-// // Function to load YAML data from file
-// export function loadGameData(filePath: string): DataStructure {
-//   try {
-//     // Load and parse YAML file
-//     const fileContents = fs.readFileSync(filePath, 'utf8');
-//     const parsedData = yaml.load(fileContents) as DataStructure;
+// Function to load YAML data from file
+export async function loadGameData(): Promise<DataStructure> {
+  try {
+    // Load and parse YAML file
+    const res = await fetch(testDataUri);
+    const testDataContents = await res.text();
+    const fileContents = testDataContents;
 
-//     console.log('YAML Data Loaded:', parsedData);
+    // Parse the YAML into a JavaScript 
+    const parsedData = YAML.parse(fileContents) as DataStructure;
 
-//     // Ensure data conforms to expected format
-//     if (!parsedData.events || !parsedData.win_conditions) {
-//       throw new Error('Missing required fields in YAML file.');
-//     }
+    console.log('YAML Data Loaded:', parsedData);
 
-//     return parsedData;
-//   } catch (error) {
-//     console.error('Error loading YAML file:', error);
-//     throw error;
-//   }
-// }
+    // Ensure data conforms to expected format
+    if (!parsedData.events || !parsedData.win_conditions) {
+      throw new Error('Missing required fields in YAML file.');
+    }
 
-// // const data = loadGameData('./gameData.yaml');
-// // console.log(data);
+    return parsedData;
+  } catch (error) {
+    console.error('Error loading YAML file:', error);
+    throw error;
+  }
+}
+
+// const data = loadGameData('./gameData.yaml');
+// console.log(data);

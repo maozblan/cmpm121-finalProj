@@ -7,4 +7,4 @@ events:
     - every: 2
     - chance_of_rain: 0.5
 win_conditions:
-  point_requirement: 20
+  point_requirement: 100
