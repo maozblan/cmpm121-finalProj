@@ -6,9 +6,25 @@ declare module '*.png' {
 interface PlantInfo {
   name: string;
   imgUrl: string; // for ui
-  waterEx: number; // water needed for expanding
-  sunEx: number; // sun needed for expanding
-  waterSelf: number;
-  sunSelf: number;
+  maxLevel: number; // inclusive
+  expandLevel: number; // level at which plant can expand
+  waterConsumption: number;
+  expandConditions: PlantConditions;
+  growConditions: PlantConditions;
+  decayConditions: PlantConditions; 
+  // note about decay conditions, water and sun are inversed, so falling short of threshold means decay.
+  // neighbors checks for number of enemy neighbors. if condition is met, plant decays.
   color: string; // for ui
+  friendlyNeighbors: Array<number>; // plant types that are counted as positive neighbors
+  enemyNeighbors: Array<number>; // plant types that are counted as negative neighbors
+}
+
+interface PlantConditions {
+  water?: number;
+  sun?: number;
+  booleanLogic?: string; // "and" or "or", default assumption is "and"
+  chance?: number;
+  minNeighbors?: number;
+  maxNeighbors?: number;
+  tolerance?: number; // how many opponent plants can be tolerated
 }
