@@ -8,6 +8,7 @@ class Cell {
 	}
 	set waterLevel(value: number) {
 		if (value > 65535 || value < 0) throw("Excessive Water Level")
+		if (value >= MAX_WATER) value = MAX_WATER;
 		this.dataView.setInt16(0, value);
 	}
 	get sunLevel() {
@@ -36,6 +37,11 @@ class Cell {
 	}
 }
 
+const SUN_CEIL = 10;
+const SUN_FLOOR = 2;
+const WATER_CEIL = 5;
+const WATER_FLOOR = 0;
+const MAX_WATER = 25;
 export class GameMap {
 	private cells: Array<Array<Cell>>;
 	private buffer: ArrayBuffer;
@@ -51,8 +57,11 @@ export class GameMap {
 				this.cells[i][j] = new Cell(new DataView(
 					this.buffer, i * size * CELL_SIZE + j * CELL_SIZE, CELL_SIZE
 				));
-				this.cells[i][j].waterLevel = this.randomInt(2, 7);
-				this.cells[i][j].sunLevel = this.randomInt(2, 7);
+
+				// setting initial water/sun levels (water doubled)
+				this.cells[i][j].sunLevel = this.randomInt(SUN_FLOOR, SUN_CEIL);
+				this.cells[i][j].waterLevel = this.randomInt(WATER_FLOOR, WATER_CEIL);
+				this.cells[i][j].waterLevel += this.randomInt(WATER_FLOOR, WATER_CEIL);
 			}
 		}
 	}
@@ -185,13 +194,13 @@ export class GameMap {
 
 	updateWaterLevels() {
 		this.loopCells((cell, _x, _y) => {
-			cell.waterLevel += this.randomInt(0,2);
+			cell.waterLevel += this.randomInt(WATER_FLOOR, WATER_CEIL);
 		});
 	}
 
 	updateSun() {
 		this.loopCells((cell, _x, _y) => {
-			cell.sunLevel = this.randomInt(0, 6);
+			cell.sunLevel = this.randomInt(SUN_FLOOR, SUN_CEIL);
 		});
 	}
 
