@@ -42,9 +42,9 @@ export function displayMap(map: GameMap, player: Player): void {
       } else if (!gameCell.hasPlant) {
         cell.classList.add("cell");
       } else {
-        if (gameCell.plantType === 1) {
+        if (gameCell.plantType === 0) {
           cell.classList.add("plantCell1");
-        } else if (gameCell.plantType === 2) {
+        } else if (gameCell.plantType === 1) {
           cell.classList.add("plantCell2");
         }
         cell.innerHTML = gameCell.plantLevel.toString();
