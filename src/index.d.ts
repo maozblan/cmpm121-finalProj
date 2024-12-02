@@ -10,4 +10,5 @@ interface PlantInfo {
   sunEx: number; // sun needed for expanding
   waterSelf: number;
   sunSelf: number;
+  color: string; // for ui
 }

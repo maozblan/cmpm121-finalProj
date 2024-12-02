@@ -92,8 +92,9 @@ export class GameMap {
 				this.updatePlant(x, y, newMap);
 				//reduce the new map's water by 1
 				try {
-					newMap.getCell(x, y).waterLevel -= 1;
+					newMap.getCell(x, y).waterLevel -= 2;
 				} catch {
+					newMap.getCell(x, y).waterLevel = 0;
 					console.error("Error decreasing water levels");
 				}
 			}
@@ -175,6 +176,7 @@ export class GameMap {
 		if (this.getCell(x, y).waterLevel < 1) {
 			console.log(`Not enough water to grow plant at cell (${x}, ${y})`);
 			this.reapPlant(x, y);
+			newMap.reapPlant(x, y);
 			return;
 		}
 		const plant = new Plant(this.getCell(x, y).plantType, this.getCell(x, y).plantLevel, x, y);

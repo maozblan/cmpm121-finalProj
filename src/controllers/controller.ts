@@ -10,7 +10,7 @@ import {
   redo,
 } from "../game.ts";
 import { MoveDirection } from "../models/player.ts";
-import { loadPlantData } from "../models/loadData.ts";
+import { loadGameData } from "../models/loadData.ts";
 
 const actions: { [key: string]: () => void } = {
   p: test,
@@ -86,7 +86,7 @@ function plant() {
 
 function test() {
   console.log("test");
-  loadPlantData().then((data) => {
+  loadGameData().then((data) => {
     console.log("result of loading", data);
   });
 }
