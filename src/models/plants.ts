@@ -20,17 +20,20 @@ export class Plant {
       console.error("Error planting plant");
     }
   }
+  
   grow(map: GameMap, newMap: GameMap) {
+    // expand conditions
     for (const [x, y] of getSurroundingCells(this.x, this.y)) {
       try {
         const cell = map.getCell(x, y);
         if (cell.waterLevel > plantInfo[this.plantType].waterEx && cell.sunLevel > plantInfo[this.plantType].sunEx) {
-          this._tryPlace(newMap, x, y, this.plantType, this.plantLevel);
+          this._tryPlace(newMap, x, y, this.plantType, 1);
         }
       } catch {
-        console.error("Error growing plant to neighbor");
+        // console.error("Error growing plant to neighbor");
       }
     }
+    // grow conditions on self
     try {
       const tmpCell = map.getCell(this.x, this.y);
       if (tmpCell.waterLevel > plantInfo[this.plantType].waterSelf && tmpCell.sunLevel > plantInfo[this.plantType].sunSelf) {
