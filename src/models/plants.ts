@@ -1,23 +1,6 @@
 import { GameMap } from "./map.ts";
+import { plantInfo } from "./plantTypes.ts";
 
-const plantInfo: PlantInfo[] = [
-  {
-    name: "Plant1",
-    imgUrl: "",
-    waterEx: 5,
-    sunEx: 4,
-    waterSelf: 2,
-    sunSelf: 2,
-  },
-  {
-    name: "Plant2",
-    imgUrl: "",
-    waterEx: 7,
-    sunEx: 5,
-    waterSelf: 2,
-    sunSelf: 2,
-  },
-];
 
 export class Plant {
   plantType: number;
@@ -57,7 +40,12 @@ export class Plant {
       console.error("Error raising plant level");
     }
   }
+  getColor() {
+    return plantInfo[this.plantType].color;
+  }
 }
+
+
 
 function getSurroundingCells(x: number, y: number) {
   return [
