@@ -1,9 +1,8 @@
 {
   "version": "4",
   "specifiers": {
-    "npm:@deno/vite-plugin@1": "1.0.1_vite@5.4.8_@types+node@22.5.4",
-    "npm:@sveltejs/vite-plugin-svelte@^5.0.1": "5.0.1_svelte@5.4.0__acorn@8.14.0_vite@6.0.2__@types+node@22.5.4__yaml@2.6.1_@types+node@22.5.4_yaml@2.6.1",
-    "npm:@types/node@*": "22.5.4",
+    "npm:@deno/vite-plugin@1": "1.0.1_vite@5.4.8",
+    "npm:@sveltejs/vite-plugin-svelte@^5.0.1": "5.0.1_svelte@5.4.0__acorn@8.14.0_vite@6.0.2__yaml@2.6.1_yaml@2.6.1",
     "npm:eslint-plugin-svelte@^2.46.1": "2.46.1_eslint@9.16.0_svelte@5.4.0__acorn@8.14.0_postcss@8.4.47",
     "npm:svelte-preprocess@^6.0.3": "6.0.3_svelte@5.4.0__acorn@8.14.0",
     "npm:svelte@^5.4.0": "5.4.0_acorn@8.14.0",
@@ -18,10 +17,10 @@
         "@jridgewell/trace-mapping"
       ]
     },
-    "@deno/vite-plugin@1.0.1_vite@5.4.8_@types+node@22.5.4": {
+    "@deno/vite-plugin@1.0.1_vite@5.4.8": {
       "integrity": "sha512-w5drKBzKrUuV3xXfW+kkVxFpAlLELTwpLmN8Fwzw21wCew8SaR/AXPYbpUvIxdl8P61J52ufUez/kSalOD5sKA==",
       "dependencies": [
-        "vite@5.4.8_@types+node@22.5.4"
+        "vite@5.4.8"
       ]
     },
     "@esbuild/aix-ppc64@0.21.5": {
@@ -303,16 +302,16 @@
     "@rollup/rollup-win32-x64-msvc@4.24.0": {
       "integrity": "sha512-fbMkAF7fufku0N2dE5TBXcNlg0pt0cJue4xBRE2Qc5Vqikxr4VCgKj/ht6SMdFcOacVA9rqF70APJ8RN/4vMJw=="
     },
-    "@sveltejs/vite-plugin-svelte-inspector@4.0.1_@sveltejs+vite-plugin-svelte@5.0.1__svelte@5.4.0___acorn@8.14.0__vite@6.0.2___@types+node@22.5.4___yaml@2.6.1__@types+node@22.5.4__yaml@2.6.1_svelte@5.4.0__acorn@8.14.0_vite@6.0.2__@types+node@22.5.4__yaml@2.6.1_@types+node@22.5.4_yaml@2.6.1": {
+    "@sveltejs/vite-plugin-svelte-inspector@4.0.1_@sveltejs+vite-plugin-svelte@5.0.1__svelte@5.4.0___acorn@8.14.0__vite@6.0.2___yaml@2.6.1__yaml@2.6.1_svelte@5.4.0__acorn@8.14.0_vite@6.0.2__yaml@2.6.1_yaml@2.6.1": {
       "integrity": "sha512-J/Nmb2Q2y7mck2hyCX4ckVHcR5tu2J+MtBEQqpDrrgELZ2uvraQcK/ioCV61AqkdXFgriksOKIceDcQmqnGhVw==",
       "dependencies": [
         "@sveltejs/vite-plugin-svelte",
         "debug",
         "svelte",
-        "vite@6.0.2_@types+node@22.5.4_yaml@2.6.1"
+        "vite@6.0.2_yaml@2.6.1"
       ]
     },
-    "@sveltejs/vite-plugin-svelte@5.0.1_svelte@5.4.0__acorn@8.14.0_vite@6.0.2__@types+node@22.5.4__yaml@2.6.1_@types+node@22.5.4_yaml@2.6.1": {
+    "@sveltejs/vite-plugin-svelte@5.0.1_svelte@5.4.0__acorn@8.14.0_vite@6.0.2__yaml@2.6.1_yaml@2.6.1": {
       "integrity": "sha512-D5l5+STmywGoLST07T9mrqqFFU+xgv5fqyTWM+VbxTvQ6jujNn4h3lQNCvlwVYs4Erov8i0K5Rwr3LQtmBYmBw==",
       "dependencies": [
         "@sveltejs/vite-plugin-svelte-inspector",
@@ -321,7 +320,7 @@
         "kleur",
         "magic-string",
         "svelte",
-        "vite@6.0.2_@types+node@22.5.4_yaml@2.6.1",
+        "vite@6.0.2_yaml@2.6.1",
         "vitefu"
       ]
     },
@@ -330,12 +329,6 @@
     },
     "@types/json-schema@7.0.15": {
       "integrity": "sha512-5+fP8P8MFNC+AyZCDxrB2pkZFPGzqQWUzpSeuuVLvm8VMcorNYavBqoFcxK8bQz4Qsbn4oUEEem4wDLfcysGHA=="
-    },
-    "@types/node@22.5.4": {
-      "integrity": "sha512-FDuKUJQm/ju9fT/SeX/6+gBzoPzlVCzfzmGkwKvRHQVxi4BntVbyIwf6a4Xn62mrvndLiml6z/UBXIdEVjQLXg==",
-      "dependencies": [
-        "undici-types"
-      ]
     },
     "acorn-jsx@5.3.2_acorn@8.14.0": {
       "integrity": "sha512-rq9s+JNhf0IChjtDXxllJ7g41oZk5SlXtp0LHwyA5cejwn7vKmKp4pPri6YEePv2PU65sAsegbXtIinmDFDXgQ==",
@@ -948,9 +941,6 @@
         "prelude-ls"
       ]
     },
-    "undici-types@6.19.8": {
-      "integrity": "sha512-ve2KP6f/JnbPBFyobGHuerC9g1FYGn/F8n1LWTwNxCEzd6IfqTwUQcNXgEtmmQ6DlRrC1hrSrBnCZPokRrDHjw=="
-    },
     "uri-js@4.4.1": {
       "integrity": "sha512-7rKUyy33Q1yc98pQ1DAmLtwX109F7TIfWlW1Ydo8Wl1ii1SeHieeh0HHfPeL2fMXK6z0s8ecKs9frCuLJvndBg==",
       "dependencies": [
@@ -969,20 +959,9 @@
         "rollup"
       ]
     },
-    "vite@5.4.8_@types+node@22.5.4": {
-      "integrity": "sha512-FqrItQ4DT1NC4zCUqMB4c4AZORMKIa0m8/URVCZ77OZ/QSNeJ54bU1vrFADbDsuwfIPcgknRkmqakQcgnL4GiQ==",
-      "dependencies": [
-        "@types/node",
-        "esbuild@0.21.5",
-        "fsevents",
-        "postcss@8.4.47",
-        "rollup"
-      ]
-    },
-    "vite@6.0.2_@types+node@22.5.4_yaml@2.6.1": {
+    "vite@6.0.2_yaml@2.6.1": {
       "integrity": "sha512-XdQ+VsY2tJpBsKGs0wf3U/+azx8BBpYRHFAyKm5VeEZNOJZRB63q7Sc8Iup3k0TrN3KO6QgyzFf+opSbfY1y0g==",
       "dependencies": [
-        "@types/node",
         "esbuild@0.24.0",
         "fsevents",
         "postcss@8.4.49",
@@ -990,10 +969,10 @@
         "yaml@2.6.1"
       ]
     },
-    "vitefu@1.0.4_vite@6.0.2__@types+node@22.5.4__yaml@2.6.1_@types+node@22.5.4_yaml@2.6.1": {
+    "vitefu@1.0.4_vite@6.0.2__yaml@2.6.1_yaml@2.6.1": {
       "integrity": "sha512-y6zEE3PQf6uu/Mt6DTJ9ih+kyJLr4XcSgHR2zUkM8SWDhuixEJxfJ6CZGMHh1Ec3vPLoEA0IHU5oWzVqw8ulow==",
       "dependencies": [
-        "vite@6.0.2_@types+node@22.5.4_yaml@2.6.1"
+        "vite@6.0.2_yaml@2.6.1"
       ]
     },
     "which@2.0.2": {
