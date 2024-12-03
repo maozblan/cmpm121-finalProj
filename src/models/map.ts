@@ -125,7 +125,7 @@ export class GameMap {
 
 	// game functions ///////////////////////////////////////////////////////////
 
-	getCell(x:number, y:number) {
+	getCell(x:number, y:number): Cell {
 		this.checkBounds(x, y);
 		return this.cells[x][y];
 	}
