@@ -1,5 +1,5 @@
-import { GameMap } from "./map.ts";
-import { plantInfo } from "./plantTypes.ts";
+import { GameMap, Cell } from "./map.ts";
+import { PlantInfo } from "./PlantInfo.ts";
 
 
 export class Plant {
@@ -20,28 +20,89 @@ export class Plant {
       console.error("Error planting plant");
     }
   }
+  
   grow(map: GameMap, newMap: GameMap) {
-    for (const [x, y] of getSurroundingCells(this.x, this.y)) {
-      try {
-        const cell = map.getCell(x, y);
-        if (cell.waterLevel > plantInfo[this.plantType].waterEx && cell.sunLevel > plantInfo[this.plantType].sunEx) {
-          this._tryPlace(newMap, x, y, this.plantType, this.plantLevel);
-        }
-      } catch {
-        console.error("Error growing plant to neighbor");
+    const thisCell = map.getCell(this.x, this.y);
+    const thisInfo = PlantInfo[this.plantType];
+    
+    // grow conditions
+    if (checkPlantCondition(this.x, this.y, thisCell, thisInfo.growConditions)) {
+      // increase level
+      if (Math.random() < thisInfo.growConditions.chance) {
+        try {
+          if (thisCell.plantLevel != thisInfo.maxLevel) {
+            newMap.getCell(this.x, this.y).plantLevel = thisCell.plantLevel + 1;
+          }
+        } catch {
+          // do nothing
+          }
       }
     }
-    try {
-      const tmpCell = map.getCell(this.x, this.y);
-      if (tmpCell.waterLevel > plantInfo[this.plantType].waterSelf && tmpCell.sunLevel > plantInfo[this.plantType].sunSelf) {
-        newMap.getCell(this.x, this.y).plantLevel = tmpCell.plantLevel + 1;
+
+    // decay conditions
+    if (!checkPlantCondition(this.x, this.y, thisCell, thisInfo.decayConditions)) {
+      // decrease level
+      if (Math.random() < thisInfo.decayConditions.chance) {
+        try {
+          if (thisCell.plantLevel === 1) {
+            newMap.reapPlant(this.x, this.y);
+          } else {
+            newMap.getCell(this.x, this.y).plantLevel = thisCell.plantLevel - 1;
+          }
+        } catch {
+          // do nothing
+         }
       }
-    } catch {
-      console.error("Error raising plant level");
+    }
+
+    if (thisCell.plantLevel >= thisInfo.expandLevel) {
+    // expand conditions
+      for (const [x, y] of getSurroundingCells(this.x, this.y)) {
+        try {
+          if (checkPlantCondition(x, y, map.getCell(x, y), thisInfo.expandConditions)) {
+            this._tryPlace(newMap, x, y, this.plantType, 1);
+          }
+        } catch {
+          // do nothing
+        }
+      }
+    }
+
+    function checkPlantCondition(x:number, y:number, cell: Cell, condition: PlantConditions) {
+      // check water and sun levels
+      if (condition.water && cell.waterLevel < condition.water) {
+        return false;
+      }
+      if (condition.sun && cell.sunLevel < condition.sun) {
+        return false;
+      }
+
+      // check neighbor conditions
+      const neighbors = getNeighborPlants(x, y, map);
+      if (condition.minNeighbors) {
+        if (getNumOfType(neighbors, PlantInfo[cell.plantType].friendlyNeighbors)
+          < condition.minNeighbors) {
+          return false;
+        }
+      }
+      if (condition.maxNeighbors) {
+        if (getNumOfType(neighbors, PlantInfo[cell.plantType].friendlyNeighbors)
+          > condition.maxNeighbors) {
+          return false;
+        }
+      }
+      if (condition.tolerance) {
+        if (getNumOfType(neighbors, PlantInfo[cell.plantType].enemyNeighbors)
+          > condition.tolerance) {
+          return false;
+        }
+      }
+      return true;      
     }
   }
+
   getColor() {
-    return plantInfo[this.plantType].color;
+    return PlantInfo[this.plantType].color;
   }
 }
 
@@ -54,4 +115,23 @@ function getSurroundingCells(x: number, y: number) {
     [x, y - 1],
     [x, y + 1],
   ];
+}
+
+function getNeighborPlants(x: number, y: number, map: GameMap) {
+  const neighbors = [];
+  for (const [nx, ny] of getSurroundingCells(x, y)) {
+    try {
+      const cell = map.getCell(nx, ny);
+      if (cell.hasPlant) {
+        neighbors.push(cell.plantType);
+      }
+    } catch {
+      // console.error("Error getting neighbor cell");
+    }
+  }
+  return neighbors;
+}
+
+function getNumOfType(neighbors: number[], types: number[]) {
+  return neighbors.filter((n) => types.includes(n)).length;
 }
