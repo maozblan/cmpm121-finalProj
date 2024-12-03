@@ -1,3 +1,27 @@
+// PLANT DSL
+// enter new plants into PlantInfo array to create them. 
+
+// ==== PlantInfo Interface ====
+/*
+    name: string;
+    imgUrl: string;
+    maxLevel: number; // inclusive
+    scoreMultiplier: number; // multiplied by plant level for each plant's score
+    expandLevel: number; // level at which plant can expand
+    waterConsumption: number; // amount of water consumed per turn
+    expandConditions: PlantConditions;
+    growConditions: PlantConditions;
+    decayConditions: PlantConditions; 
+    color: string; // for ui
+    friendlyNeighbors: Array<number>; // plant types that are counted for min/max neighbors
+    enemyNeighbors: Array<number>; // plant types which are considered by tolerance
+*/
+// NOTE: plant conditions define values that must be met to grow/expand/decay. 
+// min and max neighbors checks for decided friendly neighbors.
+// enemy neighbors is only used for tolerance, allowing different treatment of 
+// neighbors and dangerous plants.
+// plant conditions are inversed for decay, so falling short of any threshold means decay.
+
 export const PlantInfo: PlantInfo[] = [
   {
     // grow fast, expand fast, low max level
