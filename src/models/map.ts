@@ -132,6 +132,16 @@ export class GameMap {
 		return this.cells[x][y];
 	}
 
+	getScore(): number {
+		let score = 0;
+		this.loopCells((cell, _x, _y) => {
+			if (cell.hasPlant) {
+				score += PlantInfo[cell.plantType].scoreMultiplier * cell.plantLevel;
+			}
+		});
+		return score;
+	}
+
 	placePlantOnCopy(x:number, y:number, plantType:number, plantLevel:number = 1): GameMap | null {
 		const newMap = this.copy();
 		this.checkBounds(x, y);
@@ -236,26 +246,8 @@ export class GameMap {
 		return Math.floor(Math.random() * (max - min + 1)) + min;
 	}
 
-	//current senario is trying to check if you trapped the faster growing green plants
+	// win condition ////////////////////////////////////////////////////////////
 	playScenarioCompleted(){
-		let plant1Count = 0;
-		let plant2Count = 0;
-		let minPlant1Level = 99999;
-		let minPlant2Level = 99999;
-		this.loopCells((cell) => {
-			if(cell.plantType === 0 && cell.hasPlant){
-				plant1Count++;
-				if(cell.plantLevel < minPlant1Level){
-					minPlant1Level = cell.plantLevel;
-				}
-			}
-			if(cell.plantType === 1 && cell.hasPlant){
-				plant2Count++;
-				if(cell.plantLevel < minPlant2Level){
-					minPlant2Level = cell.plantLevel;
-				}
-			}
-		});
-		return (plant1Count >= 4 && plant2Count >= 4 && minPlant1Level >= 4 && minPlant2Level >= 4 && plant1Count < plant2Count);
+		return this.getScore() > 500;
 	}
 }
