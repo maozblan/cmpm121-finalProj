@@ -7,6 +7,7 @@ interface PlantInfo {
   name: string;
   imgUrl: string; // for ui
   maxLevel: number; // inclusive
+  scoreMultiplier: number;
   expandLevel: number; // level at which plant can expand
   waterConsumption: number;
   expandConditions: PlantConditions;
@@ -22,8 +23,7 @@ interface PlantInfo {
 interface PlantConditions {
   water?: number;
   sun?: number;
-  booleanLogic?: string; // "and" or "or", default assumption is "and"
-  chance?: number;
+  chance: number;
   minNeighbors?: number;
   maxNeighbors?: number;
   tolerance?: number; // how many opponent plants can be tolerated

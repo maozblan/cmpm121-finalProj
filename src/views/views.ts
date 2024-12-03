@@ -1,7 +1,7 @@
 import { GameMap } from "../models/map.ts";
 import { Player } from "../models/player.ts";
 import { gameState, getCurrentMap, player } from "../game.ts";
-import { plantInfo } from "../models/plantTypes.ts";
+import { PlantInfo } from "../models/PlantInfo.ts";
 
 export function createMap(map: GameMap): void {
   const field = document.querySelector<HTMLDivElement>("#field")!;
@@ -44,7 +44,7 @@ export function displayMap(map: GameMap, player: Player): void {
         cell.classList.add("cell");
       } else {
           cell.classList.add("plantCell1");
-          cell.style.backgroundColor = plantInfo[gameCell.plantType].color;
+          cell.style.backgroundColor = PlantInfo[gameCell.plantType].color;
         cell.innerHTML = gameCell.plantLevel.toString();
       }
       field.append(cell);

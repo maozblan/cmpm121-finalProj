@@ -1,6 +1,8 @@
 import { Plant } from "./plants.ts";
+import { PlantInfo } from "./PlantInfo.ts";
+
 const CELL_SIZE = 6; // in bytes
-class Cell {
+export class Cell {
 	constructor(private dataView: DataView) {}
 
 	get waterLevel() {
@@ -99,9 +101,9 @@ export class GameMap {
 			if (cell.hasPlant) {
 				//update the plant: changes are made in the new map
 				this.updatePlant(x, y, newMap);
-				//reduce the new map's water by 1
+				//reduce the new map's water by if has plant
 				try {
-					newMap.getCell(x, y).waterLevel -= 2;
+					newMap.getCell(x, y).waterLevel -= PlantInfo[cell.plantType].waterConsumption;
 				} catch {
 					newMap.getCell(x, y).waterLevel = 0;
 					console.error("Error decreasing water levels");
