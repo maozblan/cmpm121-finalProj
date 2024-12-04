@@ -57,7 +57,6 @@ export default function playerInteraction(event: KeyboardEvent | MouseEvent) {
     (event.target as HTMLButtonElement)!.blur();
   }
   actions[key]?.();
-  document.dispatchEvent(new Event("update-visuals"));
 }
 
 function playerMove(direction: MoveDirection) {

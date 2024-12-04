@@ -1,6 +1,7 @@
 <script>
   import { get } from 'svelte/store';
   import { gameState, chanceOfRain } from '../game.ts';
+  import Grid from './Grid.svelte';
 </script>
 
 <main class="col-div">
@@ -23,7 +24,7 @@
     {/if}
   </div>
   <div class="row-div">
-    <div id="field"></div>
+    <Grid />
     <div id="htp">
       <h2>How to Play</h2>
       <p>Use WASD to move your character</p>
