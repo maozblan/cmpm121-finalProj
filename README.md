@@ -16,9 +16,9 @@ Project Members:
 ## How to Run Project
 
 1. clone the repository
-2. open console and run `deno install`
-3. then run `deno run dev` to run the development page
+2. open console and run `npm install`
+3. then run `npm run dev` to run the development page
 
-Deno and Vite setup credit to: [CMPM121-DEMO2 from Adam Smith](https://github.com/rndmcnlly/cmpm-121-demo-2/)
+Nodejs and Vite setup credit to: [CMPM121-DEMO1 from Adam Smith](https://github.com/rndmcnlly/cmpm-121-demo-1/)
 
-pre-commit, post-commit hooks, github actions credit also to demo-2
+pre-commit, post-commit hooks, github actions credit also to demo-1

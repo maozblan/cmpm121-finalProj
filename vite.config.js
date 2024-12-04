@@ -2,7 +2,8 @@ import { svelte } from '@sveltejs/vite-plugin-svelte'
 import sveltePreprocess from "svelte-preprocess";
 
 export default {
-  base: Deno.env.get("REPO_NAME") || "/project",
+  // eslint-disable-next-line no-undef
+  base: process.env.REPO_NAME || "/project/",
   assetsInclude: ['**/*.png', '**/*.yaml'],
   plugins: [
     svelte({
