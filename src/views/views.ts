@@ -7,19 +7,16 @@ export function createMap(map: GameMap): void {
   const field = document.querySelector<HTMLDivElement>("#field")!;
   while (field.firstChild) {
     const child = field.firstChild as HTMLElement;
-    // child.removeEventListener('click', childClickHandler);
     field.removeChild(child);
   }
   for (let i = 0; i < map.size; ++i) {
     for (let j = 0; j < map.size; ++j) {
       const cell = document.createElement("div");
-      //cell.classList.add("cell");
       if (player.x === j && player.y === i) {
         cell.classList.add("playerCell");
       } else {
         cell.classList.add("cell");
       }
-      // cell.addEventListener('click', foo);
       field.append(cell);
     }
   }
@@ -31,7 +28,6 @@ export function displayMap(map: GameMap, player: Player): void {
   const field = document.querySelector<HTMLDivElement>("#field")!;
   while (field.firstChild) {
     const child = field.firstChild as HTMLElement;
-    // child.removeEventListener('click', childClickHandler);
     field.removeChild(child);
   }
   for (let i = 0; i < map.size; i++) {
@@ -43,8 +39,8 @@ export function displayMap(map: GameMap, player: Player): void {
       } else if (!gameCell.hasPlant) {
         cell.classList.add("cell");
       } else {
-          cell.classList.add("plantCell1");
-          cell.style.backgroundColor = PlantInfo[gameCell.plantType].color;
+        cell.classList.add("plantCell1");
+        cell.style.backgroundColor = PlantInfo[gameCell.plantType].color;
         cell.innerHTML = gameCell.plantLevel.toString();
       }
       field.append(cell);
@@ -58,9 +54,9 @@ function displayData(): void {
     gameState.currentTurn.toString();
   const eventAnnouncement = document.querySelector<HTMLDivElement>("#event")!;
   if (chanceOfRain > 0) {
-    eventAnnouncement.textContent = `Chance of rain ${chanceOfRain*100}%`;
+    eventAnnouncement.textContent = `Chance of rain ${chanceOfRain * 100}%`;
   } else {
-    eventAnnouncement.textContent = "";
+    eventAnnouncement.textContent = "no rain this turn...";
   }
 }
 

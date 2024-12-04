@@ -10,11 +10,9 @@ import {
   redo,
 } from "../game.ts";
 import { MoveDirection } from "../models/player.ts";
-import { loadGameData } from "../models/loadData.ts";
 import { PlantInfo } from "../models/PlantInfo.ts";
 
 const actions: { [key: string]: () => void } = {
-  p: test,
   w: () => playerMove(MoveDirection.UP),
   a: () => playerMove(MoveDirection.LEFT),
   s: () => playerMove(MoveDirection.DOWN),
@@ -46,7 +44,7 @@ const actions: { [key: string]: () => void } = {
 
 // adding all plant types to number keys (up to 9)
 for (let i = 0; i < PlantInfo.length; i++) {
-  actions[i+1] = () => setPlantType(i);
+  actions[i + 1] = () => setPlantType(i);
 }
 // after loading this is called every turn
 export default function playerInteraction(event: KeyboardEvent | MouseEvent) {
@@ -85,11 +83,4 @@ function plant() {
       getCurrentMap().placePlantOnCopy(player.x, player.y, player.plantType, 1)
     );
   }
-}
-
-function test() {
-  console.log("test");
-  loadGameData().then((data) => {
-    console.log("result of loading", data);
-  });
 }

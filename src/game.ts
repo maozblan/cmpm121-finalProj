@@ -2,7 +2,7 @@ import { loadGameData } from "./models/loadData.ts";
 import { GameMap } from "./models/map.ts";
 import { Player } from "./models/player.ts";
 
-// important variables
+// map and player variables
 const MAPSIZE = 10;
 export const player = new Player(0, 0);
 export let gameState: GameState = {
@@ -11,10 +11,10 @@ export let gameState: GameState = {
   mapUpdateLedger: [{ map: new GameMap(MAPSIZE), turn: 0 }],
 };
 
-//a stand-in for document.cookie for testing
+// a stand-in for document.cookie for testing
 let document_cookie = "";
 
-//game data from external DSL
+// game data from external DSL
 export let gameData: null | DataStructure;
 loadGameData().then((data) => {
   gameData = data;
@@ -135,7 +135,6 @@ export function setTurn(turn: number) {
       chanceOfRain = repEvent.chance_of_rain!;
     }
     const oneEvent = gameData.events.one_time_event;
-    console.log(oneEvent, turn === oneEvent.turn)
     if (turn === oneEvent.turn) {
       chanceOfRain = oneEvent.chance_of_rain!;
     }
@@ -169,12 +168,10 @@ export function save(slot: "autosave" | "save1" | "save2") {
     const saveDataObject: SaveData = { autosave: "", save1: "", save2: "" };
     saveDataObject[slot] = GameStateStringify(gameState);
     document_cookie = JSON.stringify(saveDataObject);
-    //console.log(saveDataObject);
   } else {
     const saveDataObject: SaveData = JSON.parse(document_cookie);
     saveDataObject[slot] = GameStateStringify(gameState);
     document_cookie = JSON.stringify(saveDataObject);
-    //console.log(saveDataObject);
   }
 }
 

@@ -3,7 +3,7 @@ import sveltePreprocess from "svelte-preprocess";
 
 export default {
   // eslint-disable-next-line no-undef
-  base: process.env.REPO_NAME || "/project/",
+  base: process.env.REPO_NAME || "/project",
   assetsInclude: ['**/*.png', '**/*.yaml'],
   plugins: [
     svelte({

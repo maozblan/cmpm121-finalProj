@@ -1,7 +1,6 @@
 import { GameMap, Cell } from "./map.ts";
 import { PlantInfo } from "./PlantInfo.ts";
 
-
 export class Plant {
   plantType: number;
   plantLevel: number;
@@ -20,13 +19,15 @@ export class Plant {
       console.error("Error planting plant");
     }
   }
-  
+
   grow(map: GameMap, newMap: GameMap) {
     const thisCell = map.getCell(this.x, this.y);
     const thisInfo = PlantInfo[this.plantType];
-    
+
     // grow conditions
-    if (checkPlantCondition(this.x, this.y, thisCell, thisInfo.growConditions)) {
+    if (
+      checkPlantCondition(this.x, this.y, thisCell, thisInfo.growConditions)
+    ) {
       // increase level
       if (Math.random() < thisInfo.growConditions.chance) {
         try {
@@ -35,12 +36,14 @@ export class Plant {
           }
         } catch {
           // do nothing
-          }
+        }
       }
     }
 
     // decay conditions
-    if (!checkPlantCondition(this.x, this.y, thisCell, thisInfo.decayConditions)) {
+    if (
+      !checkPlantCondition(this.x, this.y, thisCell, thisInfo.decayConditions)
+    ) {
       // decrease level
       if (Math.random() < thisInfo.decayConditions.chance) {
         try {
@@ -51,15 +54,22 @@ export class Plant {
           }
         } catch {
           // do nothing
-         }
+        }
       }
     }
 
     if (thisCell.plantLevel >= thisInfo.expandLevel) {
-    // expand conditions
+      // expand conditions
       for (const [x, y] of getSurroundingCells(this.x, this.y)) {
         try {
-          if (checkPlantCondition(x, y, map.getCell(x, y), thisInfo.expandConditions)) {
+          if (
+            checkPlantCondition(
+              x,
+              y,
+              map.getCell(x, y),
+              thisInfo.expandConditions
+            )
+          ) {
             this._tryPlace(newMap, x, y, this.plantType, 1);
           }
         } catch {
@@ -68,7 +78,12 @@ export class Plant {
       }
     }
 
-    function checkPlantCondition(x:number, y:number, cell: Cell, condition: PlantConditions) {
+    function checkPlantCondition(
+      x: number,
+      y: number,
+      cell: Cell,
+      condition: PlantConditions
+    ) {
       // check water and sun levels
       if (condition.water && cell.waterLevel < condition.water) {
         return false;
@@ -80,24 +95,30 @@ export class Plant {
       // check neighbor conditions
       const neighbors = getNeighborPlants(x, y, map);
       if (condition.minNeighbors) {
-        if (getNumOfType(neighbors, PlantInfo[cell.plantType].friendlyNeighbors)
-          < condition.minNeighbors) {
+        if (
+          getNumOfType(neighbors, PlantInfo[cell.plantType].friendlyNeighbors) <
+          condition.minNeighbors
+        ) {
           return false;
         }
       }
       if (condition.maxNeighbors) {
-        if (getNumOfType(neighbors, PlantInfo[cell.plantType].friendlyNeighbors)
-          > condition.maxNeighbors) {
+        if (
+          getNumOfType(neighbors, PlantInfo[cell.plantType].friendlyNeighbors) >
+          condition.maxNeighbors
+        ) {
           return false;
         }
       }
       if (condition.tolerance) {
-        if (getNumOfType(neighbors, PlantInfo[cell.plantType].enemyNeighbors)
-          > condition.tolerance) {
+        if (
+          getNumOfType(neighbors, PlantInfo[cell.plantType].enemyNeighbors) >
+          condition.tolerance
+        ) {
           return false;
         }
       }
-      return true;      
+      return true;
     }
   }
 
@@ -105,8 +126,6 @@ export class Plant {
     return PlantInfo[this.plantType].color;
   }
 }
-
-
 
 function getSurroundingCells(x: number, y: number) {
   return [
