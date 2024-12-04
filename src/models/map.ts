@@ -1,6 +1,7 @@
 import { Plant } from "./plants.ts";
 import { PlantInfo } from "./PlantInfo.ts";
 import { chanceOfRain, gameData } from "../game.ts";
+import { get } from "svelte/store";
 
 const CELL_SIZE = 6; // in bytes
 export class Cell {
@@ -121,7 +122,7 @@ export class GameMap {
 
     //update the next maps water/sun levels
     try {
-      if (chanceOfRain && Math.random() <= chanceOfRain) {
+      if (chanceOfRain && Math.random() <= get(chanceOfRain)) {
         newMap.updateWaterLevels();
       }
     } catch {

@@ -1,6 +1,6 @@
 import { GameMap } from "../models/map.ts";
 import { Player } from "../models/player.ts";
-import { chanceOfRain, gameState, getCurrentMap, player } from "../game.ts";
+import { getCurrentMap, player } from "../game.ts";
 import { PlantInfo } from "../models/PlantInfo.ts";
 
 export function createMap(map: GameMap): void {
@@ -48,19 +48,6 @@ export function displayMap(map: GameMap, player: Player): void {
   }
 }
 
-function displayData(): void {
-  const controls = document.querySelector<HTMLDivElement>("#controls")!;
-  controls.querySelector("#turn-count")!.textContent =
-    gameState.currentTurn.toString();
-  const eventAnnouncement = document.querySelector<HTMLDivElement>("#event")!;
-  if (chanceOfRain > 0) {
-    eventAnnouncement.textContent = `Chance of rain ${chanceOfRain * 100}%`;
-  } else {
-    eventAnnouncement.textContent = "no rain this turn...";
-  }
-}
-
 document.addEventListener("update-visuals", () => {
-  displayData();
   displayMap(getCurrentMap(), player);
 });

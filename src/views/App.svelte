@@ -1,7 +1,12 @@
+<script>
+  import { get } from 'svelte/store';
+  import { gameState, chanceOfRain } from '../game.ts';
+</script>
+
 <main class="col-div">
   <h1>cmpm121 plant game</h1>
   <div id="controls">
-    <h2>TURN: <span id="turn-count">0</span></h2>
+    <h2>TURN: {$gameState.currentTurn}</h2>
     <button id="undo">Undo</button>
     <button id="redo">Redo</button>
     <button id="loadautosave">Load Autosave</button>
@@ -10,7 +15,13 @@
     <button id="save2">save2</button>
     <button id="load2">load2</button>
   </div>
-  <div id="event"></div>
+  <div id="event">
+    {#if $chanceOfRain}
+      <p>Chance of rain {get(chanceOfRain) * 100}%</p>
+    {:else}
+      <p>no rain this turn...</p>
+    {/if}
+  </div>
   <div class="row-div">
     <div id="field"></div>
     <div id="htp">

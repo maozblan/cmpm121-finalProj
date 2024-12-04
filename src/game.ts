@@ -1,15 +1,16 @@
 import { loadGameData } from "./models/loadData.ts";
 import { GameMap } from "./models/map.ts";
 import { Player } from "./models/player.ts";
+import { get, writable, type Writable } from "svelte/store";
 
 // map and player variables
-const MAPSIZE = 10;
-export const player = new Player(0, 0);
-export let gameState: GameState = {
+export const MAPSIZE = 10;
+export const player: Player = new Player(0, 0);
+export const gameState: Writable<GameState> = writable({
   currentTurn: 0,
   currentIndex: 0,
   mapUpdateLedger: [{ map: new GameMap(MAPSIZE), turn: 0 }],
-};
+});
 
 // a stand-in for document.cookie for testing
 let document_cookie = "";
@@ -19,7 +20,7 @@ export let gameData: null | DataStructure;
 loadGameData().then((data) => {
   gameData = data;
 });
-export let chanceOfRain: number = 0;
+export const chanceOfRain: Writable<number> = writable(0);
 
 interface SaveData {
   autosave: string;
@@ -46,7 +47,8 @@ interface GameState {
 // map state //////////////////////////////////////////////////////////////////
 
 export function getCurrentMap(): GameMap {
-  return gameState.mapUpdateLedger[gameState.currentIndex].map;
+  const state = get(gameState);
+  return state.mapUpdateLedger[state.currentIndex].map;
 }
 
 interface GameStateStringStructure {
@@ -124,40 +126,50 @@ function GameStateParse(str: string): GameState {
 }
 
 export function setTurn(turn: number) {
-  gameState.currentTurn = turn;
-  chanceOfRain = 0;
+  gameState.update((state) => {
+    return { ...state, currentTurn: turn };
+  });
+  let tempChance: number = 0;
   if (gameData) {
     const repEvent = gameData.events.repeating_event;
     if (
       turn >= repEvent.starting_turn &&
       (turn - repEvent.starting_turn) % repEvent.every === 0
     ) {
-      chanceOfRain = repEvent.chance_of_rain!;
+      tempChance = repEvent.chance_of_rain!;
     }
     const oneEvent = gameData.events.one_time_event;
     if (turn === oneEvent.turn) {
-      chanceOfRain = oneEvent.chance_of_rain!;
+      tempChance = oneEvent.chance_of_rain!;
     }
   }
+  chanceOfRain.update(() => {
+    return tempChance;
+  });
 }
 
 export function undo() {
-  gameState.currentIndex--;
-  if (gameState.currentIndex < 0) {
-    gameState.currentIndex = 0;
-  }
-  gameState.currentTurn =
-    gameState.mapUpdateLedger[gameState.currentIndex].turn;
+  const ind = Math.max(get(gameState).currentIndex - 1, 0);
+  gameState.update((state) => {
+    return {
+      ...state,
+      currentIndex: ind,
+      currentTurn: state.mapUpdateLedger[ind].turn,
+     };
+  });
   save("autosave");
 }
 
 export function redo() {
-  gameState.currentIndex++;
-  if (gameState.currentIndex > gameState.mapUpdateLedger.length - 1) {
-    gameState.currentIndex = gameState.mapUpdateLedger.length - 1;
-  }
-  gameState.currentTurn =
-    gameState.mapUpdateLedger[gameState.currentIndex].turn;
+  const max = get(gameState).mapUpdateLedger.length - 1;
+  const ind = Math.min(get(gameState).currentIndex + 1, max);
+  gameState.update((state) => {
+    return {
+      ...state,
+      currentIndex: ind,
+      currentTurn: state.mapUpdateLedger[ind].turn,
+    };
+  });
   save("autosave");
 }
 
@@ -166,11 +178,11 @@ export function redo() {
 export function save(slot: "autosave" | "save1" | "save2") {
   if (document_cookie === "") {
     const saveDataObject: SaveData = { autosave: "", save1: "", save2: "" };
-    saveDataObject[slot] = GameStateStringify(gameState);
+    saveDataObject[slot] = GameStateStringify(get(gameState));
     document_cookie = JSON.stringify(saveDataObject);
   } else {
     const saveDataObject: SaveData = JSON.parse(document_cookie);
-    saveDataObject[slot] = GameStateStringify(gameState);
+    saveDataObject[slot] = GameStateStringify(get(gameState));
     document_cookie = JSON.stringify(saveDataObject);
   }
 }
@@ -183,18 +195,24 @@ export function tryLoad(slot: "autosave" | "save1" | "save2") {
   const saveDataObject: SaveData = JSON.parse(document_cookie);
   if (saveDataObject[slot] !== "") {
     const tmp: GameState = GameStateParse(saveDataObject[slot]);
-    gameState = tmp;
+    gameState.update(() => {
+      return { ...tmp };
+    });
   }
 }
 
 export function updateMap(newMap: GameMap | null) {
   if (newMap === null) return;
-  gameState.mapUpdateLedger.splice(gameState.currentIndex + 1);
-  gameState.mapUpdateLedger.push({
+  const gs = get(gameState);
+  gs.mapUpdateLedger.splice(gs.currentIndex + 1);
+  gs.mapUpdateLedger.push({
     map: newMap.copy(),
-    turn: gameState.currentTurn,
+    turn: gs.currentTurn,
   });
-  gameState.currentIndex = gameState.mapUpdateLedger.length - 1;
+  gs.currentIndex = gs.mapUpdateLedger.length - 1;
+  gameState.update(() => {
+    return { ...gs };
+  });
   save("autosave");
 }
 

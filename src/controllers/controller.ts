@@ -11,6 +11,7 @@ import {
 } from "../game.ts";
 import { MoveDirection } from "../models/player.ts";
 import { PlantInfo } from "../models/PlantInfo.ts";
+import { get } from "svelte/store";
 
 const actions: { [key: string]: () => void } = {
   w: () => playerMove(MoveDirection.UP),
@@ -64,7 +65,7 @@ function playerMove(direction: MoveDirection) {
 }
 
 function nextTurn() {
-  setTurn(gameState.currentTurn + 1);
+  setTurn(get(gameState).currentTurn + 1);
   updateMap(getCurrentMap().nextTurn());
   if (getCurrentMap().playScenarioCompleted()) {
     alert("You win!");
