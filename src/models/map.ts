@@ -106,9 +106,7 @@ export class GameMap {
 
     //update the plants into the next turn in the new map
     this.loopCells((cell, x, y) => {
-      //if current maps cell has a plant
       if (cell.hasPlant) {
-        //update the plant: changes are made in the new map
         this.updatePlant(x, y, newMap);
         //reduce the new map's water by if has plant
         try {
