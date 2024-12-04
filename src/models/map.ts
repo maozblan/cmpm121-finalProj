@@ -1,5 +1,6 @@
 import { Plant } from "./plants.ts";
 import { PlantInfo } from "./PlantInfo.ts";
+import { chanceOfRain, gameData } from "../game.ts";
 
 const CELL_SIZE = 6; // in bytes
 export class Cell {
@@ -113,7 +114,9 @@ export class GameMap {
 
 		//update the next maps water/sun levels
 		try {
-			newMap.updateWaterLevels();
+			if (chanceOfRain && Math.random() <= chanceOfRain) {
+				newMap.updateWaterLevels();
+			}
 		} catch {
 			console.error("Error updating water levels");
 		}
@@ -248,6 +251,6 @@ export class GameMap {
 
 	// win condition ////////////////////////////////////////////////////////////
 	playScenarioCompleted(){
-		return this.getScore() > 500;
+		return this.getScore() > gameData!.win_conditions.point_requirement;
 	}
 }

@@ -1,8 +1,8 @@
 events:
-  one_time_events:
+  one_time_event:
     - turn: 5
     - chance_of_rain: 0.9
-  repeating_events:
+  repeating_event:
     - starting_turn: 6
     - every: 2
     - chance_of_rain: 0.5

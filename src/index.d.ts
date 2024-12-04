@@ -3,6 +3,7 @@ declare module '*.png' {
   export default value;
 }
 
+// for internal DSL
 interface PlantInfo {
   name: string;
   imgUrl: string; // for ui
@@ -27,4 +28,26 @@ interface PlantConditions {
   minNeighbors?: number;
   maxNeighbors?: number;
   tolerance?: number; // how many opponent plants can be tolerated
+}
+
+// for external DSL
+interface Event {
+  turn: number;
+  chance_of_rain: number;
+}
+
+interface RepeatingEvent {
+  starting_turn: number;
+  every: number;
+  chance_of_rain: number;
+}
+
+interface DataStructure {
+  events: {
+    one_time_event: Event;
+    repeating_event: RepeatingEvent;
+  };
+  win_conditions: {
+    point_requirement: number;
+  };
 }

@@ -1,3 +1,4 @@
+import { loadGameData } from "./models/loadData.ts";
 import { GameMap } from "./models/map.ts";
 import { Player } from "./models/player.ts";
 
@@ -12,6 +13,13 @@ export let gameState: GameState = {
 
 //a stand-in for document.cookie for testing
 let document_cookie = "";
+
+//game data from external DSL
+export let gameData: null | DataStructure;
+loadGameData().then((data) => {
+  gameData = data;
+});
+export let chanceOfRain: number = 0;
 
 interface SaveData {
   autosave: string;
@@ -117,6 +125,21 @@ function GameStateParse(str: string): GameState {
 
 export function setTurn(turn: number) {
   gameState.currentTurn = turn;
+  chanceOfRain = 0;
+  if (gameData) {
+    const repEvent = gameData.events.repeating_event;
+    if (
+      turn >= repEvent.starting_turn &&
+      (turn - repEvent.starting_turn) % repEvent.every === 0
+    ) {
+      chanceOfRain = repEvent.chance_of_rain!;
+    }
+    const oneEvent = gameData.events.one_time_event;
+    console.log(oneEvent, turn === oneEvent.turn)
+    if (turn === oneEvent.turn) {
+      chanceOfRain = oneEvent.chance_of_rain!;
+    }
+  }
 }
 
 export function undo() {
