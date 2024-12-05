@@ -3,7 +3,8 @@ import { GameMap } from "./models/map.ts";
 import { Player } from "./models/player.ts";
 import { get, writable, type Writable } from "svelte/store";
 
-// map and player variables
+// game variables
+export const POINTS_TO_WIN: Writable<number> = writable(0);
 export const MAPSIZE = 10;
 export const player: Player = new Player(0, 0);
 export const gameState: Writable<GameState> = writable({
@@ -19,6 +20,10 @@ let document_cookie = "";
 export let gameData: null | DataStructure;
 loadGameData().then((data) => {
   gameData = data;
+  POINTS_TO_WIN.update((state) => {
+    state = data.win_conditions.point_requirement;
+    return state;
+  });
 });
 export const chanceOfRain: Writable<number> = writable(0);
 
@@ -149,13 +154,14 @@ export function setTurn(turn: number) {
 }
 
 export function undo() {
+  console.log("undo");
   const ind = Math.max(get(gameState).currentIndex - 1, 0);
   gameState.update((state) => {
     return {
       ...state,
       currentIndex: ind,
       currentTurn: state.mapUpdateLedger[ind].turn,
-     };
+    };
   });
   save("autosave");
 }

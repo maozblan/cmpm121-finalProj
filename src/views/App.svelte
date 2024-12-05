@@ -2,10 +2,12 @@
   import { get } from 'svelte/store';
   import { gameState, chanceOfRain } from '../game.ts';
   import Grid from './Grid.svelte';
+  import Header from './Header.svelte';
 </script>
 
 <main class="col-div">
   <h1>cmpm121 plant game</h1>
+  <Header />
   <div id="controls">
     <h2>TURN: {$gameState.currentTurn}</h2>
     <button id="undo">Undo</button>
