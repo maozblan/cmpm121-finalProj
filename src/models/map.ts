@@ -1,7 +1,7 @@
 import { Plant } from "./plants.ts";
 import { PlantInfo } from "./PlantInfo.ts";
 import { chanceOfRain, gameData } from "../game.ts";
-import { get } from "svelte/store";
+import { get, writable, type Writable } from "svelte/store";
 
 const CELL_SIZE = 6; // in bytes
 export class Cell {
@@ -50,6 +50,7 @@ export class GameMap {
   private cells: Array<Array<Cell>>;
   private buffer: ArrayBuffer;
   size: number;
+  score: Writable<number> = writable(0);
 
   constructor(size: number) {
     this.size = size;
@@ -74,23 +75,20 @@ export class GameMap {
     }
   }
 
-  getBuffer() {
+  getBuffer(): ArrayBuffer {
     return this.buffer;
   }
-  exportBuffer() {
+  exportBuffer(): ArrayBuffer {
     return this.buffer.slice(0);
   }
-  loadBuffer(buffer: ArrayBuffer) {
+  // overrides current map state with state in parameter (buffer)
+  loadBuffer(buffer: ArrayBuffer): void {
     this.buffer = buffer;
     for (let i = 0; i < this.size; i++) {
       this.cells[i] = new Array(this.size);
       for (let j = 0; j < this.size; j++) {
         this.cells[i][j] = new Cell(
-          new DataView(
-            this.buffer,
-            i * this.size * CELL_SIZE + j * CELL_SIZE,
-            CELL_SIZE
-          )
+          this.createDataView(this.buffer, i, j)
         );
       }
     }
@@ -102,19 +100,17 @@ export class GameMap {
     return newMap;
   }
 
-  nextTurn(): GameMap {
-    const newMap = this.copy();
-
+  nextTurn(): void {
     //update the plants into the next turn in the new map
     this.loopCells((cell, x, y) => {
       if (cell.hasPlant) {
-        this.updatePlant(x, y, newMap);
+        this.updatePlant(x, y);
         //reduce the new map's water by if has plant
         try {
-          newMap.getCell(x, y).waterLevel -=
+          this.getCell(x, y).waterLevel -=
             PlantInfo[cell.plantType].waterConsumption;
         } catch {
-          newMap.getCell(x, y).waterLevel = 0;
+          this.getCell(x, y).waterLevel = 0;
         }
       }
     });
@@ -122,17 +118,16 @@ export class GameMap {
     //update the next maps water/sun levels
     try {
       if (chanceOfRain && Math.random() <= get(chanceOfRain)) {
-        newMap.updateWaterLevels();
+        this.updateWaterLevels();
       }
     } catch {
       console.error("Error updating water levels");
     }
     try {
-      newMap.updateSun();
+      this.updateSun();
     } catch {
       console.error("Error updating sun levels");
     }
-    return newMap;
   }
 
   // game functions ///////////////////////////////////////////////////////////
@@ -143,13 +138,17 @@ export class GameMap {
   }
 
   getScore(): number {
-    let score = 0;
+    let currentScore = 0;
     this.loopCells((cell) => {
       if (cell.hasPlant) {
-        score += PlantInfo[cell.plantType].scoreMultiplier * cell.plantLevel;
+        currentScore +=
+          PlantInfo[cell.plantType].scoreMultiplier * cell.plantLevel;
       }
     });
-    return score;
+    this.score.update(() => {
+      return currentScore;
+    });
+    return currentScore;
   }
 
   placePlantOnCopy(
@@ -199,14 +198,14 @@ export class GameMap {
 
   // internal functions ///////////////////////////////////////////////////////
 
-  updatePlant(x: number, y: number, newMap: GameMap) {
+  updatePlant(x: number, y: number) {
     this.checkBounds(x, y);
     if (!this.getCell(x, y).hasPlant) {
       return;
     }
     if (this.getCell(x, y).waterLevel < 1) {
       this.reapPlant(x, y);
-      newMap.reapPlant(x, y);
+      this.reapPlant(x, y);
       return;
     }
     const plant = new Plant(
@@ -215,7 +214,7 @@ export class GameMap {
       x,
       y
     );
-    plant.grow(this, newMap);
+    plant.grow(this);
   }
 
   updateWaterLevels() {
@@ -258,6 +257,14 @@ export class GameMap {
 
   randomInt(min: number, max: number) {
     return Math.floor(Math.random() * (max - min + 1)) + min;
+  }
+
+  createDataView(buffer: ArrayBuffer, i: number, j: number): DataView {
+    return new DataView(
+      buffer,
+      i * this.size * CELL_SIZE + j * CELL_SIZE,
+      CELL_SIZE
+    );
   }
 
   // win condition ////////////////////////////////////////////////////////////

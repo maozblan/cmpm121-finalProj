@@ -20,7 +20,7 @@ export class Plant {
     }
   }
 
-  grow(map: GameMap, newMap: GameMap) {
+  grow(map: GameMap) {
     const thisCell = map.getCell(this.x, this.y);
     const thisInfo = PlantInfo[this.plantType];
 
@@ -32,7 +32,7 @@ export class Plant {
       if (Math.random() < thisInfo.growConditions.chance) {
         try {
           if (thisCell.plantLevel != thisInfo.maxLevel) {
-            newMap.getCell(this.x, this.y).plantLevel = thisCell.plantLevel + 1;
+            thisCell.plantLevel++;
           }
         } catch {
           // do nothing
@@ -48,9 +48,9 @@ export class Plant {
       if (Math.random() < thisInfo.decayConditions.chance) {
         try {
           if (thisCell.plantLevel === 1) {
-            newMap.reapPlant(this.x, this.y);
+            map.reapPlant(this.x, this.y);
           } else {
-            newMap.getCell(this.x, this.y).plantLevel = thisCell.plantLevel - 1;
+            thisCell.plantLevel--;
           }
         } catch {
           // do nothing
@@ -58,19 +58,19 @@ export class Plant {
       }
     }
 
+    // expand conditions
     if (thisCell.plantLevel >= thisInfo.expandLevel) {
-      // expand conditions
       for (const [x, y] of getSurroundingCells(this.x, this.y)) {
         try {
           if (
             checkPlantCondition(
               x,
               y,
-              map.getCell(x, y),
+              thisCell,
               thisInfo.expandConditions
             )
           ) {
-            this._tryPlace(newMap, x, y, this.plantType, 1);
+            this._tryPlace(map, x, y, this.plantType, 1);
           }
         } catch {
           // do nothing

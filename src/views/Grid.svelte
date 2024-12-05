@@ -1,23 +1,26 @@
 <script>
-  import { MAPSIZE, player } from "../game.ts";
-  import { gameState } from '../game.ts';
+  import { MAPSIZE, gameState, player } from "../game.ts";
+  import { GameMap, Cell } from "../models/map.ts";
   import { PlantInfo } from "../models/PlantInfo.ts";
+  import { get } from "svelte/store";
   const x_val = player.x_val;
   const y_val = player.y_val;
+  const map = new GameMap(MAPSIZE);
+  const ledger = gameState.mapUpdateLedger;
 </script>
 
 <main>
-  {#snippet renderMap(map)}
-    {#each { length: map.size }, i}
-      {#each { length: map.size }, j}
-        {@render renderCell(map, i, j)}
+  {#snippet renderMap()}
+    {#each { length: MAPSIZE }, i}
+      {#each { length: MAPSIZE }, j}
+        {@render renderCell(i, j)}
       {/each}
     {/each}
   {/snippet}
 
-  {#snippet renderCell(map, i, j)}
+  {#snippet renderCell(i, j)}
     <div
-      class="cell {map.getCell(j, i).hasPlant ? 'plant' : ''}"
+      class="cell {new Cell(map.createDataView($ledger[get(ledger).length - 1].map, j, i)).hasPlant ? 'plant' : ''}"
       id="{$x_val === j && $y_val === i ? 'player-cell' : ''}"
       style="{
         map.getCell(j, i).hasPlant && ($x_val !== j || $y_val !== i )?
@@ -33,13 +36,11 @@
 
   <div 
     id="field"
-    class="{$gameState.currentTurn}"
     style="
       grid-template-columns: repeat({MAPSIZE}, 1fr);
       grid-template-rows: repeat({MAPSIZE}, 1fr)">
-      {@render renderMap(
-        $gameState.mapUpdateLedger[$gameState.currentIndex].map,
-      )}
+      {map.loadBuffer($ledger[get(ledger).length - 1].map)}
+      {@render renderMap()}
   </div>
 </main>
 

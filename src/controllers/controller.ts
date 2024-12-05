@@ -1,5 +1,4 @@
 import {
-  updateMap,
   gameState,
   getCurrentMap,
   tryLoad,
@@ -57,6 +56,7 @@ export default function playerInteraction(event: KeyboardEvent | MouseEvent) {
     (event.target as HTMLButtonElement)!.blur();
   }
   actions[key]?.();
+  document.dispatchEvent(new Event("update-visuals")); // TODO
 }
 
 function playerMove(direction: MoveDirection) {
@@ -64,8 +64,8 @@ function playerMove(direction: MoveDirection) {
 }
 
 function nextTurn() {
-  setTurn(get(gameState).currentTurn + 1);
-  updateMap(getCurrentMap().nextTurn());
+  setTurn(get(gameState.currentTurn) + 1);
+  getCurrentMap().nextTurn();
   if (getCurrentMap().playScenarioCompleted()) {
     alert("You win!");
   }
@@ -77,10 +77,9 @@ function setPlantType(type: number) {
 
 function plant() {
   if (getCurrentMap().getCell(player.x, player.y).hasPlant) {
-    updateMap(getCurrentMap().reapPlantOnCopy(player.x, player.y));
+    getCurrentMap().reapPlant(player.x, player.y);
   } else {
-    updateMap(
-      getCurrentMap().placePlantOnCopy(player.x, player.y, player.plantType, 1)
-    );
+    getCurrentMap().placePlant(player.x, player.y, player.plantType);
   }
+  globalThis.dispatchEvent(new Event("map-update"));
 }

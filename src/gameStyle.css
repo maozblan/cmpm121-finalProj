@@ -10,31 +10,31 @@
 }
 
 
-#field {
+#test-field {
   display: grid;
   grid-gap: 5px;
   margin: 0 auto;
   height: fit-content;
 }
 
-#field .cell {
+#test-field .cell {
   background-color: cornflowerblue;
   width: 30px;
   height: 30px;
 }
 
-#field .plantCell1 {
+#test-field .plantCell1 {
   background-color: rgb(12, 144, 0);
   width: 30px;
   height: 30px;
 }
-#field .plantCell2 {
+#test-field .plantCell2 {
   background-color: rgb(229, 162, 56);
   width: 30px;
   height: 30px;
 }
 
-#field .playerCell {
+#test-field .playerCell {
   background-color: rgb(255, 0, 0);
   width: 30px;
   height: 30px;

@@ -9,7 +9,6 @@
   <h1>cmpm121 plant game</h1>
   <Header />
   <div id="controls">
-    <h2>TURN: {$gameState.currentTurn}</h2>
     <button id="undo">Undo</button>
     <button id="redo">Redo</button>
     <button id="loadautosave">Load Autosave</button>
@@ -26,7 +25,7 @@
     {/if}
   </div>
   <div class="row-div">
-    <Grid />
+    <!-- <Grid /> -->
     <div id="htp">
       <h2>How to Play</h2>
       <p>Use WASD to move your character</p>
@@ -38,6 +37,7 @@
       <p>Balance plant 1 and plant 2 to grow both to appropriate levels</p>
       <p>while still keeping plant 2 greater than plant 1</p>
     </div>
+  <div id="test-field"></div>
   </div>
 </main>
 
