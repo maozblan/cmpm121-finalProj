@@ -115,7 +115,6 @@ export class GameMap {
             PlantInfo[cell.plantType].waterConsumption;
         } catch {
           newMap.getCell(x, y).waterLevel = 0;
-          console.error("Error decreasing water levels");
         }
       }
     });
@@ -162,7 +161,6 @@ export class GameMap {
     const newMap = this.copy();
     this.checkBounds(x, y);
     if (this.getCell(x, y).hasPlant) {
-      console.log("Cell already has a plant");
       return null;
     }
     newMap.getCell(x, y).plantType = plantType;
@@ -174,7 +172,6 @@ export class GameMap {
     const newMap = this.copy();
     this.checkBounds(x, y);
     if (!this.getCell(x, y).hasPlant) {
-      console.log("Cell does not have a plant");
       return null;
     }
     newMap.getCell(x, y).plantType = 0;
@@ -185,7 +182,6 @@ export class GameMap {
   placePlant(x: number, y: number, plantType: number, plantLevel: number = 1) {
     this.checkBounds(x, y);
     if (this.getCell(x, y).hasPlant) {
-      console.log("Cell already has a plant");
       return;
     }
     this.getCell(x, y).plantType = plantType;
@@ -195,7 +191,6 @@ export class GameMap {
   reapPlant(x: number, y: number) {
     this.checkBounds(x, y);
     if (!this.getCell(x, y).hasPlant) {
-      console.log("Cell does not have a plant");
       return;
     }
     this.getCell(x, y).plantType = 0;
@@ -207,11 +202,9 @@ export class GameMap {
   updatePlant(x: number, y: number, newMap: GameMap) {
     this.checkBounds(x, y);
     if (!this.getCell(x, y).hasPlant) {
-      console.log("Cell does not have a plant");
       return;
     }
     if (this.getCell(x, y).waterLevel < 1) {
-      console.log(`Not enough water to grow plant at cell (${x}, ${y})`);
       this.reapPlant(x, y);
       newMap.reapPlant(x, y);
       return;

@@ -16,7 +16,7 @@ export class Plant {
     try {
       map.placePlant(x, y, type, level);
     } catch {
-      console.error("Error planting plant");
+      // do nothing
     }
   }
 
@@ -145,7 +145,7 @@ function getNeighborPlants(x: number, y: number, map: GameMap) {
         neighbors.push(cell.plantType);
       }
     } catch {
-      // console.error("Error getting neighbor cell");
+      // do nothing
     }
   }
   return neighbors;
