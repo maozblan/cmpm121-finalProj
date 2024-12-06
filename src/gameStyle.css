@@ -10,32 +10,54 @@
 }
 
 
+/* field ***************************************/
+#field-container {
+  width: fit-content;
+  height: fit-content;
+  position: relative;
+}
+
 #field {
   display: grid;
-  grid-gap: 5px;
+  /* grid-gap: 5px; */
   margin: 0 auto;
   height: fit-content;
+  width: fit-content;
 }
 
 #field .cell {
-  background-color: cornflowerblue;
+  background-color: rgb(207, 255, 112);
   width: 30px;
   height: 30px;
+  position: relative;
 }
 
-#field .plantCell1 {
-  background-color: rgb(12, 144, 0);
-  width: 30px;
-  height: 30px;
-}
-#field .plantCell2 {
-  background-color: rgb(229, 162, 56);
-  width: 30px;
-  height: 30px;
+#field .cell img {
+  width: 100%;
+  height: 100%;
 }
 
-#field .playerCell {
-  background-color: rgb(255, 0, 0);
+#field .plant {
+  position: absolute;
+  left: 5px;
+  top: 5px;
+  width: 20px;
+  height: 20px;
+  font-size: 12px;
+}
+
+/* player **************************************/
+#player img {
   width: 30px;
-  height: 30px;
+  height: auto;
+  position: absolute;
+  transform-origin: bottom center;
+}
+
+#player {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  left: 0;
+  top: 0;
 }
