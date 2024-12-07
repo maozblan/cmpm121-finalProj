@@ -3,7 +3,7 @@ import sveltePreprocess from "svelte-preprocess";
 
 export default {
   // eslint-disable-next-line no-undef
-  base: process.env.REPO_NAME || "/project",
+  base: "/cmpm121-finalProj",
   assetsInclude: ['**/*.png', '**/*.yaml'],
   plugins: [
     svelte({
@@ -12,6 +12,14 @@ export default {
   ],
   build: {
     target: "esnext",
+    rollupOptions: {
+      output: {
+        // Disable hashes in filenames
+        entryFileNames: '[name].js',
+        chunkFileNames: '[name].js',
+        assetFileNames: '[name].[ext]',
+      },
+    },
   },
   resolve: {
     dedupe: ["svelte"], // Ensure only one copy of Svelte is loaded by Vite

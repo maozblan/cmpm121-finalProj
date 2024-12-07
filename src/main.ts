@@ -18,3 +18,16 @@ document.querySelectorAll<HTMLButtonElement>("button").forEach((button) => {
 document.addEventListener("keydown", playerInteraction);
 
 export default app;
+
+if ('serviceWorker' in navigator) {
+  const BASE_PATH = location.pathname.replace(/\/$/, ''); // Get the base path dynamically
+  navigator.serviceWorker
+    .register(`${BASE_PATH}/service-worker.js`)
+    .then((registration) => {
+      console.log('Service Worker registered with scope:', registration.scope);
+    })
+    .catch((err) => {
+      console.error('Service Worker registration failed:', err);
+    });
+}
+
