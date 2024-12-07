@@ -1,0 +1,21 @@
+{
+  "title": "植物游戏",
+  "turn": "回合",
+  "undo": "撤销",
+  "redo": "重做",
+  "load autosave": "加载自动保存",
+  "save1": "保存1",
+  "load1": "加载1",
+  "save2": "保存2",
+  "load2": "加载2",
+  "chance of rain": "下雨的可能性",
+  "no chance of rain": "没有下雨的可能性...",
+  "how to play": "如何玩",
+  "how to move": "使用WASD移动角色",
+  "how to plant": "按F键在当前方块上收获/种植植物",
+  "how to end turn": "按SPACE结束回合",
+  "sun rates": "每个格子每回合随机获得3-7单位的阳光和雨水",
+  "your plants will grow accordingly": "你的植物会相应生长",
+  "goal": "目标",
+  "what to do": "种植足够高等级的植物以获胜"
+}

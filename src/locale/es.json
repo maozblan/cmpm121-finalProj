@@ -1,0 +1,21 @@
+{
+  "title": "Juego de Plantas",
+  "turn": "Turno",
+  "undo": "Deshacer",
+  "redo": "Rehacer",
+  "load autosave": "Cargar Guardado Automático",
+  "save1": "Guardar1",
+  "load1": "Cargar1",
+  "save2": "Guardar2",
+  "load2": "Cargar2",
+  "chance of rain": "Probabilidad de Lluvia",
+  "no chance of rain": "Sin posibilidad de lluvia...",
+  "how to play": "Cómo Jugar",
+  "how to move": "Usa WASD para mover a tu personaje",
+  "how to plant": "Presiona F para cosechar/sembrar plantas en la casilla actual",
+  "how to end turn": "Presiona SPACE para terminar el turno",
+  "sun rates": "cada celda recibirá aleatoriamente de 3 a 7 unidades de sol y lluvia en cada turno",
+  "your plants will grow accordingly": "tus plantas crecerán en consecuencia",
+  "goal": "Objetivo",
+  "what to do": "cultivar suficientes plantas de alto nivel para ganar"
+}

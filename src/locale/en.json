@@ -1,0 +1,21 @@
+{
+  "title": "Plant Game",
+  "turn": "Turn",
+  "undo": "Undo",
+  "redo": "Redo",
+  "load autosave": "Load Autosave",
+  "save1": "Save1",
+  "load1": "Load1",
+  "save2": "Save2",
+  "load2": "Load2",
+  "chance of rain": "Chance of Rain",
+  "no chance of rain": "No chance of rain...",
+  "how to play": "How to Play",
+  "how to move": "Use WASD to move your character",
+  "how to plant": "F to reap/sow pants on current tile",
+  "how to end turn": "SPACE to end turn",
+  "sun rates": "each cell will randomly recieve 3-7 sun and rain each turn",
+  "your plants will grow accordingly": "your plants will grow accordingly",
+  "goal": "Goal",
+  "what to do": "grow enough plants of high level to win"
+}

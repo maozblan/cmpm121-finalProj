@@ -13,6 +13,6 @@ addMessages('zh', zh);
 addMessages('ar', ar);
 
 init({
-  fallbackLocale: 'zh',
+  fallbackLocale: 'en',
   initialLocale: getLocaleFromNavigator(),
 });
