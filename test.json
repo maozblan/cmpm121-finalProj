@@ -1,6 +1,6 @@
 {
-  "name": "Your App Name",
-  "short_name": "AppShortName",
+  "name": "Plant Game",
+  "short_name": "Plant Game",
   "start_url": "/cmpm121-finalProj/",
   "display": "standalone",
   "background_color": "#ffffff",

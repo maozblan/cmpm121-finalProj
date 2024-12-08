@@ -24,6 +24,8 @@ const actions: { [key: string]: () => void } = {
   RIGHT: () => actions.d(),
   NEXT_TURN: nextTurn,
   ACTION: plant,
+  NEXT_PLANT: nextPlantType,
+  PREV_PLANT: prevPlantType,
   " ": nextTurn,
   f: plant,
   undo: undo,
@@ -82,6 +84,15 @@ function nextTurn() {
 
 function setPlantType(type: number) {
   player.plantType = type;
+}
+
+function nextPlantType() {
+  player.plantType = (player.plantType + 1) % PlantInfo.length;
+}
+
+function prevPlantType() {
+  player.plantType =
+    (player.plantType - 1 + PlantInfo.length) % PlantInfo.length;
 }
 
 function plant() {

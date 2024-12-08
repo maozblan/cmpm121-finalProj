@@ -17,5 +17,8 @@
   "sun rates": "cada celda recibirá aleatoriamente de 3 a 7 unidades de sol y lluvia en cada turno",
   "your plants will grow accordingly": "tus plantas crecerán en consecuencia",
   "goal": "Objetivo",
-  "what to do": "cultivar suficientes plantas de alto nivel para ganar"
+  "what to do": "cultivar suficientes plantas de alto nivel para ganar",
+  "action": "Acción",
+  "next plant": "Siguiente Planta",
+  "prev plant": "Planta Anterior"
 }

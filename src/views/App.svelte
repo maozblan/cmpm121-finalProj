@@ -27,6 +27,8 @@
     <button id="DOWN">{"v"}</button>
     <button id="NEXT_TURN">{$t("turn")}</button>
     <button id="ACTION">{$t("action")}</button>
+    <button id="PREV_PLANT">{$t("prev plant")}</button>
+    <button id="NEXT_PLANT">{$t("next plant")}</button>
   </div>
   <div id="event">
     {#if $chanceOfRain}

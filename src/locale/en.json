@@ -17,5 +17,8 @@
   "sun rates": "each cell will randomly recieve 3-7 sun and rain each turn",
   "your plants will grow accordingly": "your plants will grow accordingly",
   "goal": "Goal",
-  "what to do": "grow enough plants of high level to win"
+  "what to do": "grow enough plants of high level to win",
+  "action": "Action",
+  "next plant": "Next Plant",
+  "prev plant": "Prev Plant"
 }

@@ -17,5 +17,8 @@
   "sun rates": "每个格子每回合随机获得3-7单位的阳光和雨水",
   "your plants will grow accordingly": "你的植物会相应生长",
   "goal": "目标",
-  "what to do": "种植足够高等级的植物以获胜"
+  "what to do": "种植足够高等级的植物以获胜",
+  "action": "行动",
+  "next plant": "下一个植物",
+  "prev plant": "上一个植物"
 }
