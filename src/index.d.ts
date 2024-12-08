@@ -6,7 +6,7 @@ declare module "*.png" {
 // for internal DSL
 interface PlantInfo {
   name: string;
-  imgUrl: string; // for ui
+  imgs: string[]; // for ui
   maxLevel: number; // inclusive
   scoreMultiplier: number;
   expandLevel: number; // level at which plant can expand

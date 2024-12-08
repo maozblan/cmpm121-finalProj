@@ -1,10 +1,12 @@
 // PLANT DSL
 // enter new plants into PlantInfo array to create them.
 
+import { img } from "../views/imgs";
+
 // ==== PlantInfo Interface ====
 /*
     name: string;
-    imgUrl: string;
+    imgs: string[];
     maxLevel: number; // inclusive
     scoreMultiplier: number; // multiplied by plant level for each plant's score
     expandLevel: number; // level at which plant can expand
@@ -26,8 +28,8 @@ export const PlantInfo: PlantInfo[] = [
   {
     // grow fast, expand fast, low max level
     name: "Grass",
-    imgUrl: "",
-    maxLevel: 3,
+    imgs: img.grass,
+    maxLevel: 2,
     expandLevel: 2,
     waterConsumption: 1,
     scoreMultiplier: 1,
@@ -56,8 +58,8 @@ export const PlantInfo: PlantInfo[] = [
   {
     // grow fast, expand fast, weak to other plants
     name: "Flower",
-    imgUrl: "",
-    maxLevel: 5,
+    imgs: img.flower,
+    maxLevel: 4,
     expandLevel: 3,
     waterConsumption: 1,
     scoreMultiplier: 2,
@@ -85,8 +87,8 @@ export const PlantInfo: PlantInfo[] = [
   {
     // grow slowly, expand slowly, resilient, grows in clumps
     name: "Moss",
-    imgUrl: "",
-    maxLevel: 10,
+    imgs: img.moss,
+    maxLevel: 3,
     expandLevel: 7,
     waterConsumption: 1,
     scoreMultiplier: 1,
@@ -116,8 +118,8 @@ export const PlantInfo: PlantInfo[] = [
   {
     // grows fast, eats other plants
     name: "Weeds",
-    imgUrl: "",
-    maxLevel: 2,
+    imgs: img.weed,
+    maxLevel: 3,
     expandLevel: 1,
     waterConsumption: 4,
     scoreMultiplier: 1,

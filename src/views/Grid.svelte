@@ -25,13 +25,20 @@
     >
       <img src={img.soil} alt="soil" />
       {#if map.getCell(j, i).hasPlant}
-        <div
-          class="plant"
-          style="background-color: {PlantInfo[map.getCell(j, i).plantType].color};"
-        >
-          {map.getCell(j, i).plantLevel.toString()}
-        </div>
+        {@render renderPlant(
+          map.getCell(j, i).plantType,
+          map.getCell(j, i).plantLevel,
+        )}
       {/if}
+    </div>
+  {/snippet}
+
+  {#snippet renderPlant(type, level)}
+    <div class="plant">
+      <img
+        src={PlantInfo[type].imgs[level-1]}
+        alt={`lvl${level} ${PlantInfo[type].name}`}
+      /> 
     </div>
   {/snippet}
 
