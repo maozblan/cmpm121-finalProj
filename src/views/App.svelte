@@ -19,6 +19,15 @@
     <button id="save2">{$t("save2")}</button>
     <button id="load2">{$t("load2")}</button>
   </div>
+
+  <div id="mobile-controls">
+    <button id="UP">{"^"}</button>
+    <button id="LEFT">{"<"}</button>
+    <button id="RIGHT">{">"}</button>
+    <button id="DOWN">{"v"}</button>
+    <button id="NEXT_TURN">{$t("turn")}</button>
+    <button id="ACTION">{$t("action")}</button>
+  </div>
   <div id="event">
     {#if $chanceOfRain}
       <p>{$t("chance of rain")} {get(chanceOfRain) * 100}%</p>

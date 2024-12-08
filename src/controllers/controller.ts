@@ -18,6 +18,12 @@ const actions: { [key: string]: () => void } = {
   a: () => playerMove(MoveDirection.LEFT),
   s: () => playerMove(MoveDirection.DOWN),
   d: () => playerMove(MoveDirection.RIGHT),
+  UP: () => actions.w(),
+  LEFT: () => actions.a(),
+  DOWN: () => actions.s(),
+  RIGHT: () => actions.d(),
+  NEXT_TURN: nextTurn,
+  ACTION: plant,
   " ": nextTurn,
   f: plant,
   undo: undo,
@@ -44,6 +50,9 @@ const actions: { [key: string]: () => void } = {
 };
 
 // adding all plant types to number keys (up to 9)
+if (PlantInfo.length > 9) {
+  throw new Error("Too many plant types");
+}
 for (let i = 0; i < PlantInfo.length; i++) {
   actions[i + 1] = () => setPlantType(i);
 }
