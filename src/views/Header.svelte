@@ -1,20 +1,30 @@
 <script>
+	import { img } from './imgs.ts';
   import { get } from 'svelte/store';
   import { POINTS_TO_WIN, gameState, chanceOfRain } from '../game.ts';
 </script>
 
-<main>
-  <div id="turn-counter">TURN: {$gameState.currentTurn}</div>
-  <div id="point-counter">
-    {$gameState.mapUpdateLedger[$gameState.currentIndex].map.getScore()} / 
-    {$POINTS_TO_WIN}
+<main class="ui-layer" id="header">
+  <div class="cloud back">
+    <img src={img.cloud} alt="cloud" />
+    <div class="text">
+      {$gameState.mapUpdateLedger[$gameState.currentIndex].map.getScore()} / 
+      {$POINTS_TO_WIN}
+    </div>
   </div>
-  <div id="chance-of-rain">
-    {#if $chanceOfRain}
-      <p>Chance of rain {get(chanceOfRain) * 100}%</p>
-    {:else}
-      <p>no rain this turn...</p>
-    {/if}
+  <div class="sun">
+    <img src={img.sun} alt="sun" />
+    <div class="text">
+      <p>
+        {$gameState.currentTurn}
+      </p>
+    </div>
+  </div>
+  <div class="cloud front">
+    <img src={img.cloud} alt="cloud" />
+    <div class="text">
+      {$chanceOfRain * 100}%
+    </div>
   </div>
 </main>
 

@@ -8,7 +8,7 @@
 
 <main class="col-div">
   <h1>{$t("title")}</h1>
-  <!-- <Header /> -->
+  <Header />
   <div id="controls">
     <h2>{$t("turn")}: {$gameState.currentTurn}</h2>
     <button id="undo">{$t("undo")}</button>
