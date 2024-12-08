@@ -19,5 +19,5 @@
         "*.svelte": ["./node_modules/@types"]
       }
     },
-    "include": ["src"]
+    "include": ["src", "service-worker.js"]
   }

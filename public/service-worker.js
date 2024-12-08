@@ -2,7 +2,10 @@ const CACHE_NAME = 'gamecache-v1';
 const BASE_PATH = `/${location.pathname.split('/')[1]}/`.replace(/\/$/, '');
 const urlsToCache = [
   `${BASE_PATH}/`,
+  `${BASE_PATH}/index.css`,
   `${BASE_PATH}/index.html`,
+  `${BASE_PATH}/index.js`,
+  `${BASE_PATH}/player.png`,
   `${BASE_PATH}/soil.png`,
 ];
 
@@ -18,10 +21,6 @@ self.addEventListener('install', (event) => {
       );
     })
   );
-});
-
-self.addEventListener('activate', (event) => {
-  console.log('Service Worker activated...');
 });
 
 self.addEventListener('fetch', (event) => {
