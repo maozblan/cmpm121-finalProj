@@ -38,4 +38,8 @@ export const img = {
   load_p: new URL('../../assets/load_pressed.png', import.meta.url).href,
   help: new URL('../../assets/help.png', import.meta.url).href,
   help_p: new URL('../../assets/help_pressed.png', import.meta.url).href,
+  plant: new URL('../../assets/plant.png', import.meta.url).href,
+  plant_p: new URL('../../assets/plant_pressed.png', import.meta.url).href, // currently no different pressed version
+  reap: new URL('../../assets/reap.png', import.meta.url).href,
+  reap_p: new URL('../../assets/reap_pressed.png', import.meta.url).href, // currently no different pressed version
 }

@@ -12,27 +12,6 @@
 <main class="col-div">
   <h1>{$t("title")}</h1>
   <Header />
-  <div id="controls">
-    <h2>{$t("turn")}: {$gameState.currentTurn}</h2>
-    <button id="undo">{$t("undo")}</button>
-    <button id="redo">{$t("redo")}</button>
-    <button id="loadautosave">{$t("load autosave")}</button>
-    <button id="save1">{$t("save1")}</button>
-    <button id="load1">{$t("load1")}</button>
-    <button id="save2">{$t("save2")}</button>
-    <button id="load2">{$t("load2")}</button>
-  </div>
-
-  <div id="mobile-controls">
-    <button id="UP">{"^"}</button>
-    <button id="LEFT">{"<"}</button>
-    <button id="RIGHT">{">"}</button>
-    <button id="DOWN">{"v"}</button>
-    <button id="NEXT_TURN">{$t("turn")}</button>
-    <button id="ACTION">{$t("action")}</button>
-    <button id="PREV_PLANT">{$t("prev plant")}</button>
-    <button id="NEXT_PLANT">{$t("next plant")}</button>
-  </div>
   <div id="event">
     {#if $chanceOfRain}
       <p>{$t("chance of rain")} {get(chanceOfRain) * 100}%</p>

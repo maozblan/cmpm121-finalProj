@@ -13,9 +13,6 @@ const app = mount(App, {
 });
 
 // use controller to handle player interactions
-document.querySelectorAll<HTMLButtonElement>("button").forEach((button) => {
-  button.addEventListener("click", playerInteraction);
-});
 document.addEventListener("keydown", playerInteraction);
 
 export default app;

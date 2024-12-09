@@ -1,4 +1,6 @@
 <script>
+  import playerInteraction from "../controllers/controller";
+
   let {
     width = 45,
     height = 45,
@@ -28,7 +30,7 @@
   --pressed-px-change: {pxChange}px;
 "
 >
-  <button {id} class={classes} {style}>
+  <button {id} class={classes} {style} on:click={playerInteraction}>
     <img src={norm} {alt} />
     <img src={pressed} {alt} />
   </button>
