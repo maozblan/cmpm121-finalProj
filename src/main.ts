@@ -1,9 +1,9 @@
-import "./style.css";
-import "./gameStyle.css";
+import "./views/style.css";
+import "./views/gameStyle.css";
 import { mount } from "svelte";
 import App from "./views/App.svelte";
 import playerInteraction from "./controllers/controller.ts";
-import "./i18n.ts";
+import "./locale/i18n.ts";
 
 const APP_NAME = "cmpm121-final";
 document.title = APP_NAME;

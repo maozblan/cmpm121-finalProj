@@ -1,6 +1,7 @@
 <script>
   import { get } from "svelte/store";
   import ImgButton from "./ImgButton.svelte";
+  import MobileController from "./MobileController.svelte";
   import { img } from "./imgs";
   import { currTab } from "./tabs";
   import playerInteraction from "../controllers/controller.ts";
@@ -70,6 +71,8 @@
   <div class="container">
     {#if $currTab}
       {@render tabContent($currTab)}
+    {:else}
+      <MobileController />
     {/if}
     <div class="tab-buttons">
       <ImgButton {...optionButtons.help} />
@@ -122,6 +125,5 @@
     width: 100%;
     height: fit-content;
     justify-content: space-evenly;
-    background-color: red;
   }
 </style>

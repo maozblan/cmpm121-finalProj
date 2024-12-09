@@ -1,6 +1,5 @@
 <script>
-  import { MAPSIZE } from "../game.ts";
-  import { gameState } from '../game.ts';
+  import { MAPSIZE, gameState } from "../controllers/game.ts";
   import { PlantInfo } from "../models/PlantInfo.ts";
   import { img } from "./imgs.ts";
   import Player from "./Player.svelte";

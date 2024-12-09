@@ -1,10 +1,10 @@
 import { addMessages, init, getLocaleFromNavigator } from 'svelte-i18n';
 
 // import translation packs 
-import en from './locale/en.json';
-import es from './locale/es.json';
-import zh from './locale/zh.json';
-import ar from './locale/ar.json';
+import en from './en.json';
+import es from './es.json';
+import zh from './zh.json';
+import ar from './ar.json';
 
 // add translations to app
 addMessages('en', en);

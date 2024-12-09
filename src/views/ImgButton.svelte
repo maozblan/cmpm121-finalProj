@@ -1,5 +1,5 @@
 <script>
-  import playerInteraction from "../controllers/controller";
+  import playerInteraction from "../controllers/controller.ts";
 
   let {
     width = 45,

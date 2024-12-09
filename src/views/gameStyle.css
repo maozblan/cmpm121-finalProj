@@ -93,6 +93,16 @@
   position: absolute;
 }
 
+/* game ui positioning ******************************/
+#main-game {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  height: fit-content;
+  width: fit-content;
+}
+
 /* overrides for mobile app *************************/
 @media only screen and (orientation: portrait) {
   h1 {

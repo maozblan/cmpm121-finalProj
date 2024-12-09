@@ -1,8 +1,9 @@
 <script>
   import { img } from "./imgs.ts";
-  import { player } from "../game.ts";
+  import { player } from "../controllers/game.ts";
   const x = player.x_val;
   const y = player.y_val;
+  const scale = 1;
 </script>
 
 <main>
@@ -11,8 +12,8 @@
       src={img.player}
       alt="you"
       style="
-        left: {($x + 1) * 30}px;
-        top: {$y * 30}px;
+        left: {($x + 1) * 30 * scale}px;
+        top: {$y * 30 * scale}px;
       "
     />
   </div>

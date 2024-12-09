@@ -1,6 +1,6 @@
-import { loadGameData } from "./models/loadData.ts";
-import { GameMap } from "./models/map.ts";
-import { Player } from "./models/player.ts";
+import { loadGameData } from "../models/loadData.ts";
+import { GameMap } from "../models/map.ts";
+import { Player } from "../models/player.ts";
 import { get, writable, type Writable } from "svelte/store";
 
 // game variables

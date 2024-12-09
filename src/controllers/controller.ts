@@ -8,7 +8,7 @@ import {
   player,
   undo,
   redo,
-} from "../game.ts";
+} from "./game.ts";
 import { MoveDirection } from "../models/player.ts";
 import { PlantInfo } from "../models/PlantInfo.ts";
 import { toggleTab } from "../views/tabs.ts";
@@ -22,6 +22,7 @@ const actions: { [key: string]: () => void } = {
   " ": nextTurn,
   nextTurn: () => actions[" "](),
   f: plant,
+  cyclePlant: nextPlantType,
   undo: undo,
   redo: redo,
   loadautosave: () => {
@@ -85,6 +86,10 @@ function nextTurn() {
 
 function setPlantType(type: number) {
   player.plantType = type;
+}
+
+function nextPlantType() {
+  player.plantType = (player.plantType + 1) % PlantInfo.length;
 }
 
 function plant() {

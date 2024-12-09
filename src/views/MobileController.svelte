@@ -1,8 +1,7 @@
 <script>
   import ImgButton from "./ImgButton.svelte";
   import { img } from "./imgs";
-  import { gameState, getCurrentMap } from "../game.ts";
-  import { player } from "../game.ts";
+  import { gameState, getCurrentMap, player } from "../controllers/game.ts";
   import { get } from "svelte/store";
 
   const UI_SCALE = 3;
@@ -18,6 +17,7 @@
       },
     },
     reap: {
+      id: "f",
       classes: "action",
       iconData: {
         norm: img.reap,
@@ -27,6 +27,7 @@
       },
     },
     plant: {
+      id: "f",
       classes: "action",
       iconData: {
         norm: img.plant,
@@ -48,6 +49,17 @@
         pxChange: -3,
       },
     },
+    cyclePlant: {
+      id: "cyclePlant",
+      alt: "cycle plant",
+      classes: "action",
+      iconData: {
+        norm: img.sun,
+        pressed: img.sun,
+        scale: UI_SCALE,
+        pxChange: -3,
+      },
+    },
   };
 
   const x = player.x_val;
@@ -63,7 +75,9 @@
     <div>
       <ImgButton {...btns.wasdProps} id="w" alt="UP" />
     </div>
-    <div></div>
+    <div>
+      <ImgButton {...btns.cyclePlant} />
+    </div>
     <!-- row 2 -->
     <div>
       <ImgButton
@@ -75,9 +89,9 @@
     </div>
     <div>
       {#if $gameState.mapUpdateLedger[$gameState.currentIndex].map.getCell($x, $y).hasPlant}
-        <ImgButton {...btns.reap} id="f" />
+        <ImgButton {...btns.reap} />
       {:else}
-        <ImgButton {...btns.plant} id="f" />
+        <ImgButton {...btns.plant} />
       {/if}
     </div>
     <div>
@@ -103,10 +117,20 @@
 </main>
 
 <style>
+  #mobile-controls {
+    width: 100%;
+    height: fit-content;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
   .grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     grid-gap: calc(0px * var(--controller-scale));
+    width: fit-content;
+    height: fit-content;
+    margin-bottom: calc(20px * var(--controller-scale));
   }
   div {
     width: calc(45px * var(--controller-scale));

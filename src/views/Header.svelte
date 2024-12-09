@@ -1,14 +1,14 @@
 <script>
-	import { img } from './imgs.ts';
-  import { get } from 'svelte/store';
-  import { POINTS_TO_WIN, gameState, chanceOfRain } from '../game.ts';
+	import { img } from "./imgs.ts";
+  import { get } from "svelte/store";
+  import { POINTS_TO_WIN, gameState, chanceOfRain } from "../controllers/game.ts";
 </script>
 
 <main class="ui-layer" id="header">
   <div class="cloud back">
     <img src={$chanceOfRain ? img.rainCloud : img.cloud} alt="cloud" />
     <div class="text"
-      style={$chanceOfRain ? 'color: rgb(24,54,107)' : ''}
+      style={$chanceOfRain ? "color: rgb(24,54,107)" : ""}
     >
       {$gameState.mapUpdateLedger[$gameState.currentIndex].map.getScore()} / 
       {$POINTS_TO_WIN}
@@ -25,7 +25,7 @@
   <div class="cloud front">
     <img src={$chanceOfRain ? img.rainCloud : img.cloud} alt="cloud" />
     <div class="text"
-      style={$chanceOfRain ? 'color: rgb(24,54,107)' : ''}
+      style={$chanceOfRain ? "color: rgb(24,54,107)" : ""}
     >
       {$chanceOfRain * 100}%
     </div>
