@@ -1,6 +1,5 @@
 :root {
   --gameScale: 1;
-  --uiScale: 5;
 }
 
 .row-div {
@@ -92,54 +91,6 @@
 }
 #header * {
   position: absolute;
-}
-
-#header .sun {
-  width: calc(50px * var(--uiScale));
-  height: calc(50px * var(--uiScale));
-  top: calc(4px * var(--uiScale));
-  left: calc(10px * var(--uiScale));
-}
-#header .sun img {
-  rotate: 180deg;
-}
-
-#header .cloud {
-  width: calc(52px * var(--uiScale));
-  height: calc(33px * var(--uiScale));
-}
-#header .cloud.back {
-  top: calc(8px * var(--uiScale));
-  left: calc(46px * var(--uiScale));
-}
-#header .cloud.front {
-  top: calc(25px * var(--uiScale));
-  left: calc(-9px * var(--uiScale));
-}
-#header img {
-  width: 100%;
-  top: 0;
-  left: 0;
-}
-#header .text {
-  font-size: calc(7px * var(--uiScale));
-  text-align: center;
-  margin: 0;
-}
-#header .sun .text {
-  width: calc(50px * var(--uiScale));
-  height: calc(50px * var(--uiScale));
-  color: rgb(194,107,40);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-}
-#header .cloud .text {
-  right: calc(0px * var(--uiScale));
-  bottom: calc(2px * var(--uiScale));
-  width: calc(30px * var(--uiScale));
-  color: rgb(134,155,179);
 }
 
 /* overrides for mobile app *************************/
