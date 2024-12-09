@@ -20,6 +20,7 @@ const actions: { [key: string]: () => void } = {
   s: () => playerMove(MoveDirection.DOWN),
   d: () => playerMove(MoveDirection.RIGHT),
   " ": nextTurn,
+  nextTurn: () => actions[" "](),
   f: plant,
   undo: undo,
   redo: redo,
