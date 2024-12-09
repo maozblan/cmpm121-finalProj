@@ -11,6 +11,7 @@ import {
 } from "../game.ts";
 import { MoveDirection } from "../models/player.ts";
 import { PlantInfo } from "../models/PlantInfo.ts";
+import { toggleTab } from "../views/tabs.ts";
 import { get } from "svelte/store";
 
 const actions: { [key: string]: () => void } = {
@@ -36,19 +37,26 @@ const actions: { [key: string]: () => void } = {
   load1: () => {
     console.log("input: load1");
     tryLoad("save1");
+    toggleTab("load");
   },
   load2: () => {
     console.log("input: load2");
     tryLoad("save2");
+    toggleTab("load");
   },
   save1: () => {
     console.log("input: save1");
     save("save1");
+    toggleTab("save");
   },
   save2: () => {
     console.log("input: save2");
     save("save2");
+    toggleTab("save");
   },
+  save: () => toggleTab("save"),
+  load: () => toggleTab("load"),
+  help: () => toggleTab("help"),
 };
 
 // adding all plant types to number keys (up to 9)

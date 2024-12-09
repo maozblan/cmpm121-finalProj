@@ -6,6 +6,7 @@
   import { t } from "svelte-i18n";
   import Controls from "./MobileController.svelte";
   import MobileController from "./MobileController.svelte";
+  import OptionsBar from "./OptionsBar.svelte";
 </script>
 
 <main class="col-div">
@@ -53,6 +54,7 @@
     </div>
   </div>
   <MobileController />
+  <OptionsBar />
 </main>
 
 <style>
