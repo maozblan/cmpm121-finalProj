@@ -128,8 +128,7 @@
     grid-template-columns: repeat(3, 1fr);
     grid-gap: calc(0px * var(--controller-scale));
     width: fit-content;
-    height: fit-content;
-    margin-bottom: calc(20px * var(--controller-scale));
+    display: none;
   }
   div {
     width: calc(45px * var(--controller-scale));

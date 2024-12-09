@@ -48,7 +48,7 @@ img {
 .sun {
   width: calc(50px * var(--uiScale));
   height: calc(50px * var(--uiScale));
-  top: calc(4px * var(--uiScale));
+  top: calc(-2px * var(--uiScale));
   left: calc(10px * var(--uiScale));
 }
 .sun img {
@@ -69,11 +69,11 @@ img {
   height: calc(33px * var(--uiScale));
 }
 .cloud.back {
-  top: calc(8px * var(--uiScale));
+  top: calc(6px * var(--uiScale));
   left: calc(46px * var(--uiScale));
 }
 .cloud.front {
-  top: calc(25px * var(--uiScale));
+  top: calc(23px * var(--uiScale));
   left: calc(-9px * var(--uiScale));
 }
 .cloud .text {

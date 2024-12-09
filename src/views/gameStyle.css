@@ -2,6 +2,10 @@
   --gameScale: 1;
 }
 
+html, body {
+  overflow: hidden;
+}
+
 .row-div {
   display: flex;
   flex-direction: row;
@@ -48,7 +52,30 @@
 
 /* overrides for mobile app *************************/
 @media only screen and (orientation: portrait) {
-  h1 {
-    color: red;
+  #app h1 {
+    font-size: 1.5rem;
+    margin-bottom: 1vh;
+  }
+  body {
+    display: flex;
+    align-items: flex-end;
+    height: 63vh;
+    min-height: 0;
+  }
+  .htp .mobile {
+    display: block;
+  }
+  .htp .desktop {
+    display: none;
+  }
+  #mobile-controls .grid {
+    display: grid;
+  }
+  #options-bar .container {
+    height: 37vh;
+    width: 100vw;
+  }
+  #options-bar .container .tab-content {
+    height: 100%;
   }
 }

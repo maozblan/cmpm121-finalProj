@@ -8,10 +8,6 @@
   import { t } from "svelte-i18n";
   import { uiScale } from "./uiSettings.ts";
 
-  function foo() {
-    console.log("foo");
-  }
-
   const PIXEL_CHANGE = -3;
   const optionButtons = {
     undo: {
@@ -69,11 +65,13 @@
 
 <main id="options-bar" class="col-div ui-layer">
   <div class="container">
-    {#if $currTab}
-      {@render tabContent($currTab)}
-    {:else}
-      <MobileController />
-    {/if}
+    <div class="tab-content">
+      {#if $currTab}
+        {@render tabContent($currTab)}
+      {:else}
+        <MobileController />
+      {/if}
+    </div>
     <div class="tab-buttons">
       <ImgButton {...optionButtons.help} />
       <ImgButton {...optionButtons.undo} />
@@ -85,23 +83,28 @@
 
   {#snippet tabContent(tab)}
     {#if tab === "save"}
-    <div class="col-div tab-content">
+    <div class="col-div panel">
       <button id="save1" on:click={playerInteraction}>save slot 1</button>
       <button id="save2" on:click={playerInteraction}>save slot 2</button>
     </div>
     {:else if tab === "load"}
-    <div class="col-div tab-content">
+    <div class="col-div panel">
       <button id="load1" on:click={playerInteraction}>load save slot 1</button>
       <button id="load2" on:click={playerInteraction}>load save slot 2</button>
     </div>
     {:else if tab === "help"}
-    <div class="col-div tab-content">
+    <div class="col-div panel htp">
       <h2>{$t("how to play")}</h2>
-      <p>{$t("how to move")}</p>
-      <p>{$t("how to plant")}</p>
-      <p>{$t("how to end turn")}</p>
-      <p>{$t("sun rates")}</p>
-      <p>{$t("your plants will grow accordingly")}</p>
+      <div class="desktop">
+        <p>{$t("how to move")}</p>
+        <p>{$t("how to plant")}</p>
+        <p>{$t("how to end turn")}</p>
+        <p>{$t("sun rates")}</p>
+        <p>{$t("your plants will grow accordingly")}</p>
+      </div>
+      <div class="mobile">
+        <!-- jaxon look here -->
+      </div>
       <h2>{$t("goal")}</h2>
       <p>{$t("what to do")}</p>
     </div>
@@ -114,16 +117,36 @@
     position: absolute;
     right: 0;
     bottom: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
   }
 
   .tab-buttons {
     display: flex;
     flex-direction: row;
+    justify-content: space-around;
   }
 
   .tab-content {
     width: 100%;
-    height: fit-content;
+    height: 80vh;
+    display: flex;
     justify-content: space-evenly;
+    overflow-y: scroll;
+  }
+
+  .tab-content .panel {
+    width: 80%;
+    overflow-y: scroll;
+    justify-content: space-evenly;
+  }
+
+  .htp .mobile {
+    display: none;
+  }
+  .htp {
+    margin: 0;
+    padding: 0;
   }
 </style>
