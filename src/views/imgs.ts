@@ -20,6 +20,7 @@ export const img = {
   moss: [
     new URL('../../assets/moss1.png', import.meta.url).href,
     new URL('../../assets/moss2.png', import.meta.url).href,
+    new URL('../../assets/moss3.png', import.meta.url).href,
   ],
   moon: new URL('../../assets/moon.png', import.meta.url).href,
   sun: new URL('../../assets/sun.png', import.meta.url).href,
