@@ -1,54 +1,44 @@
 <script>
-
+  import ImgButton from "./ImgButton.svelte";
   import { img } from "./imgs";
-
+  const UI_SCALE = 3;
+  const wasdProps = {
+    classes: "movement",
+    iconData: {
+      norm: img.wasd,
+      pressed: img.wasd_p,
+      scale: UI_SCALE,
+      pxChange: -3,
+    },
+  };
 </script>
-<scritp>
 
-</scritp>
-
-<main id="mobile-controls">
+<main id="mobile-controls" style="--controller-scale: 3;">
   <div class="grid">
     <!-- row 1 -->
     <div></div>
     <div>
-      <button id="w" class="movement">
-        <img src={img.wasd} alt="UP" />
-        <img src={img.wasd_p} alt="UP" />
-      </button>
+      <ImgButton {...wasdProps} id="w", alt="UP" />
     </div>
     <div></div>
     <!-- row 2 -->
     <div>
-      <button id="a" class="movement" style="rotate: -90deg;">
-        <img src={img.wasd} alt="LEFT" />
-        <img src={img.wasd_p} alt="LEFT" />
-      </button>
+      <ImgButton {...wasdProps} id="a", alt="LEFT" style="rotate: -90deg;" />
     </div>
     <div></div>
     <div>
-      <button id="d" class="movement" style="rotate: 90deg;">
-        <img src={img.wasd} alt="RIGHT" />
-        <img src={img.wasd_p} alt="LEFT" />
-      </button>
+      <ImgButton {...wasdProps} id="d", alt="RIGHT" style="rotate: 90deg;" />
     </div>
     <!-- row 3 -->
     <div></div>
     <div>
-      <button id="s" class="movement" style="rotate: 180deg;">
-        <img src={img.wasd} alt="DOWN" />
-        <img src={img.wasd_p} alt="DOWN" />
-      </button>
+      <ImgButton {...wasdProps} id="s", alt="DOWN" style="rotate: 180deg;" />
     </div>
     <div></div>
   </div>
 </main>
 
 <style>
-  :root {
-    --controller-scale: 3;
-  }
-
   .grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
@@ -57,38 +47,5 @@
   div {
     width: calc(45px * var(--controller-scale));
     height: calc(45px * var(--controller-scale));
-  }
-  button {
-    margin: 0;
-    padding: 0;
-    border: none;
-    border-radius: 0;
-    background-color: transparent;
-    width: 100%;
-    height: 100%;
-    overflow: hidden;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-
-  button.movement img{
-    width: calc(40px * var(--controller-scale));
-  }
-  /* disable items inside buttons to be clicked */
-  button * {
-    pointer-events: none;
-  }
-  /* button "animations" */
-  button img:first-child ~ *{
-    display: none;
-  }
-  button:active > img:first-child {
-    display: none;
-  }
-  button:active img:first-child ~ img {
-    display: block;
-    width: calc(37px * var(--controller-scale));
-    height: calc(37px * var(--controller-scale));
   }
 </style>
