@@ -141,3 +141,10 @@
   width: calc(30px * var(--uiScale));
   color: rgb(134,155,179);
 }
+
+/* overrides for mobile app *************************/
+@media only screen and (orientation: portrait) {
+  h1 {
+    color: red;
+  }
+}

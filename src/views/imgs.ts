@@ -24,4 +24,6 @@ export const img = {
   moon: new URL('../../assets/moon.png', import.meta.url).href,
   sun: new URL('../../assets/sun.png', import.meta.url).href,
   cloud: new URL('../../assets/cloud.png', import.meta.url).href,
+  wasd: new URL('../../assets/mobileController.png', import.meta.url).href,
+  wasd_p: new URL('../../assets/mobileController_pressed.png', import.meta.url).href,
 }

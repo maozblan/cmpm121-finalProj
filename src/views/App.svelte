@@ -4,6 +4,8 @@
   import Grid from "./Grid.svelte";
   import Header from "./Header.svelte";
   import { t } from "svelte-i18n";
+  import Controls from "./MobileController.svelte";
+  import MobileController from "./MobileController.svelte";
 </script>
 
 <main class="col-div">
@@ -50,6 +52,7 @@
       <p>{$t("what to do")}</p>
     </div>
   </div>
+  <MobileController />
 </main>
 
 <style>

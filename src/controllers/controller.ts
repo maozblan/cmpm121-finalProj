@@ -67,6 +67,7 @@ export default function playerInteraction(event: KeyboardEvent | MouseEvent) {
     key = (event.target as HTMLElement).id;
     (event.target as HTMLButtonElement)!.blur();
   }
+  console.log("input: " + key);
   actions[key]?.();
 }
 
