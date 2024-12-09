@@ -6,12 +6,12 @@
   import { currTab } from "./tabs";
   import playerInteraction from "../controllers/controller.ts";
   import { t } from "svelte-i18n";
+  import { uiScale } from "./uiSettings.ts";
 
   function foo() {
     console.log("foo");
   }
 
-  const UI_SCALE = 3;
   const PIXEL_CHANGE = -3;
   const optionButtons = {
     undo: {
@@ -20,7 +20,7 @@
       iconData: {
         norm: img.undo,
         pressed: img.undo_p,
-        scale: UI_SCALE,
+        scale: uiScale,
         pxChange: PIXEL_CHANGE,
       },
     },
@@ -30,7 +30,7 @@
       iconData: {
         norm: img.redo,
         pressed: img.redo_p,
-        scale: UI_SCALE,
+        scale: uiScale,
         pxChange: PIXEL_CHANGE,
       },
     },
@@ -40,7 +40,7 @@
       iconData: {
         norm: img.load,
         pressed: img.load_p,
-        scale: UI_SCALE,
+        scale: uiScale,
         pxChange: PIXEL_CHANGE,
       },
     },
@@ -50,7 +50,7 @@
       iconData: {
         norm: img.save,
         pressed: img.save_p,
-        scale: UI_SCALE,
+        scale: uiScale,
         pxChange: PIXEL_CHANGE,
       },
     },
@@ -60,7 +60,7 @@
       iconData: {
         norm: img.help,
         pressed: img.help_p,
-        scale: UI_SCALE,
+        scale: uiScale,
         pxChange: PIXEL_CHANGE,
       },
     },

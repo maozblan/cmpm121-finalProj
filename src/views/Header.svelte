@@ -2,9 +2,10 @@
 	import { img } from "./imgs.ts";
   import { get } from "svelte/store";
   import { POINTS_TO_WIN, gameState, chanceOfRain } from "../controllers/game.ts";
+  import { overlayScale } from "./uiSettings.ts";
 </script>
 
-<main class="ui-layer" id="header">
+<main class="ui-layer" id="header" style="--uiScale: {overlayScale};">
   <div class="cloud back">
     <img src={$chanceOfRain ? img.rainCloud : img.cloud} alt="cloud" />
     <div class="text"
@@ -33,9 +34,6 @@
 </main>
 
 <style>
-:root {
-  --uiScale: 5;
-}
 img {
   width: 100%;
   top: 0;

@@ -3,8 +3,7 @@
   import { img } from "./imgs";
   import { gameState, getCurrentMap, player } from "../controllers/game.ts";
   import { get } from "svelte/store";
-
-  const UI_SCALE = 3;
+  import { uiScale } from "./uiSettings.ts";
 
   const btns = {
     wasdProps: {
@@ -12,7 +11,7 @@
       iconData: {
         norm: img.wasd,
         pressed: img.wasd_p,
-        scale: UI_SCALE,
+        scale: uiScale,
         pxChange: -3,
       },
     },
@@ -22,7 +21,7 @@
       iconData: {
         norm: img.reap,
         pressed: img.reap_p,
-        scale: UI_SCALE,
+        scale: uiScale,
         pxChange: -3,
       },
     },
@@ -32,7 +31,7 @@
       iconData: {
         norm: img.plant,
         pressed: img.plant_p,
-        scale: UI_SCALE,
+        scale: uiScale,
         pxChange: -3,
       },
     },
@@ -45,7 +44,7 @@
         height: 32,
         norm: img.moon,
         pressed: img.moon,
-        scale: UI_SCALE,
+        scale: uiScale,
         pxChange: -3,
       },
     },
@@ -56,7 +55,7 @@
       iconData: {
         norm: img.sun,
         pressed: img.sun,
-        scale: UI_SCALE,
+        scale: uiScale,
         pxChange: -3,
       },
     },
@@ -66,7 +65,7 @@
   const y = player.y_val;
 </script>
 
-<main id="mobile-controls" style="--controller-scale: 3;">
+<main id="mobile-controls" style="--controller-scale: {uiScale};">
   <div class="grid">
     <!-- row 1 -->
     <div>

@@ -13,63 +13,6 @@
   flex-direction: column;
 }
 
-/* field ***************************************/
-#field-container {
-  width: fit-content;
-  height: fit-content;
-  position: relative;
-}
-
-#field {
-  display: grid;
-  margin: 0 auto;
-  height: fit-content;
-  width: fit-content;
-}
-
-#field .cell {
-  background-color: rgb(207, 255, 112);
-  width: calc(30px * var(--gameScale));
-  height: calc(30px * var(--gameScale));
-  position: relative;
-}
-
-#field .cell img {
-  width: 100%;
-  height: 100%;
-}
-
-#field .plant {
-  position: absolute;
-  width: calc(30px * var(--gameScale));
-  height: calc(50px * var(--gameScale));
-  left: 0;
-  bottom: 0;
-  display: flex;
-  align-items: flex-end;
-}
-
-#field .plant img {
-  width: 100%;
-  height: auto;
-}
-
-/* player **************************************/
-#player img {
-  width: calc(30px * var(--gameScale));
-  height: auto;
-  position: absolute;
-  transform-origin: bottom center;
-}
-
-#player {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  left: 0;
-  top: 0;
-}
-
 /* ui ******************************************/
 .ui-layer {
   margin: 0;
