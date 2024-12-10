@@ -25,5 +25,8 @@
   "what to do": "植物根据其类型和生长有积分值。获得足够的积分以获胜",
   "action": "动作",
   "next plant": "下一个植物",
-  "prev plant": "上一个植物"
+  "prev plant": "上一个植物",
+  "you win": "你赢了!",
+  "restart game": "重新开始游戏",
+  "continue game": "继续游戏"
 }

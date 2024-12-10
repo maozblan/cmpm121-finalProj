@@ -25,5 +25,8 @@
   "what to do": "Las plantas tienen valores en puntos en función de su tipo y crecimiento. Consigue suficientes puntos para ganar",
   "action": "Acción",
   "next plant": "Siguiente Planta",
-  "prev plant": "Planta Anterior"
+  "prev plant": "Planta Anterior",
+  "you win": "¡Has ganado!",
+  "restart game": "Reiniciar juego",
+  "continue game": "Continuar juego"
 }

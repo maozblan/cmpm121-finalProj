@@ -25,5 +25,8 @@
   "what to do": "Plants have point values based on their type and growth. Gain enough points to win",
   "action": "Action",
   "next plant": "Next Plant",
-  "prev plant": "Prev Plant"
+  "prev plant": "Prev Plant",
+  "you win": "You Win!",
+  "restart game": "Restart Game",
+  "continue game": "Continue Game"
 }
