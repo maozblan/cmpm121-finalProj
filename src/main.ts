@@ -3,7 +3,7 @@ import "./views/gameStyle.css";
 import { mount } from "svelte";
 import App from "./views/App.svelte";
 import playerInteraction from "./controllers/controller.ts";
-import "./locale/i18n.ts";
+import "./views/locale/i18n.ts";
 
 const APP_NAME = "cmpm121-final";
 document.title = APP_NAME;
