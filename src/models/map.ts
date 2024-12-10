@@ -50,6 +50,7 @@ export class GameMap {
   private cells: Array<Array<Cell>>;
   private buffer: ArrayBuffer;
   size: number;
+  winState: boolean = false;
 
   constructor(size: number) {
     this.size = size;
@@ -131,6 +132,10 @@ export class GameMap {
       newMap.updateSun();
     } catch {
       console.error("Error updating sun levels");
+    }
+
+    if (!this.winState && this.getScore() > gameData!.win_conditions.point_requirement) {
+      newMap.winState = true;
     }
     return newMap;
   }
@@ -264,4 +269,6 @@ export class GameMap {
   playScenarioCompleted() {
     return this.getScore() > gameData!.win_conditions.point_requirement;
   }
+  // can also access with map.winState
+  // winState is checked every turn
 }

@@ -222,6 +222,20 @@ export function updateMap(newMap: GameMap | null) {
   save("autosave");
 }
 
+// reset function /////////////////////////////////////////////////////////////
+export function resetGame() {
+  gameState.update(() => {
+    return {
+      currentTurn: 0,
+      currentIndex: 0,
+      mapUpdateLedger: [{ map: new GameMap(MAPSIZE), turn: 0 }],
+    };
+  });
+  save("autosave");
+}
+
+
+
 // save between sessions //////////////////////////////////////////////////////
 document.addEventListener("DOMContentLoaded", function () {
   document_cookie = JSON.parse(localStorage.getItem("savestate") || "");
