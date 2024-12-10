@@ -4,11 +4,13 @@ const isTiny = window.matchMedia("(max-width: 350px)").matches;
 export let gameScale = 1.3;        // field
 export let uiScale = 3;          // buttons
 export let overlayScale = 5;     // top left overlay
+export let popupScale = 5;     // top left overlay
 
 if (isMobile) {
   uiScale = 1.65;
   overlayScale = 3;
   gameScale = 0.8;
+  popupScale = 2.5;
 }
 
 if (isTiny) {

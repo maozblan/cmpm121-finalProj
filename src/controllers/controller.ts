@@ -8,7 +8,7 @@ import {
   player,
   undo,
   redo,
-  resetGame
+  resetGame,
 } from "./game.ts";
 import { MoveDirection } from "../models/player.ts";
 import { PlantInfo } from "../models/PlantInfo.ts";
@@ -53,6 +53,12 @@ const actions: { [key: string]: () => void } = {
   save: () => toggleTab("save"),
   load: () => toggleTab("load"),
   help: () => toggleTab("help"),
+  restartGame: resetGame,
+  continueGame: () => {
+    const tmp = getCurrentMap().copy();
+    tmp.gameMode = "zen";
+    updateMap(tmp);
+  },
 };
 
 // adding all plant types to number keys (up to 9)
@@ -83,10 +89,9 @@ function playerMove(direction: MoveDirection) {
 
 function nextTurn() {
   setTurn(get(gameState).currentTurn + 1);
-  updateMap(getCurrentMap().nextTurn());
-  if (getCurrentMap().playScenarioCompleted()) {
-    alert("You win!");
-  }
+  const tmp = getCurrentMap().nextTurn();
+  tmp.playScenarioCompleted();
+  updateMap(tmp);
 }
 
 function setPlantType(type: number) {
@@ -95,7 +100,7 @@ function setPlantType(type: number) {
 
 function nextPlantType() {
   player.plantType.update((type) => {
-    return (type + 1) % PlantInfo.length
+    return (type + 1) % PlantInfo.length;
   });
 }
 
@@ -104,7 +109,12 @@ function plant() {
     updateMap(getCurrentMap().reapPlantOnCopy(player.x, player.y));
   } else {
     updateMap(
-      getCurrentMap().placePlantOnCopy(player.x, player.y, get(player.plantType), 1)
+      getCurrentMap().placePlantOnCopy(
+        player.x,
+        player.y,
+        get(player.plantType),
+        1
+      )
     );
   }
 }

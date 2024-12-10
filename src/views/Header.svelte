@@ -11,8 +11,11 @@
     <div class="text"
       style={$chanceOfRain ? "color: rgb(24,54,107)" : ""}
     >
-      {$gameState.mapUpdateLedger[$gameState.currentIndex].map.getScore()} / 
-      {$POINTS_TO_WIN}
+      {$gameState.mapUpdateLedger[$gameState.currentIndex].map.getScore()} 
+      {#if $gameState.mapUpdateLedger[$gameState.currentIndex].map.gameMode === "normal"}
+        / 
+        {$POINTS_TO_WIN}
+      {/if}
     </div>
   </div>
   <div class="sun">

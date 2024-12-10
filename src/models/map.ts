@@ -51,6 +51,7 @@ export class GameMap {
   private buffer: ArrayBuffer;
   size: number;
   winState: boolean = false;
+  gameMode: string = "normal";
 
   constructor(size: number) {
     this.size = size;
@@ -100,6 +101,8 @@ export class GameMap {
   copy(): GameMap {
     const newMap = new GameMap(this.size);
     newMap.loadBuffer(this.exportBuffer());
+    newMap.winState = this.winState;
+    newMap.gameMode = this.gameMode;
     return newMap;
   }
 
@@ -134,9 +137,6 @@ export class GameMap {
       console.error("Error updating sun levels");
     }
 
-    if (!this.winState && this.getScore() > gameData!.win_conditions.point_requirement) {
-      newMap.winState = true;
-    }
     return newMap;
   }
 
@@ -267,8 +267,9 @@ export class GameMap {
 
   // win condition ////////////////////////////////////////////////////////////
   playScenarioCompleted() {
-    return this.getScore() > gameData!.win_conditions.point_requirement;
+    if (this.getScore() > gameData!.win_conditions.point_requirement) {
+      this.winState = true;
+    }
+    return this.winState;
   }
-  // can also access with map.winState
-  // winState is checked every turn
 }

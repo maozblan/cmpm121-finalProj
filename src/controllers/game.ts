@@ -234,8 +234,6 @@ export function resetGame() {
   save("autosave");
 }
 
-
-
 // save between sessions //////////////////////////////////////////////////////
 document.addEventListener("DOMContentLoaded", function () {
   document_cookie = JSON.parse(localStorage.getItem("savestate") || "");

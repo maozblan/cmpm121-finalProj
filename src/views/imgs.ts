@@ -48,4 +48,5 @@ export const img = {
     new URL('../../assets/seed_moss.png', import.meta.url).href,
     new URL('../../assets/seed_weed.png', import.meta.url).href,
   ],
+  popup: new URL('../../assets/panel.png', import.meta.url).href,
 }
