@@ -1,18 +1,18 @@
 <script>
+  import { t } from "svelte-i18n";
   import playerInteraction from "../controllers/controller";
   import { img } from "./imgs";
   import { popupScale } from "./uiSettings";
-
 </script>
 
 <main class="layer" style="--scale: {popupScale};">
   <div id="popup">
     <img class="layer" src={img.popup} alt="popup" />
     <div class="text col-div layer">
-      <h1>You Win!</h1>
+      <h1>{$t("you win")}</h1>
       <div class="row-div choices">
-        <button id="restartGame" on:click={playerInteraction}>Restart</button>
-        <button id="continueGame" on:click={playerInteraction}>Continue</button>
+        <button id="restartGame" on:click={playerInteraction}>{$t("restart game")}</button>
+        <button id="continueGame" on:click={playerInteraction}>{$t("continue game")}</button>
       </div>
     </div>
   </div>

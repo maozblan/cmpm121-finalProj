@@ -91,6 +91,7 @@
       <div class="col-div panel">
         <button id="load1" on:click={playerInteraction}>{$t("load1")}</button>
         <button id="load2" on:click={playerInteraction}>{$t("load2")}</button>
+        <button id="loadautosave" on:click={playerInteraction}>{$t("load autosave")}</button>
       </div>
     {:else if tab === "help"}
       <div class="col-div panel htp">

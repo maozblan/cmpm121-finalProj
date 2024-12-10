@@ -19,7 +19,7 @@
   "your plants will grow accordingly": "your plants will grow per turn based on sun, water, and neighboring plants",
   "how to move (mobile)": "Use movement buttons to move your character",
   "how to plant (mobile)": "Press the center button to plant/reap plants on current tile",
-  "how to change plants(mobile)": "Cycle plant selection with the seed bag button on the right",
+  "how to change plants (mobile)": "Cycle plant selection with the seed bag button on the right",
   "how to end turn (mobile)": "End turn with the moon button on the left",
   "goal": "Goal",
   "what to do": "Plants have point values based on their type and growth. Gain enough points to win",
@@ -27,6 +27,6 @@
   "next plant": "Next Plant",
   "prev plant": "Prev Plant",
   "you win": "You Win!",
-  "restart game": "Restart Game",
-  "continue game": "Continue Game"
+  "restart game": "Restart",
+  "continue game": "Continue"
 }
