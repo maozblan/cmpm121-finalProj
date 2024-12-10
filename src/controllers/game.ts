@@ -27,12 +27,6 @@ loadGameData().then((data) => {
 });
 export const chanceOfRain: Writable<number> = writable(0);
 
-interface SaveData {
-  autosave: string;
-  save1: string;
-  save2: string;
-}
-
 interface updateLedgerEntry {
   map: GameMap;
   turn: number;
@@ -182,29 +176,18 @@ export function redo() {
 // save and load //////////////////////////////////////////////////////////////
 
 export function save(slot: "autosave" | "save1" | "save2") {
-  if (document_cookie === "") {
-    const saveDataObject: SaveData = { autosave: "", save1: "", save2: "" };
-    saveDataObject[slot] = GameStateStringify(get(gameState));
-    document_cookie = JSON.stringify(saveDataObject);
-  } else {
-    const saveDataObject: SaveData = JSON.parse(document_cookie);
-    saveDataObject[slot] = GameStateStringify(get(gameState));
-    document_cookie = JSON.stringify(saveDataObject);
-  }
+  localStorage.setItem(slot, GameStateStringify(get(gameState)));
 }
 
 export function tryLoad(slot: "autosave" | "save1" | "save2") {
-  if (document_cookie === "") {
-    console.log("tryLoad(): document_cookie is empty");
-    return;
-  }
-  const saveDataObject: SaveData = JSON.parse(document_cookie);
-  if (saveDataObject[slot] !== "") {
-    const tmp: GameState = GameStateParse(saveDataObject[slot]);
+  const str: string | null = localStorage.getItem(slot);
+  if(str){
+  const tmp: GameState = GameStateParse(str);
     gameState.update(() => {
       return { ...tmp };
     });
   }
+
 }
 
 export function updateMap(newMap: GameMap | null) {
