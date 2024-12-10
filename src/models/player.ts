@@ -11,12 +11,12 @@ export enum MoveDirection {
 export class Player {
   x_val: Writable<number>;
   y_val: Writable<number>;
-  plantType: number;
+  plantType: Writable<number>;
 
   constructor(x: number, y: number) {
     this.x_val = writable(x);
     this.y_val = writable(y);
-    this.plantType = 1;
+    this.plantType = writable(0);
   }
 
   get x () {

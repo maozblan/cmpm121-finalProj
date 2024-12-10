@@ -53,8 +53,6 @@
       alt: "cycle plant",
       classes: "action",
       iconData: {
-        norm: img.sun,
-        pressed: img.sun,
         scale: uiScale,
         pxChange: -3,
       },
@@ -63,6 +61,7 @@
 
   const x = player.x_val;
   const y = player.y_val;
+  const currSeeds = player.plantType;
 </script>
 
 <main id="mobile-controls" style="--controller-scale: {uiScale};">
@@ -75,7 +74,15 @@
       <ImgButton {...btns.wasdProps} id="w" alt="UP" />
     </div>
     <div>
-      <ImgButton {...btns.cyclePlant} />
+      {#if $currSeeds === 0}
+        {@render renderSeeds(0)}
+      {:else if $currSeeds === 1}
+        {@render renderSeeds(1)}
+      {:else if $currSeeds === 2}
+        {@render renderSeeds(2)}
+      {:else if $currSeeds === 3}
+        {@render renderSeeds(3)}
+      {/if}
     </div>
     <!-- row 2 -->
     <div>
@@ -113,6 +120,18 @@
     </div>
     <div></div>
   </div>
+
+  <!-- because currSeeds doesn't want to be reactive :( -->
+  {#snippet renderSeeds(seed)}
+    <ImgButton
+      {...btns.cyclePlant}
+      iconData={{
+        ...btns.cyclePlant.iconData,
+        norm: img.seeds[seed],
+        pressed: img.seeds[seed],
+      }}
+    />
+  {/snippet}
 </main>
 
 <style>

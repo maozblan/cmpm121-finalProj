@@ -85,11 +85,13 @@ function nextTurn() {
 }
 
 function setPlantType(type: number) {
-  player.plantType = type;
+  player.plantType.set(type);
 }
 
 function nextPlantType() {
-  player.plantType = (player.plantType + 1) % PlantInfo.length;
+  player.plantType.update((type) => {
+    return (type + 1) % PlantInfo.length
+  });
 }
 
 function plant() {
@@ -97,7 +99,7 @@ function plant() {
     updateMap(getCurrentMap().reapPlantOnCopy(player.x, player.y));
   } else {
     updateMap(
-      getCurrentMap().placePlantOnCopy(player.x, player.y, player.plantType, 1)
+      getCurrentMap().placePlantOnCopy(player.x, player.y, get(player.plantType), 1)
     );
   }
 }
