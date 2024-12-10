@@ -42,4 +42,10 @@ export const img = {
   plant_p: new URL('../../assets/plant_pressed.png', import.meta.url).href, // currently no different pressed version
   reap: new URL('../../assets/reap.png', import.meta.url).href,
   reap_p: new URL('../../assets/reap_pressed.png', import.meta.url).href, // currently no different pressed version
+  seeds: [
+    new URL('../../assets/seed_grass.png', import.meta.url).href,
+    new URL('../../assets/seed_flower.png', import.meta.url).href,
+    new URL('../../assets/seed_moss.png', import.meta.url).href,
+    new URL('../../assets/seed_weed.png', import.meta.url).href,
+  ],
 }
