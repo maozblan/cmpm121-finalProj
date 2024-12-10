@@ -83,31 +83,31 @@
 
   {#snippet tabContent(tab)}
     {#if tab === "save"}
-    <div class="col-div panel">
-      <button id="save1" on:click={playerInteraction}>save slot 1</button>
-      <button id="save2" on:click={playerInteraction}>save slot 2</button>
-    </div>
+      <div class="col-div panel">
+        <button id="save1" on:click={playerInteraction}>{$t("save1")}</button>
+        <button id="save2" on:click={playerInteraction}>{$t("save2")}</button>
+      </div>
     {:else if tab === "load"}
-    <div class="col-div panel">
-      <button id="load1" on:click={playerInteraction}>load save slot 1</button>
-      <button id="load2" on:click={playerInteraction}>load save slot 2</button>
-    </div>
+      <div class="col-div panel">
+        <button id="load1" on:click={playerInteraction}>{$t("load1")}</button>
+        <button id="load2" on:click={playerInteraction}>{$t("load2")}</button>
+      </div>
     {:else if tab === "help"}
-    <div class="col-div panel htp">
-      <h2>{$t("how to play")}</h2>
-      <div class="desktop">
-        <p>{$t("how to move")}</p>
-        <p>{$t("how to plant")}</p>
-        <p>{$t("how to end turn")}</p>
-        <p>{$t("sun rates")}</p>
-        <p>{$t("your plants will grow accordingly")}</p>
+      <div class="col-div panel htp">
+        <h2>{$t("how to play")}</h2>
+        <div class="desktop">
+          <p>{$t("how to move")}</p>
+          <p>{$t("how to plant")}</p>
+          <p>{$t("how to end turn")}</p>
+          <p>{$t("sun rates")}</p>
+          <p>{$t("your plants will grow accordingly")}</p>
+        </div>
+        <div class="mobile">
+          <!-- jaxon look here -->
+        </div>
+        <h2>{$t("goal")}</h2>
+        <p>{$t("what to do")}</p>
       </div>
-      <div class="mobile">
-        <!-- jaxon look here -->
-      </div>
-      <h2>{$t("goal")}</h2>
-      <p>{$t("what to do")}</p>
-    </div>
     {/if}
   {/snippet}
 </main>
