@@ -130,7 +130,7 @@
 
   .tab-content {
     width: 100%;
-    height: 80vh;
+    height: 60vh;
     display: flex;
     justify-content: space-evenly;
     overflow-y: scroll;

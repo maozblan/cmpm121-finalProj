@@ -1,7 +1,7 @@
 const isMobile = window.matchMedia("(orientation: portrait)").matches;
 const isTiny = window.matchMedia("(max-width: 350px)").matches;
 
-export let gameScale = 1;        // field
+export let gameScale = 1.3;        // field
 export let uiScale = 3;          // buttons
 export let overlayScale = 5;     // top left overlay
 
