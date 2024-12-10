@@ -2,11 +2,26 @@ const CACHE_NAME = 'gamecache-v1';
 const BASE_PATH = `/${location.pathname.split('/')[1]}/`.replace(/\/$/, '');
 const urlsToCache = [
   `${BASE_PATH}/`,
-  `${BASE_PATH}/index.css`,
   `${BASE_PATH}/index.html`,
-  `${BASE_PATH}/index.js`,
-  `${BASE_PATH}/player.png`,
+  `${BASE_PATH}/load.png`,
+  `${BASE_PATH}/redo.png`,
+  `${BASE_PATH}/undo.png`,
+  `${BASE_PATH}/redo_pressed.png`,
+  `${BASE_PATH}/save_pressed.png`,
+  `${BASE_PATH}/undo_pressed.png`,
+  `${BASE_PATH}/load_pressed.png`,
+  `${BASE_PATH}/save.png`,
+  `${BASE_PATH}/cloud.png`,
+  `${BASE_PATH}/rainCloud.png`,
+  `${BASE_PATH}/help.png`,
+  `${BASE_PATH}/help_pressed.png`,
+  `${BASE_PATH}/plant.png`,
+  `${BASE_PATH}/reap.png`,
+  `${BASE_PATH}/sun.png`,
   `${BASE_PATH}/soil.png`,
+  `${BASE_PATH}/player.png`,
+  `${BASE_PATH}/index.css`,
+  `${BASE_PATH}/index.js`,
 ];
 
 self.addEventListener('install', (event) => {
