@@ -8,6 +8,7 @@ import {
   player,
   undo,
   redo,
+  resetGame
 } from "./game.ts";
 import { MoveDirection } from "../models/player.ts";
 import { PlantInfo } from "../models/PlantInfo.ts";
