@@ -62,7 +62,7 @@ html, body {
     height: 63vh;
     min-height: 0;
   }
-  .htp .mobile {
+  #options-bar .htp .mobile {
     display: block;
   }
   .htp .desktop {
