@@ -13,6 +13,7 @@ import { MoveDirection } from "../models/player.ts";
 import { PlantInfo } from "../models/PlantInfo.ts";
 import { toggleTab } from "../views/tabs.ts";
 import { get } from "svelte/store";
+import { animateMove, currentAnimation } from "../views/playerAnimation.ts";
 
 const actions: { [key: string]: () => void } = {
   w: () => playerMove(MoveDirection.UP),
@@ -73,6 +74,9 @@ export default function playerInteraction(event: KeyboardEvent | MouseEvent) {
 }
 
 function playerMove(direction: MoveDirection) {
+  // uncomment last line and change playerAnimation.ts to enable drifting lol
+  if (currentAnimation !== null) return;
+  animateMove(direction);
   player.move(direction, getCurrentMap());
 }
 
