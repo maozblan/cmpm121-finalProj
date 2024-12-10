@@ -96,14 +96,20 @@
       <div class="col-div panel htp">
         <h2>{$t("how to play")}</h2>
         <div class="desktop">
-          <p>{$t("how to move")}</p>
-          <p>{$t("how to plant")}</p>
-          <p>{$t("how to end turn")}</p>
-          <p>{$t("sun rates")}</p>
+          <p>{$t("how to move (desktop)")}</p>
+          <p>{$t("how to plant (desktop)")}</p>
+          <p>{$t("how to change plants (desktop)")}</p>
+          <p>{$t("how to end turn (desktop)")}</p>
+          <p>{$t("weather info")}</p>
           <p>{$t("your plants will grow accordingly")}</p>
         </div>
         <div class="mobile">
-          <!-- jaxon look here -->
+          <p>{$t("how to move (mobile)")}</p>
+          <p>{$t("how to plant (mobile)")}</p>
+          <p>{$t("how to change plants (mobile)")}</p>
+          <p>{$t("how to end turn (mobile)")}</p>
+          <p>{$t("weather info")}</p>
+          <p>{$t("your plants will grow accordingly")}</p>
         </div>
         <h2>{$t("goal")}</h2>
         <p>{$t("what to do")}</p>
